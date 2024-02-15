@@ -23,7 +23,7 @@
 			<acme:menu-suboption code="master.menu.anonymous.favourite-link-alvparbor1" action="https://www.linkedin.com/in/alvaro-paradas-borrego-756661206/"/>
 			<acme:menu-suboption code="master.menu.anonymous.favourite-link-javmunrom" action="https://www.informatica.us.es/"/>
 			<acme:menu-suboption code="master.menu.anonymous.favourite-link-juanunsan2" action="https://github.com/"/>
-			
+			<acme:menu-suboption code="master.menu.anonymous.favourite-link-felpennun" action="https://github.com/felpennun"/>
 			
 		</acme:menu-option>
 
