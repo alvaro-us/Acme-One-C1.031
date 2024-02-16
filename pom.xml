@@ -20,9 +20,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<name>Acme One</name>
+	<name>Acme-SF-D</name>
 	<description>This is my first proyect in Design &amp; Testing.</description>
-	<artifactId>Acme-One-24.1.0</artifactId>
+	<artifactId>Acme-SF-D01</artifactId>
 	<packaging>war</packaging>
 	
 	<parent>
@@ -34,4 +34,3 @@
 
 	
 </project>
-
