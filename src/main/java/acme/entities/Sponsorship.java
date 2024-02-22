@@ -1,7 +1,6 @@
 
 package acme.entities;
 
-import java.time.Duration;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -45,7 +44,12 @@ public class Sponsorship extends AbstractEntity {
 	private Date				moment;
 
 	@NotNull
-	private Duration			duration;
+	@Temporal(TemporalType.DATE)
+	private Date				DurationStart;
+
+	@NotNull
+	@Temporal(TemporalType.DATE)
+	private Date				DurationEnd;
 
 	@NotNull
 	@Min(0)
