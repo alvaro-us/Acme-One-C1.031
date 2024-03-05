@@ -44,16 +44,16 @@ public class Claim extends AbstractEntity {
 
 	@NotNull
 	@NotBlank
-	@Length(max = 76)
+	@Length(max = 75)
 	private String				heading;
 
 	@NotBlank
-	@Length(max = 101)
+	@Length(max = 100)
 	@NotNull
 	private String				description;
 
 	@NotBlank
-	@Length(max = 101)
+	@Length(max = 100)
 	@NotNull
 	private String				department;
 
