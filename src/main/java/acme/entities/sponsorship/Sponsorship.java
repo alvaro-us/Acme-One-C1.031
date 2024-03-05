@@ -1,15 +1,14 @@
 
-package acme.entities;
+package acme.entities.sponsorship;
 
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-import javax.validation.Valid;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -25,7 +24,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Invoice extends AbstractEntity {
+public class Sponsorship extends AbstractEntity {
 
 	// Serialisation identifier -------------------------------------------------
 
@@ -34,43 +33,38 @@ public class Invoice extends AbstractEntity {
 	// Propieties ---------------------------------------------------------------
 
 	@NotBlank
+	@NotNull
+	@Pattern(regexp = "[A-Z]{1,3}-[0-9]{3}")
 	@Column(unique = true)
-	@Pattern(regexp = "IN-[0-9]{4}-[0-9]{4}")
 	private String				code;
 
 	@NotNull
 	@Past
-	private Date				registrationTime;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				moment;
 
 	@NotNull
-	@Temporal(TemporalType.DATE)
-	private Date				dueDate;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				DurationStart;
+
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				DurationEnd;
 
 	@NotNull
 	@PositiveOrZero
-	private int					quantity;
+	@Digits(integer = 10, fraction = 2)
+	private Double				amount;
 
 	@NotNull
-	@PositiveOrZero
-	private Double				tax;
+	private SponsorshipType		type;
+
+	@Email
+	@NotBlank
+	private String				email;
 
 	@URL
+	@NotBlank
 	private String				link;
-
-	// Derived attributes -------------------------------------------------------
-
-
-	@Transient
-	public Double getTotalAmount() {
-		return this.tax + this.quantity;
-	}
-
-	// Relationships
-
-
-	@Valid
-	@NotNull
-	@ManyToOne(optional = true)
-	private Sponsorship sponsorship;
 
 }
