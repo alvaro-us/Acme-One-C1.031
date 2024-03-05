@@ -36,18 +36,18 @@ public class Objetive extends AbstractEntity {
 
 	@NotNull
 	@NotBlank
+	@Length(max = 75)
 	private String				title;
 
 	@NotNull
 	@NotBlank
-	@Length(max = 101)
+	@Length(max = 100)
 	private String				description;
 
 	@NotNull
 	private Priority			priority;
 
-	@NotNull
-	private Boolean				status;
+	private boolean				status;
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
