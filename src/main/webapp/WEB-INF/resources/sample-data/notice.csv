@@ -1,0 +1,6 @@
+key,inst-moment,title,author,message,email,link
+notice-01,2021/05/20 10:00,Importante anuncio,John Doe,Esto es un aviso importante,,
+notice-02,2021/05/21 15:30,Nueva actualización,Javier Lucia Mario Angela Maria Martinez Cuenca Pérez Roberto Nadal Isco.,Este es un mensaje de ejemplo con exactamente 100 caracteres para probar la longitud permitida fin,contact@example.com,https://example.com/update
+notice-03,2020/05/22 09:45,Recordatorio de reunión,David Johnson,Recordatorio de reunión de equipo mañana a las 10 a.m.,team@example.com,null
+notice-04,2019/05/23 14:20,Este es un título con exactamente 75 caracteres para probar la longitud aa.,Ana García,Feliz cumpleaños a nuestro colega Juan,,https://example.com/birthday
+notice-05,1999/05/24 11:55,Actualización de políticas,Sophia Martinez,Se han actualizado las políticas de la empresa,hr@example.com,null
