@@ -5,8 +5,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.PositiveOrZero;
 
@@ -44,17 +44,18 @@ public class Project extends AbstractEntity {
 
 	private boolean				indicator;
 
-	@Digits(integer = 3, fraction = 2)
 	@PositiveOrZero
-	private Double				cost;
+	private int					cost;
 
 	@URL
+	@Length(max = 255)
 	private String				link;
+
+	private boolean				draftMode;
 
 	@ManyToOne(optional = false)
 	@Valid
+	@NotNull
 	private Manager				manager;
-
-	private boolean				draftMode;
 
 }

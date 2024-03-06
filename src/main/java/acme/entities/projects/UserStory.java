@@ -4,15 +4,15 @@ package acme.entities.projects;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Positive;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 
 import acme.client.data.AbstractEntity;
+import acme.roles.Manager;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,9 +35,8 @@ public class UserStory extends AbstractEntity {
 	@Length(max = 100)
 	private String				description;
 
-	@Digits(integer = 3, fraction = 2)
-	@PositiveOrZero
-	private double				estimatedCost;
+	@Positive
+	private int					estimatedCost;
 
 	@NotBlank
 	@Length(max = 75)
@@ -47,10 +46,14 @@ public class UserStory extends AbstractEntity {
 	private prioType			priorityType;
 
 	@URL
+	@Length(max = 255)
 	private String				link;
+
+	private boolean				draftMode;
 
 	@ManyToOne(optional = false)
 	@Valid
-	private Project				project;
+	@NotNull
+	private Manager				manager;
 
 }

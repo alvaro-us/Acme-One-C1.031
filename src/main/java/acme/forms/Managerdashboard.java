@@ -1,5 +1,5 @@
 
-package acme.entities.projects;
+package acme.forms;
 
 import acme.client.data.AbstractForm;
 import lombok.Getter;
@@ -22,12 +22,12 @@ public class Managerdashboard extends AbstractForm {
 
 	double						averageEstimatedCostUserStory;
 	double						deviationEstimatedCostUserStory;
-	double						miniEstimatedCostUserStory;
-	double						maxEstimatedCostUserStory;
+	int							minEstimatedCostUserStory;
+	int							maxEstimatedCostUserStory;
 
 	double						averageCostProject;
 	double						deviationCostProject;
-	double						minCostProject;
-	double						maxCostProject;
+	int							minCostProject;
+	int							maxCostProject;
 
 }
