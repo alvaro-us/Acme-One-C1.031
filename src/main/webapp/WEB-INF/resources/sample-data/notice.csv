@@ -1,6 +1,6 @@
 key,inst-moment,title,author,message,email,link
-notice-01,2021/05/20 10:00,Importante anuncio,"pabcueper - Cuenca, Pablo",Esto es un aviso importante,,
-notice-02,2021/05/21 15:30,Nueva actualización,"johndoe - Smith, John",Este es un mensaje de ejemplo con exactamente 100 caracteres para probar la longitud permitida fin,contact@example.com,https://example.com/update
-notice-03,2020/05/22 09:45,Recordatorio de reunión,"maryjane - Johnson, Mary",Recordatorio de reunión de equipo mañana a las 10 a.m.,team@example.com,null
+notice-01,2021/05/20 23:59,Importante anuncio,"pabcueper - Cuenca, Pablo",Esto es un aviso importante,,
+notice-02,2021/01/01 00:00,Nueva actualización,"johndoe - Smith, John",Este es un mensaje de ejemplo con exactamente 100 caracteres para probar la longitud permitida fin,contact@example.com,https://example.com/update
+notice-03,2020/12/12 23:59,Recordatorio de reunión,"maryjane - Johnson, Mary",Recordatorio de reunión de equipo mañana a las 10 a.m.,team@example.com,null
 notice-04,2019/05/23 14:20,Este es un título con exactamente 75 caracteres para probar la longitud aa.,"davidlee - Garcia, David",Feliz cumpleaños a nuestro colega Juan,,https://example.com/birthday
 notice-05,1999/05/24 11:55,Actualización de políticas,"sarahwilliams - Brown, Sarah",Se han actualizado las políticas de la empresa,hr@example.com,null
