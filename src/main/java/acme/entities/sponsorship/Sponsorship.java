@@ -60,11 +60,9 @@ public class Sponsorship extends AbstractEntity {
 	private SponsorshipType		type;
 
 	@Email
-	@NotBlank
 	private String				email;
 
 	@URL
-	@NotBlank
 	private String				link;
 
 }

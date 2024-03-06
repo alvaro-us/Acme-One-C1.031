@@ -57,7 +57,6 @@ public class Invoice extends AbstractEntity {
 	private Money				tax;
 
 	@URL
-	@NotBlank
 	private String				link;
 
 	// Derived attributes -------------------------------------------------------
