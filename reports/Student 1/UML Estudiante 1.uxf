@@ -17,7 +17,7 @@ User Story
 + estimatedCost: double {Digits(3,2), PositiveOrZero}
 + acceptanceCriteria: String{NotBlank, Length(max=75)}	
 + priorityType: Priority {NotNull}
-+ link: String {URL, Length(max=255)}
++ link: String {URL}
 
 bg=green</panel_attributes>
     <additional_attributes/>
@@ -38,7 +38,7 @@ Project
 + abstrat: String{NotBlank, Length(max=100)}
 + indicator: boolean
 + cost: double {Digits(3,2), PositiveOrZero}
-+ link: String {URL, Length(max=255)}
++ link: String {URL}
 + draftMode: boolean
 bg=green
 </panel_attributes>
@@ -90,7 +90,7 @@ Manager
 + degree: String {NotBlank, Length(max=75)}
 + overview: String {NotBlank, Length(max=100)}
 + certifications: String {NotBlank, Length(max=100)}
-+ link: String {URL, Length(max=255)}
++ link: String {URL}
 bg=green
 </panel_attributes>
     <additional_attributes/>
