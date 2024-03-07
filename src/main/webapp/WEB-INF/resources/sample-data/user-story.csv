@@ -1,0 +1,9 @@
+key,title,description,estimatedCost,acceptanceCriteria,priorityType,link,key:manager
+user-story-01,Desarrollar funcionalidad de inicio de sesión,Los usuarios deben poder iniciar sesión en la plataforma.,15,Los usuarios pueden iniciar sesión utilizando su correo electrónico,MUST,,manager-01
+user-story-02,Implementar funcionalidad de registro,Los usuarios deben poder registrarse en la plataforma.,12,Los usuarios pueden crear una cuenta proporcionando su correo electrónico,COULD,https://example.com/register,manager-01
+user-story-03,Crear página de perfil de usuario,Los usuarios deben tener una página de perfil personalizada.,20,Los usuarios pueden ver y editar su información personal en su perfil,SHOULD,https://example.com/profile,manager-01
+user-story-04,Agregar función de búsqueda avanzada,Los usuarios deben poder buscar contenido avanzado en la plataforma.,18,Los usuarios pueden filtrar los resultados de búsqueda utilizando criterios,MUST,https://example.com/search,manager-01
+user-story-05,Desarrollar módulo de notificaciones,Los usuarios deben recibir notificaciones sobre actividades importantes.,23,Los usuarios recibirán notificaciones por correo y en la plataforma,SHOULD,,manager-02
+user-story-06,Implementar sistema de comentarios,Los usuarios deben poder comentar en publicaciones y contenido.,18,Los usuarios pueden escribir comentarios y responder a otros comentarios,COULD,https://example.com/comments,manager-02
+user-story-07,Agregar función de carrito de compras,Los usuarios deben poder agregar productos a un carrito de compras.,26,Los usuarios pueden ver los productos en su carrito antes de pagar,MUST,https://example.com/cart,manager-02
+user-story-08,Desarrollar funcionalidad de pago,a,30,a,MUST,,manager-02
