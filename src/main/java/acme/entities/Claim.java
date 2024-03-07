@@ -32,7 +32,6 @@ public class Claim extends AbstractEntity {
 	// Properties ---------------------------------------------------------------
 
 	@NotBlank
-	@NotNull
 	@Column(unique = true)
 	@Pattern(regexp = "C-[0-9]{4}")
 	private String				code;
@@ -42,19 +41,16 @@ public class Claim extends AbstractEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				instantiationMoment;
 
-	@NotNull
 	@NotBlank
-	@Length(max = 76)
+	@Length(max = 75)
 	private String				heading;
 
 	@NotBlank
-	@Length(max = 101)
-	@NotNull
+	@Length(max = 100)
 	private String				description;
 
 	@NotBlank
-	@Length(max = 101)
-	@NotNull
+	@Length(max = 100)
 	private String				department;
 
 	@Email
