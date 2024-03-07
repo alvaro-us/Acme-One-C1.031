@@ -1,17 +1,19 @@
 
-package acme.entities;
+package acme.entities.risks;
 
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.PostLoad;
+import javax.persistence.Transient;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Positive;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
@@ -24,38 +26,45 @@ import lombok.Setter;
 @Setter
 @Entity
 public class Risk extends AbstractEntity {
-	// Serialisation Identifier
+	// Serialisation identifier -----------------------------------------------
 
 	private static final long	serialVersionUID	= 1L;
 
-	// Atributes
+	// Attributes -------------------------------------------------------------
 
 	@NotBlank
 	@Column(unique = true)
-	@Pattern(regexp = "R-\\d{3}", message = "La referencia debe seguir el patrón R-XXX")
+	@Pattern(regexp = "R-\\d{3}", message = "{validation.risk.reference}")
 	private String				reference;
 
 	@NotNull
 	@Past
 	private Date				identificationDate;
 
-	@PositiveOrZero
-	@NotNull
-	private Double				impact;
+	@Positive
+	private double				impact;
 
-	@NotNull
 	@Min(0)
 	@Max(1)
-	private Double				probability;
+	private double				probability;
 
-	@NotNull
-	private Double				value;
+	@Transient
+	private double				value;
 
 	@NotBlank
 	@Length(max = 100)
 	private String				description;
 
 	@URL
+	@Length(max = 255)
 	private String				link;
+
+	// Derived attributes -----------------------------------------------------
+
+
+	@PostLoad // Este método se ejecuta después de que se carga una instancia desde la base de datos
+	private void calculateValue() {
+		this.value = this.impact * this.probability;
+	}
 
 }
