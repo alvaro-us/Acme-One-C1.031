@@ -43,7 +43,7 @@ public class CodeAudits extends AbstractEntity {
 	protected EnumType			type;
 
 	@NotBlank
-	@Length(min = 1, max = 102)
+	@Length(max = 100)
 	private List<String>		proposedCorrectiveActions;
 
 	private Double				mark;
