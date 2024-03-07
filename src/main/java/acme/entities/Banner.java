@@ -4,6 +4,7 @@ package acme.entities;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.Length;
@@ -30,11 +31,12 @@ public class Banner extends AbstractEntity {
 	@Past
 	private Date				modificationDate;
 
+	@Future
 	private Date				displayPeriod;
 
 	private String				pictureLink;
 
-	@Length(max = 77)
+	@Length(max = 75)
 	private String				slogan;
 
 	@URL
