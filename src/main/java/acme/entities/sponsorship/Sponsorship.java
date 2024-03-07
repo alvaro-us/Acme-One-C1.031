@@ -5,19 +5,21 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Digits;
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.PositiveOrZero;
 
 import org.hibernate.validator.constraints.URL;
 
 import acme.client.data.AbstractEntity;
+import acme.client.data.datatypes.Money;
+import acme.roles.Sponsor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,7 +35,6 @@ public class Sponsorship extends AbstractEntity {
 	// Propieties ---------------------------------------------------------------
 
 	@NotBlank
-	@NotNull
 	@Pattern(regexp = "[A-Z]{1,3}-[0-9]{3}")
 	@Column(unique = true)
 	private String				code;
@@ -52,9 +53,8 @@ public class Sponsorship extends AbstractEntity {
 	private Date				DurationEnd;
 
 	@NotNull
-	@PositiveOrZero
-	@Digits(integer = 10, fraction = 2)
-	private Double				amount;
+	@Valid
+	private Money				amount;
 
 	@NotNull
 	private SponsorshipType		type;
@@ -64,5 +64,12 @@ public class Sponsorship extends AbstractEntity {
 
 	@URL
 	private String				link;
+
+	// Relationships
+
+	@Valid
+	@NotNull
+	@ManyToOne(optional = false)
+	private Sponsor				sponsor;
 
 }

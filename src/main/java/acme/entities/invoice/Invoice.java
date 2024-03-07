@@ -10,6 +10,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -42,6 +43,7 @@ public class Invoice extends AbstractEntity {
 
 	@NotNull
 	@Past
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date				registrationTime;
 
 	@NotNull
@@ -49,12 +51,13 @@ public class Invoice extends AbstractEntity {
 	private Date				dueDate;
 
 	@NotNull
-	@PositiveOrZero
+	@Valid
 	private Money				quantity;
 
 	@NotNull
 	@PositiveOrZero
-	private Money				tax;
+	@Max(1)
+	private Double				tax;
 
 	@URL
 	private String				link;
@@ -63,8 +66,11 @@ public class Invoice extends AbstractEntity {
 
 
 	@Transient
-	public Double getTotalAmount() {
-		return this.tax.getAmount() + this.quantity.getAmount();
+	public Money getTotalAmount() {
+		Money res = new Money();
+		res.setAmount(this.quantity.getAmount() / this.tax);
+		res.setCurrency(this.quantity.getCurrency());
+		return res;
 	}
 
 	// Relationships
@@ -72,7 +78,7 @@ public class Invoice extends AbstractEntity {
 
 	@Valid
 	@NotNull
-	@ManyToOne(optional = true)
+	@ManyToOne(optional = false)
 	private Sponsorship sponsorship;
 
 }
