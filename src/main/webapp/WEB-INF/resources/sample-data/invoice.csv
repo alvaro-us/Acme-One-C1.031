@@ -1,0 +1,10 @@
+key,code,registration-time,due-date,quantity,tax,link,key:sponsorship
+invoice-01,IN-1234-1234,2021/04/28 02:31,2021/05/29 00:00,23.0 EUR,0.21,http://invoice-01.com,sponsorship-01
+invoice-02,IN-5678-5678,2021/04/10 08:45,2021/05/11 00:00,18.0 EUR,0.21,http://invoice-02.com,sponsorship-01
+invoice-03,IN-9012-9012,2021/05/05 14:20,2021/06/06 00:00,30.0 EUR,0.21,http://invoice-03.com,sponsorship-02
+invoice-04,IN-3456-3456,2021/06/15 08:00,2021/07/16 00:00,25.0 EUR,0.21,http://invoice-04.com,sponsorship-03
+invoice-05,IN-7890-7890,2021/07/20 16:30,2021/08/21 00:00,20.0 EUR,0.21,http://invoice-05.com,sponsorship-04
+invoice-06,IN-1234-5625,2021/09/12 09:15,2021/10/13 00:00,26.0 EUR,0.21,http://invoice-06.com,sponsorship-05
+invoice-07,IN-3456-3472,2021/06/15 08:00,2021/07/16 00:00,32.0 EUR,0.21,http://invoice-04.com,sponsorship-06
+invoice-08,IN-7890-7812,2021/07/20 16:30,2021/08/21 00:00,86.0 EUR,0.21,http://invoice-05.com,sponsorship-07
+invoice-09,IN-1234-5632,2021/09/12 09:15,2021/10/13 00:00,12.0 EUR,0.21,http://invoice-06.com,sponsorship-08
