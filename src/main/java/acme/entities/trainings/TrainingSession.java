@@ -12,7 +12,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
@@ -34,16 +33,14 @@ public class TrainingSession extends AbstractEntity {
 
 	@NotBlank
 	@Column(unique = true)
-	@Pattern(regexp = "TS-[A-Z]{1,3}-\\d{3}", message = "{validation.trainingSession.code}")
+	@Pattern(regexp = "^TS-[A-Z]{1,3}-\\d{3}$", message = "{validation.trainingSession.code}")
 	private String				code;
 
 	@NotNull
-	@Past
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				startPeriod;
 
 	@NotNull
-	@Past
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				endPeriod;
 
