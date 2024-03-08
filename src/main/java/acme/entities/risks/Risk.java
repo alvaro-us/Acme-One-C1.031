@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -38,6 +40,7 @@ public class Risk extends AbstractEntity {
 
 	@NotNull
 	@Past
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date				identificationDate;
 
 	@Positive
@@ -57,5 +60,4 @@ public class Risk extends AbstractEntity {
 	@URL
 	@Length(max = 255)
 	private String				link;
-
 }

@@ -1,0 +1,6 @@
+key,code,instantiation-moment,heading,description,department,email,link
+claim-01,C-3478,2021/05/20 23:59,Esto es un heading para probar el maximo de caracteres probar el maximo jns,Esto es un description,Esto es un departament,,https://example.com/feliponcio
+claim-02,C-4738,2003/12/31 23:59,Esto es un heading,Esto es un description para probar el maximo de caracteres probar el maximo de caracteres que es 100,Esto es un department,,
+claim-03,C-6754,2000/01/01 00:00,Esto es otro heading,Esto es otro description,Esto es un department  para probar el maximo de caracteres probar el maximo de caracteres que es 100,,
+claim-04,C-9558,2004/05/30 21:34,Heading Prueba,Descripcion prueba,Department prueba,hr@example.com,
+claim-05,C-9598,2014/02/21 21:34,Heading Prueba,Descripcion prueba,Department prueba,videovlog@example.com,https://example.com/videovlog
