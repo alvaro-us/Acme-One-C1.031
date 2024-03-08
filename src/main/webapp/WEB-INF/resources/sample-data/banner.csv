@@ -1,0 +1,6 @@
+key,installationDate,modificationDate,displayPeriod,pictureLink,slogan,url
+banner-01,2000/01/01 00:00,2001/03/12 12:21,2200/12/31 23:59,https://example.com/imagen,La mejor forma de ver,https://example.com/ocultismo
+banner-02,2001/05/01 14:24,2001/03/12 12:21,2200/12/31 23:59,,Abre tu mente,https://example.com/mente
+banner-03,2002/04/01 21:02,2001/03/12 12:21,2200/12/31 23:59,https://example.com/fotografia,Todo puede cambiar si cambias,
+banner-04,2003/03/01 12:09,2001/03/12 12:21,2200/12/31 23:59,https://example.com/estoesunafoto,Un espejo siempre es de segunda mano,https://example.com/mano
+banner-05,2004/02/01 11:15,2001/03/12 12:21,2200/12/31 23:59,https://example.com/imagendelaño,Una oreo es un trabajo de produccion de 3 componentes,https://example.com/oreo

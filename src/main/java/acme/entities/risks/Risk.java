@@ -5,8 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.PostLoad;
-import javax.persistence.Transient;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -15,6 +15,7 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 
+import org.hibernate.annotations.Formula;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 
@@ -39,6 +40,7 @@ public class Risk extends AbstractEntity {
 
 	@NotNull
 	@Past
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date				identificationDate;
 
 	@Positive
@@ -48,7 +50,7 @@ public class Risk extends AbstractEntity {
 	@Max(1)
 	private double				probability;
 
-	@Transient
+	@Formula("probability * impact")
 	private double				value;
 
 	@NotBlank
@@ -60,11 +62,5 @@ public class Risk extends AbstractEntity {
 	private String				link;
 
 	// Derived attributes -----------------------------------------------------
-
-
-	@PostLoad // Este método se ejecuta después de que se carga una instancia desde la base de datos
-	private void calculateValue() {
-		this.value = this.impact * this.probability;
-	}
 
 }

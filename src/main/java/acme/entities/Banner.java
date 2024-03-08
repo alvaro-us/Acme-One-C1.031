@@ -4,6 +4,8 @@ package acme.entities;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Past;
 
@@ -26,12 +28,15 @@ public class Banner extends AbstractEntity {
 	// Attributes -------------------------------------------------------------
 
 	@Past
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date				installationDate;
 
 	@Past
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date				modificationDate;
 
 	@Future
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date				displayPeriod;
 
 	private String				pictureLink;
