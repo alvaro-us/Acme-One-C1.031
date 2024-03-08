@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>870</x>
+      <y>126</y>
+      <w>228</w>
+      <h>204</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; Form &gt;&gt;
+
+ClientDashboard
+--
+
++ totalNumberOfProgressLogsBelow25Percent: Integer
+
++ totalNumberOfProgressLogsBelow25Percent: Integer
+
++ totalNumberOfProgressLogsBelow25Percent: Integer
+
++ totalNumberOfProgressLogsAbove75Percent: Integer
+
++ averageBudgetOfContracts: Double
+
++ deviationBudgetOfContracts: Double
+
++ minBudgetOfContracts: Double
+
++ maxBudgetOfContracts: Double
+
+
+
+bg=GREEN</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>516</x>
+      <y>354</y>
+      <w>258</w>
+      <h>186</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; Entity &gt;&gt;
+
+Contract
+--
+
++ code: String {NotBlank, Unique, Pattern([A-Z]{1,3}-[0-9]{3})}
+
++ instationMoment: Date {NotNull, Past, Temporal(TIMESTAMP)}
+
++ customerName: String {NotBlank,Lenght(max=75)}
+
++ providerName: String {NotBlank,Lenght(max=75)}
+
++ goals: String {NotBlank,Lenght(max=100)}
+
++ budget: Money {NotNull,Valid}
+
+
+bg=GREEN</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>522</x>
+      <y>108</y>
+      <w>252</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; Entity &gt;&gt;
+ProgressLogs
+--
+
++ recordId: String {NotBlank, Unique, Pattern(PG-[A-Z]{1,2}-[0-9]{4}}
+
++ registrationMoment: Date {NotNull, Past, Temporal(TIMESTAMP)}
+
++ comment: String {NotBlank, Lenght(max=100)}
+
++ completeness: Integer {PositiveOrZero}
+
++ responsable: String {NotBlank, Lenght(max=75)}
+
+
+bg=GREEN</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>858</x>
+      <y>408</y>
+      <w>144</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; Entity &gt;&gt;
+
+Project
+--
+
+   Realizado por el estudiante 1
+bg=GREEN</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>96</x>
+      <y>366</y>
+      <w>234</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; Rol &gt;&gt;
+
+Client
+--
+
++ identification: String {NotBlank, Unique, Pattern(CLI-[0-9]{4})}
+
++ companyName: String {NotBlank,Lenght(max=75)}
+
++ link: String {URL}
+
+
+bg=GREEN</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>174</x>
+      <y>558</y>
+      <w>84</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt; Enum &gt;&gt;
+
+type
+--
+
++ COMPANY
+
++ INDIVIDUAL
+
+bg=BLUE</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>480</y>
+      <w>18</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>648</x>
+      <y>246</y>
+      <w>60</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=0..n
+compose v</panel_attributes>
+    <additional_attributes>10.0;180.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>324</x>
+      <y>438</y>
+      <w>204</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=0..n
+&lt; performed by</panel_attributes>
+    <additional_attributes>10.0;20.0;320.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>768</x>
+      <y>426</y>
+      <w>102</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=0..n
+related to &gt;</panel_attributes>
+    <additional_attributes>150.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>204</x>
+      <y>180</y>
+      <w>246</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>+ less than or equal to the corresponding project cost
+bg=blue
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>444</x>
+      <y>180</y>
+      <w>90</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>130.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+</diagram>
