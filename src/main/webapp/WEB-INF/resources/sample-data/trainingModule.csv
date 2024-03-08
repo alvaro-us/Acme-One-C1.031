@@ -1,0 +1,5 @@
+key,code,creationMoment,updateMoment,details,difficultylevel,link,estimatedTotalTime,key:project
+trainingModule-01,ABC-001,2021/04/28 02:31,2022/01/02 00:00,Introduction to Programming,INTERMEDIATE,http://example.com/module1,3.5,project-01
+trainingModule-02,DEF-002,2021/04/28 02:31,2022/01/02 00:00,Advanced Data Structures,ADVANCED,http://example.com/module2,5.2,project-01
+trainingModule-03,GHI-003,2021/04/28 02:31,2022/01/02 00:00,Web Development Basics,BASIC,http://example.com/module3,2.0,project-02
+trainingModule-04,JKL-004,2022/01/15 00:00,2022/01/16 00:00,This was used to test the constraint Length in the attribute details,INTERMEDIATE,http://example.com/module4,4.8,project-02
