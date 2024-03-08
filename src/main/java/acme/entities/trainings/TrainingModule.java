@@ -34,7 +34,7 @@ public class TrainingModule extends AbstractEntity {
 
 	@NotBlank
 	@Column(unique = true)
-	@Pattern(regexp = "[A-Z]{1,3}-\\d{3}", message = "{validation.trainingModule.code}")
+	@Pattern(regexp = "^[A-Z]{1,3}-\\d{3}$", message = "{validation.trainingModule.code}")
 	private String				code;
 
 	@NotNull
@@ -51,13 +51,14 @@ public class TrainingModule extends AbstractEntity {
 	@Length(max = 100)
 	private String				details;
 
+	@NotNull
 	private DifficultyType		difficultylevel;
 
 	@URL
 	@Length(max = 255)
 	private String				link;
 
-	private double				estimatedTotalTime;
+	private int					estimatedTotalTime;
 
 	// Relationships ----------------------------------------------------------
 

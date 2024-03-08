@@ -1,5 +1,5 @@
-key,code,period,location,instructor,email,link,key:trainingModule
-trainingSession-01,TS-ABC-001,2.5,Room 101,John Doe,johndoe@example.com,http://example.com/session1,trainingModule-01
-trainingSession-02,TS-DEF-002,3.0,Room 102,Jane Smith,janesmith@example.com,http://example.com/session2,trainingModule-01
-trainingSession-03,TS-GHI-003,1.5,Room 103,Chris Brown,chrisbrown@example.com,http://example.com/session3,trainingModule-02
-trainingSession-04,TS-JKL-004,2.0,Room 104,Alice Johnson,alicejohnson@example.com,http://example.com/session4,trainingModule-03
+key,code,startPeriod,endPeriod,location,instructor,email,link,key:trainingModule
+trainingSession-01,TS-ABC-001,2021/04/28 02:31,2022/01/02 00:00,Room 101,John Doe,johndoe@example.com,http://example.com/session1,trainingModule-01
+trainingSession-02,TS-DEF-002,2021/04/28 02:31,2022/01/02 00:00,Room 102,Jane Smith,janesmith@example.com,http://example.com/session2,trainingModule-01
+trainingSession-03,TS-GHI-003,2021/04/28 02:31,2022/01/02 00:00,Room 103,Chris Brown,chrisbrown@example.com,http://example.com/session3,trainingModule-02
+trainingSession-04,TS-JKL-004,2021/04/28 02:31,2022/01/02 00:00,Room 104,Alice Johnson,alicejohnson@example.com,http://example.com/session4,trainingModule-03

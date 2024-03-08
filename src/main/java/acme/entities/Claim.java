@@ -33,7 +33,7 @@ public class Claim extends AbstractEntity {
 
 	@NotBlank
 	@Column(unique = true)
-	@Pattern(regexp = "C-[0-9]{4}")
+	@Pattern(regexp = "C-\\d{4}")
 	private String				code;
 
 	@NotNull
