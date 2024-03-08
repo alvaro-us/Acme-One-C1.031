@@ -47,11 +47,11 @@ public class Objetive extends AbstractEntity {
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date				instationStart;
+	private Date				durationStart;
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date				instationEnd;
+	private Date				durationEnd;
 
 	@URL
 	private String				link;
