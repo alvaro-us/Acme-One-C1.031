@@ -5,9 +5,12 @@ user-account-provider-01,true,"UserIdentity{name: 'Laurel', surname: 'Provider',
 user-account-provider-02,true,"UserIdentity{name: 'Martina', surname: 'коза თხა', email: 'martina@acme.com'}",provider2,provider2
 auditor-account-auditor-01,true,"UserIdentity{name: 'auditor1', surname: 'auditor1', email: 'auditor1@acme.com'}",auditor1,auditor1
 auditor-account-auditor-02,true,"UserIdentity{name: 'auditor2', surname: 'auditor2', email: 'auditor2@acme.com'}",auditor2,auditor2
+user-account-provider-02,true,"UserIdentity{name: 'Martina', surname: 'коза თხა', email: 'martina@acme.com'}",provider2,provider2
 user-account-manager-01,true,"UserIdentity{name: 'Pablo', surname: 'Cuenca', email: 'pablo@acme.com'}",manager1,manager1
 user-account-manager-02,true,"UserIdentity{name: 'Cuenca', surname: 'Pablo', email: 'cuenca@acme.com'}",manager2,manager2
 user-account-sponsor-01,true,"UserIdentity{name: 'Javier', surname: 'Muñoz', email: 'sponsor1@acme.com'}",sponsor1,sponsor1
 user-account-sponsor-02,true,"UserIdentity{name: 'Nicolas', surname: 'Perez', email: 'sponsor2@acme.com'}",sponsor2,sponsor2
-
-
+user-account-client-01,true,"UserIdentity{name: 'Juan', surname: 'Nuñez', email: 'juan@acme.com'}",client1,client1
+user-account-client-02,true,"UserIdentity{name: 'Jose', surname: 'Sanchez', email: 'jose@acme.com'}",client2,client2
+user-account-administrator-02,true,"UserIdentity{name: 'Administrator2', surname: 'Acme2', email: 'administrator2@acme.com'}",administrator1,administrator1
+user-account-administrator-03,true,"UserIdentity{name: 'Administrator3', surname: 'Acme3', email: 'administrator3@acme.com'}",administrator2,administrator2
