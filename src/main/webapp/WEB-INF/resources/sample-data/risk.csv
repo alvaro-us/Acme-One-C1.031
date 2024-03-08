@@ -1,0 +1,6 @@
+key,reference,identification-date,impact,probability,description,link
+risk-01,R-123,2000/05/20 23:59,3.0,1,Esto es una descripcion de prueba,https://example.com/videovlog
+risk-02,R-456,2005/08/12 18:30,2.5,0.75,Otro ejemplo de descripción,https://example.com/document
+risk-03,R-789,2012/11/30 12:45,4.2,0.999999999,Descripción detallada del riesgo,https://example.com/report
+risk-04,R-567,2018/02/15 08:15,1.8,0.00001,Prueba de descripción corta,https://example.com/blogpost
+risk-05,R-890,2010/06/10 15:00,3.7,0.82,Una descripción más para el ejemplo,https://example.com/article
