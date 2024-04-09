@@ -1,0 +1,24 @@
+# messages-en.i18n
+#
+# Copyright (C) 2012-2024 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+any.project.form.title = Project 
+any.project.list.title = Listing of projects
+
+any.project.form.label.title = Title:
+any.project.form.label.abstrat = Abstract:
+any.project.form.label.indicator = Indicator:
+any.project.form.label.cost = Cost: 
+any.project.form.label.link = Link:
+
+any.project.list.label.title = Title
+any.project.list.label.indicator = Indicator
+any.project.list.label.cost = Cost
+
+manager.user-story.list.button.create = Create
