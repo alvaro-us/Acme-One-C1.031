@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
+import acme.client.views.SelectChoices;
 import acme.entities.projects.UserStory;
+import acme.entities.projects.prioType;
 import acme.roles.Manager;
 
 @Service
@@ -76,9 +78,12 @@ public class AuthenticatedManagerUserStoryUpdateService extends AbstractService<
 		Dataset dataset;
 
 		managerId = super.getRequest().getPrincipal().getActiveRoleId();
+		SelectChoices choices;
+
+		choices = SelectChoices.from(prioType.class, object.getPriorityType());
 
 		dataset = super.unbind(object, "title", "description", "estimatedCost", "acceptanceCriteria", "priorityType", "link", "draftMode");
-
+		dataset.put("priorityType", choices.getSelected().getKey());
 		super.getResponse().addData(dataset);
 	}
 

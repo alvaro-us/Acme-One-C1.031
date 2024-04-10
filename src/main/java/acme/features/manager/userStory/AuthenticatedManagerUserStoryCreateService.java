@@ -54,7 +54,7 @@ public class AuthenticatedManagerUserStoryCreateService extends AbstractService<
 	public void bind(final UserStory object) {
 		assert object != null;
 
-		super.bind(object, "title", "description", "estimatedCost", "acceptanceCriteria", "draftMode");
+		super.bind(object, "title", "description", "estimatedCost", "acceptanceCriteria", "priorityType", "link", "draftMode");
 		final prioType pType;
 		pType = super.getRequest().getData("priorityType", prioType.class);
 
@@ -82,7 +82,7 @@ public class AuthenticatedManagerUserStoryCreateService extends AbstractService<
 
 		choices = SelectChoices.from(prioType.class, object.getPriorityType());
 
-		dataset = super.unbind(object, "title", "description", "estimatedCost", "acceptanceCriteria", "draftMode");
+		dataset = super.unbind(object, "title", "description", "estimatedCost", "acceptanceCriteria", "priorityType", "link", "draftMode");
 		dataset.put("priorityType", choices.getSelected().getKey());
 		super.getResponse().addData(dataset);
 	}

@@ -56,7 +56,7 @@ public class AuthenticatedManagerProjectDeleteService extends AbstractService<Ma
 	public void bind(final Project object) {
 		assert object != null;
 
-		super.bind(object, "title", "deadline", "salary");
+		super.bind(object, "code", "title", "abstrat", "indicator", "cost", "link", "draftMode");
 	}
 
 	@Override

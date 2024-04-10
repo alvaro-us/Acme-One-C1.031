@@ -58,6 +58,11 @@ public class AuthenticatedManagerProjectUpdateService extends AbstractService<Ma
 	}
 
 	@Override
+	public void validate(final Project object) {
+		assert object != null;
+	}
+
+	@Override
 	public void perform(final Project object) {
 		assert object != null;
 

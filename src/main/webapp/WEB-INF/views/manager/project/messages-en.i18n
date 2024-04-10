@@ -26,4 +26,11 @@ manager.project.list.button.create = Create
 manager.project.form.button.update = Update
 manager.project.form.button.delete = Delete
 manager.project.form.button.publish = Publish
+manager.project.form.button.user-stories = User stories
 
+validation.project.code = Incorrect Code Scheme
+
+manager.project.title = Project title
+manager.project.abstrat = Project abstract
+manager.project.cost = Project cost
+manager.project.link = Project link

@@ -48,13 +48,17 @@ public class AuthenticatedManagerUserStoryListService extends AbstractService<Ma
 	@Override
 	public void unbind(final UserStory object) {
 		assert object != null;
+		Project project;
 
 		final int projectId = super.getRequest().getData("projectId", int.class);
 		Dataset dataset;
 
-		dataset = super.unbind(object, "title", "description", "priorityType", "draftMode");
+		project = this.repository.findProjectById(projectId);
+
+		dataset = super.unbind(object, "title", "description", "priorityType", "estimatedCost");
 
 		super.getResponse().addGlobal("projectId", projectId);
+		super.getResponse().addData("draftMode", project.isDraftMode());
 		super.getResponse().addData(dataset);
 
 	}

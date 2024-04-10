@@ -16,16 +16,16 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form>
-	<acme:input-textbox code="manager.project.form.label.code" path="code"/>
-	<acme:input-textbox code="manager.project.form.label.title" path="title"/>
-	<acme:input-textbox code="manager.project.form.label.abstrat" path="abstrat"/>
+	<acme:input-textbox code="manager.project.form.label.code" path="code" placeholder="[A-Z]{3}-\\d{4}"/>
+	<acme:input-textbox code="manager.project.form.label.title" path="title" placeholder="manager.project.title"/>
+	<acme:input-textbox code="manager.project.form.label.abstrat" path="abstrat" placeholder="manager.project.abstrat"/>
 	<acme:input-checkbox code="manager.project.form.label.indicator" path="indicator"/>
-	<acme:input-double code="manager.project.form.label.cost" path="cost"/>
-	<acme:input-double code="manager.project.form.label.link" path="link"/>	
+	<acme:input-integer code="manager.project.form.label.cost" path="cost" placeholder="manager.project.cost"/>
+	<acme:input-textbox code="manager.project.form.label.link" path="link" placeholder="manager.project.link"/>	
 	<acme:hidden-data path="draftMode"/>
 	
 	<jstl:choose>	 
-		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|finalise') && draftMode == true}">
+		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && draftMode == true}">
 			<acme:submit code="manager.project.form.button.update" action="/manager/project/update"/>
 			<acme:submit code="manager.project.form.button.delete" action="/manager/project/delete"/>
 			<acme:submit code="manager.project.form.button.publish" action="/manager/project/publish"/>
@@ -36,7 +36,7 @@
 		</jstl:when>
 	</jstl:choose>
 	<jstl:if test="${ _command == 'show' }" >
-		<acme:button code="manager.project.form.button.user-stories" action="/manager/user-stories/list?projectId=${id}"/>
+		<acme:button code="manager.project.form.button.user-stories" action="/manager/user-story/list?projectId=${id}"/>
 	</jstl:if>
 		
 </acme:form>
