@@ -45,11 +45,18 @@ master.menu.provider.favourite-link = Enlace favorito
 master.menu.consumer = Consumidor
 master.menu.consumer.favourite-link = Enlace favorito
 
+
 # master.menu.manager ##########################################################
 
 master.menu.manager = Gerente
 master.menu.manager.ListProjects = Mis proyectos
 master.menu.manager.Dashboard = My dashboard
+
+# master.menu.sponsor ##########################################################
+
+master.menu.sponsor = Patrocinador
+master.menu.sponsor.ListSponsorship = Tus anuncios
+
 
 # master.menu.user-account ####################################################
 

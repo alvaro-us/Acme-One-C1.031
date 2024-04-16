@@ -50,6 +50,12 @@ master.menu.manager = Manager
 master.menu.manager.ListProjects = My projects
 master.menu.manager.Dashboard = My dashboard
 
+# master.menu.sponsor ##########################################################
+
+master.menu.sponsor = Sponsor
+master.menu.sponsor.ListSponsorship = Yours sponsorships
+
+
 # master.menu.user-account ####################################################
 
 master.menu.user-account = Account
