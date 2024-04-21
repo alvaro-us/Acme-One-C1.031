@@ -58,7 +58,7 @@ public class AuthenticatedManagerUserStoryListService extends AbstractService<Ma
 		dataset = super.unbind(object, "title", "description", "priorityType", "estimatedCost");
 
 		super.getResponse().addGlobal("projectId", projectId);
-		super.getResponse().addData("draftMode", project.isDraftMode());
+		super.getResponse().addGlobal("draftMode1", project.isDraftMode());
 		super.getResponse().addData(dataset);
 
 	}

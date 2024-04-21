@@ -34,3 +34,5 @@ manager.project.title = Project title
 manager.project.abstrat = Project abstract
 manager.project.cost = Project cost
 manager.project.link = Project link
+
+manager.project.form.error.duplicated = Code already exists

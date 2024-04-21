@@ -49,7 +49,8 @@ master.menu.consumer.favourite-link = Enlace favorito
 
 master.menu.manager = Gerente
 master.menu.manager.ListProjects = Mis proyectos
-master.menu.manager.Dashboard = My dashboard
+master.menu.manager.Dashboard = Mi dashboard
+master.menu.manager.Assignments = Asignaciones
 
 # master.menu.user-account ####################################################
 

@@ -1,0 +1,23 @@
+# messages-es.i18n
+#
+# Copyright (C) 2012-2024 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+manager.assignment.form.title = Asignaciones 
+manager.assignment.list.title = Listado de asignaciones
+
+manager.assignment.list.label.project = Proyecto
+manager.assignment.list.label.userStory = Historia de usuario
+
+manager.assignment.form.label.project = Proyecto
+manager.assignment.form.label.story = Historia de usuario
+
+manager.assignment.list.button.create = Crear
+
+manager.assignment.form.button.delete = Eliminar
+manager.assignment.form.button.create = Crear

@@ -52,6 +52,13 @@ public class AuthenticatedManagerProjectCreateService extends AbstractService<Ma
 	@Override
 	public void validate(final Project object) {
 		assert object != null;
+		if (!super.getBuffer().getErrors().hasErrors("code")) {
+			Project existing;
+
+			existing = this.repository.findOneProjectByCode(object.getCode());
+
+			super.state(existing == null, "code", "manager.project.form.error.duplicated");
+		}
 
 	}
 
