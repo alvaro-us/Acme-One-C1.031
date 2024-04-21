@@ -44,10 +44,16 @@
 			<acme:menu-suboption code="master.menu.consumer.favourite-link" action="http://www.example.com/"/>
 		</acme:menu-option>
 		
+
 		<acme:menu-option code="master.menu.manager" access="hasRole('Manager')">
 			<acme:menu-suboption code="master.menu.manager.ListProjects" action="/manager/project/list"/>
 			<acme:menu-suboption code="master.menu.manager.Dashboard" action="/manager/manager-dashboard/show"/>
 			<acme:menu-suboption code="master.menu.manager.Assignments" action="/manager/assignment/list"/>
+  </acme:menu-option>
+  
+    
+		<acme:menu-option code="master.menu.sponsor" access="hasRole('Sponsor')">
+			<acme:menu-suboption code="master.menu.sponsor.ListSponsorship" action="/sponsor/sponsorship/list"/>
 		</acme:menu-option>
 	</acme:menu-left>
 
