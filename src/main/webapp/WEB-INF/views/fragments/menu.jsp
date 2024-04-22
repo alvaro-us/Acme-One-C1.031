@@ -35,6 +35,10 @@
 			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.shut-down" action="/administrator/system/shut-down"/>
 		</acme:menu-option>
+		
+		<acme:menu-option code="master.menu.client" access="hasRole('Client')">
+			<acme:menu-suboption code="master.menu.client.contract-list" action="/client/contract/list-service"/>
+		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.provider" access="hasRole('Provider')">
 			<acme:menu-suboption code="master.menu.provider.favourite-link" action="http://www.example.com/"/>
