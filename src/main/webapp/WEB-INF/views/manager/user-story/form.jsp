@@ -18,9 +18,11 @@
 <acme:form>
 	<acme:input-textbox code="manager.user-story.form.label.title" path="title"/>
 	<acme:input-textbox code="manager.user-story.form.label.description" path="description"/>
-	<acme:input-textarea code="manager.user-story.form.label.priorityType" path="priorityType"/>
+	<acme:input-select code="manager.user-story.form.label.priorityType" path="priorityType" choices="${priorityTypes}"/>
 	<acme:input-double code="manager.user-story.form.label.estimatedCost" path="estimatedCost"/>
 	<acme:input-double code="manager.user-story.form.label.acceptanceCriteria" path="acceptanceCriteria"/>
+	<acme:input-textbox code="manager.user-story.form.label.link" path="link"/>
+	<acme:hidden-data path="draftMode"/>
 			
 	<jstl:choose>	 
 		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && draftMode == true}">

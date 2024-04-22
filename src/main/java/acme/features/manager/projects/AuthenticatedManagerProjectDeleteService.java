@@ -1,14 +1,11 @@
 
 package acme.features.manager.projects;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
-import acme.entities.projects.Assignment;
 import acme.entities.projects.Project;
 import acme.roles.Manager;
 
@@ -62,17 +59,32 @@ public class AuthenticatedManagerProjectDeleteService extends AbstractService<Ma
 	@Override
 	public void validate(final Project object) {
 		assert object != null;
+		int id;
+		boolean status;
+
+		id = super.getRequest().getData("id", int.class);
+		int numberAssignments = this.repository.findNumberAssignmentOfProject(id);
+		int numberContracts = this.repository.findNumberContractOfProject(id);
+		//int numberRisks = this.repository.findNumberRisksOfProject(id);
+		//int numberObjective = this.repository.findNumberObjectiveOfProject(id);
+		//int numberSponsorship = this.repository.findNumberSponsorshipOfProject(id);
+		//int numberTrainingModule = this.repository.findNumberTrainingModuleOfProject(id);
+
+		status = numberAssignments == 0;
+		boolean status1 = numberContracts == 0;
+		//boolean status2 = numberRisks == 0;
+		//boolean status3 = numberObjective == 0;
+		//boolean status4 = numberSponsorship == 0;
+		//boolean status5 = numberTrainingModule == 0;
+
+		super.state(status1, "*", "manager.project.delete.exist-contract");
+		super.state(status, "*", "manager.project.delete.exist-assignment");
+
 	}
 
 	@Override
 	public void perform(final Project object) {
 		assert object != null;
-
-		Collection<Assignment> assignments;
-
-		assignments = this.repository.findAllAssignmentsOfProject(object.getId());
-
-		this.repository.deleteAll(assignments);
 		this.repository.delete(object);
 	}
 
@@ -80,10 +92,7 @@ public class AuthenticatedManagerProjectDeleteService extends AbstractService<Ma
 	public void unbind(final Project object) {
 		assert object != null;
 
-		int managerId;
 		Dataset dataset;
-
-		managerId = super.getRequest().getPrincipal().getActiveRoleId();
 
 		dataset = super.unbind(object, "code", "title", "abstrat", "indicator", "cost", "link", "draftMode");
 

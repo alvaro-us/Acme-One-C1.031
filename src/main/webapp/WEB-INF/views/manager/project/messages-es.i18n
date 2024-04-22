@@ -23,6 +23,8 @@ manager.project.form.label.indicator = Indicador
 manager.project.list.label.cost = Coste
 
 manager.project.list.button.create = Crear
+
+manager.project.form.button.create = Crear
 manager.project.form.button.update = Actualizar
 manager.project.form.button.delete = Eliminar
 manager.project.form.button.publish = Publicar

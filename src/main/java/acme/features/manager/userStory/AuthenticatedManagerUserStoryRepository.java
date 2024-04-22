@@ -30,4 +30,7 @@ public interface AuthenticatedManagerUserStoryRepository extends AbstractReposit
 	@Query("SELECT a FROM Manager a WHERE a.id = :id")
 	Manager findManagerById(int id);
 
+	@Query("select count(a) from Assignment a where a.userStory.id = :id")
+	int findNumberAssignmentOfUserStory(int id);
+
 }

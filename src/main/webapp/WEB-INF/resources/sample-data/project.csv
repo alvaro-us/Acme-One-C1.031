@@ -1,9 +1,9 @@
 key,code,title,abstrat,indicator,cost,link,draft-mode,key:manager
-project-01,ABC-1234,Proyecto de DP2,Es un proyecto con al acme framework y java,1,150,https://ev.us.es/,0,manager-01
-project-02,XYZ-5678,Proyecto de DP2,Es un proyecto con al acme framework y java,1,276,https://ev.us.es/,0,manager-01
-project-03,DEF-9999,a,Es un proyecto con al acme framework y java,1,857,,0,manager-01
-project-04,ZZZ-0000,Optimización de Recursos en la Gestión de Inventarios mediante IA,Es un proyecto para la comunidad de madrid usando Python,0,1768,,0,manager-01
-project-05,AAA-9090,Proyecto de DP2,Exploración de la complejidad emergentes en sistemas dinámicos,1,2348,,1,manager-02
-project-06,ABC-1919,Proyecto de DP2,Proyecto Estándar de la universidad,1,1000000,,1,manager-02
-project-07,CBK-6738,Proyecto de DP2,Es un proyecto cualquiera de la universidad de sevilla,0,8192,,0,manager-02
-project-08,QYR-3649,Proyecto de DP2,Es un proyecto cualquiera de la universidad de sevilla,0,9999999,,1,manager-02
+project-01,ABC-1234,Proyecto de DP2,Es un proyecto con al acme framework y java,1,150 USD,https://ev.us.es/,0,manager-01
+project-02,XYZ-5678,Proyecto de DP2,Es un proyecto con al acme framework y java,1,276 EUR,https://ev.us.es/,0,manager-01
+project-03,DEF-9999,a,Es un proyecto con al acme framework y java,1,857 GBP,,0,manager-01
+project-04,ZZZ-0000,Optimización de Recursos en la Gestión de Inventarios mediante IA,Es un proyecto para la comunidad de madrid usando Python,0,1768 EUR,,0,manager-01
+project-05,AAA-9090,Proyecto de DP2,Exploración de la complejidad emergentes en sistemas dinámicos,1,2348 USD,,1,manager-02
+project-06,ABC-1919,Proyecto de DP2,Proyecto Estándar de la universidad,1,1000000 EUR,,1,manager-02
+project-07,CBK-6738,Proyecto de DP2,Es un proyecto cualquiera de la universidad de sevilla,0,8192 GBP,,0,manager-02
+project-08,QYR-3649,Proyecto de DP2,Es un proyecto cualquiera de la universidad de sevilla,0,9999999 USD,,1,manager-02

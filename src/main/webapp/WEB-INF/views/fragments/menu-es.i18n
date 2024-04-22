@@ -34,6 +34,7 @@ master.menu.administrator.user-accounts = Cuentas de usuario
 master.menu.administrator.populate-initial = Poblar BD (inicial)
 master.menu.administrator.populate-sample = Poblar BD (ejemplos)
 master.menu.administrator.shut-down = Parar el sistema
+master.menu.administrator.configuration = Configuración de la moneda
 
 # master.menu.client ########################################################
 
@@ -56,7 +57,8 @@ master.menu.consumer.favourite-link = Enlace favorito
 
 master.menu.manager = Gerente
 master.menu.manager.ListProjects = Mis proyectos
-master.menu.manager.Dashboard = My dashboard
+master.menu.manager.Dashboard = Mi dashboard
+master.menu.manager.Assignments = Asignaciones
 
 # master.menu.sponsor ##########################################################
 
@@ -75,3 +77,4 @@ master.menu.user-account.become-consumer = Hazte consumidor
 master.menu.user-account.become-manager = Hazte Manager
 master.menu.user-account.manager = Datos de Gerente
 master.menu.user-account.projects = Proyectos
+master.menu.user-account.notices = Notificaciones
