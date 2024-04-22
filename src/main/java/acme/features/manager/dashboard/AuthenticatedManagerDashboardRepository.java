@@ -43,16 +43,46 @@ public interface AuthenticatedManagerDashboardRepository extends AbstractReposit
 	@Query("SELECT COALESCE(max(a.estimatedCost), 0) FROM UserStory a WHERE a.manager.id = :id")
 	int getMaxEstimatedCostUserStory(int id);
 
-	@Query("SELECT COALESCE(avg(a.cost.amount), 0) FROM Project a WHERE a.manager.id = :id")
-	double getAverageCostProject(int id);
+	//------------------- EUR
 
-	@Query("SELECT COALESCE(stddev(a.cost.amount), 0) FROM Project a WHERE a.manager.id = :id")
-	double getDeviationCostProject(int id);
+	@Query("SELECT COALESCE(avg(a.cost.amount), 0) FROM Project a WHERE a.manager.id = :id and a.cost.currency = 'EUR'")
+	double getAverageCostProjectEUR(int id);
 
-	@Query("SELECT COALESCE(min(a.cost.amount), 0) FROM Project a WHERE a.manager.id = :id")
-	int getMinCostProject(int id);
+	@Query("SELECT COALESCE(stddev(a.cost.amount), 0) FROM Project a WHERE a.manager.id = :id and a.cost.currency = 'EUR'")
+	double getDeviationCostProjectEUR(int id);
 
-	@Query("SELECT COALESCE(max(a.cost.amount), 0) FROM Project a WHERE a.manager.id = :id")
-	int getMaxCostProject(int id);
+	@Query("SELECT COALESCE(min(a.cost.amount), 0) FROM Project a WHERE a.manager.id = :id and a.cost.currency = 'EUR'")
+	int getMinCostProjectEUR(int id);
+
+	@Query("SELECT COALESCE(max(a.cost.amount), 0) FROM Project a WHERE a.manager.id = :id and a.cost.currency = 'EUR'")
+	int getMaxCostProjectEUR(int id);
+
+	//------------------ GBP
+
+	@Query("SELECT COALESCE(avg(a.cost.amount), 0) FROM Project a WHERE a.manager.id = :id and a.cost.currency = 'GBP'")
+	double getAverageCostProjectGBP(int id);
+
+	@Query("SELECT COALESCE(stddev(a.cost.amount), 0) FROM Project a WHERE a.manager.id = :id and a.cost.currency = 'GBP'")
+	double getDeviationCostProjectGBP(int id);
+
+	@Query("SELECT COALESCE(min(a.cost.amount), 0) FROM Project a WHERE a.manager.id = :id and a.cost.currency = 'GBP'")
+	int getMinCostProjectGBP(int id);
+
+	@Query("SELECT COALESCE(max(a.cost.amount), 0) FROM Project a WHERE a.manager.id = :id and a.cost.currency = 'GBP'")
+	int getMaxCostProjectGBP(int id);
+
+	//------------------ USD
+
+	@Query("SELECT COALESCE(avg(a.cost.amount), 0) FROM Project a WHERE a.manager.id = :id and a.cost.currency = 'USD'")
+	double getAverageCostProjectUSD(int id);
+
+	@Query("SELECT COALESCE(stddev(a.cost.amount), 0) FROM Project a WHERE a.manager.id = :id and a.cost.currency = 'USD'")
+	double getDeviationCostProjectUSD(int id);
+
+	@Query("SELECT COALESCE(min(a.cost.amount), 0) FROM Project a WHERE a.manager.id = :id and a.cost.currency = 'USD'")
+	int getMinCostProjectUSD(int id);
+
+	@Query("SELECT COALESCE(max(a.cost.amount), 0) FROM Project a WHERE a.manager.id = :id and a.cost.currency = 'USD'")
+	int getMaxCostProjectUSD(int id);
 
 }

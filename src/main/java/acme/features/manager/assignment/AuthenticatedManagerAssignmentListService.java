@@ -4,12 +4,14 @@ package acme.features.manager.assignment;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
 import acme.entities.projects.Assignment;
 import acme.roles.Manager;
 
+@Service
 public class AuthenticatedManagerAssignmentListService extends AbstractService<Manager, Assignment> {
 
 	// Internal state ---------------------------------------------------------

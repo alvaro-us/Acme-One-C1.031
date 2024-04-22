@@ -4,6 +4,7 @@ package acme.features.manager.assignment;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
@@ -13,6 +14,7 @@ import acme.entities.projects.Project;
 import acme.entities.projects.UserStory;
 import acme.roles.Manager;
 
+@Service
 public class AuthenticatedManagerAssignmentCreateService extends AbstractService<Manager, Assignment> {
 
 	// Internal state ---------------------------------------------------------
@@ -66,10 +68,10 @@ public class AuthenticatedManagerAssignmentCreateService extends AbstractService
 	public void validate(final Assignment object) {
 		assert object != null;
 
-		if (!super.getBuffer().getErrors().hasErrors("course"))
+		if (!super.getBuffer().getErrors().hasErrors("userStory"))
 			super.state(!object.getProject().isDraftMode() == false, "userStory", "manager.assignment.project.notDraftMode");
 
-		if (!super.getBuffer().getErrors().hasErrors("course"))
+		if (!super.getBuffer().getErrors().hasErrors("project"))
 			super.state(!object.getUserStory().isDraftMode() == false, "project", "manager.assignment.userStory.notDraftMode");
 
 	}
@@ -99,9 +101,9 @@ public class AuthenticatedManagerAssignmentCreateService extends AbstractService
 
 		dataset = super.unbind(object, "project", "userStory");
 		dataset.put("userStory", choices.getSelected().getKey());
-		dataset.put("userStory", choices);
+		dataset.put("userStories", choices);
 		dataset.put("project", choices1.getSelected().getKey());
-		dataset.put("project", choices1);
+		dataset.put("projects", choices1);
 
 		super.getResponse().addData(dataset);
 	}

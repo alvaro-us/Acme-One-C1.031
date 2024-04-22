@@ -4,6 +4,7 @@ package acme.features.manager.assignment;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
@@ -13,6 +14,7 @@ import acme.entities.projects.Project;
 import acme.entities.projects.UserStory;
 import acme.roles.Manager;
 
+@Service
 public class AuthenticatedManagerAssignmentDeleteService extends AbstractService<Manager, Assignment> {
 
 	// Internal state ---------------------------------------------------------
@@ -91,9 +93,9 @@ public class AuthenticatedManagerAssignmentDeleteService extends AbstractService
 
 		dataset = super.unbind(object, "project", "userStory");
 		dataset.put("userStory", choices.getSelected().getKey());
-		dataset.put("userStory", choices);
+		dataset.put("userStories", choices);
 		dataset.put("project", choices1.getSelected().getKey());
-		dataset.put("project", choices1);
+		dataset.put("projects", choices1);
 
 		super.getResponse().addData(dataset);
 	}

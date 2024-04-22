@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import acme.client.repositories.AbstractRepository;
+import acme.entities.configuration.Configuration;
 import acme.entities.projects.Assignment;
 import acme.entities.projects.Project;
 import acme.roles.Manager;
@@ -49,5 +50,8 @@ public interface AuthenticatedManagerProjectRepository extends AbstractRepositor
 
 	//@Query("select count(a) from TrainingModule a where a.project.id = :id")
 	//int findNumberTrainingModuleOfProject(int id);
+
+	@Query("select c from Configuration c")
+	Configuration findConfiguration();
 
 }

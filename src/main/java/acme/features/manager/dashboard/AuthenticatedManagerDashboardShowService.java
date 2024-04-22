@@ -1,6 +1,9 @@
 
 package acme.features.manager.dashboard;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +36,10 @@ public class AuthenticatedManagerDashboardShowService extends AbstractService<Ma
 	public void load() {
 		int managerId;
 		ManagerDashboard dashboard;
+		final Map<String, Double> averageCostProject = new HashMap<>();
+		final Map<String, Double> deviationCostProject = new HashMap<>();
+		final Map<String, Integer> minCostProject = new HashMap<>();
+		final Map<String, Integer> maxCostProject = new HashMap<>();
 
 		managerId = super.getRequest().getPrincipal().getActiveRoleId();
 
@@ -48,10 +55,26 @@ public class AuthenticatedManagerDashboardShowService extends AbstractService<Ma
 		dashboard.setMinEstimatedCostUserStory(this.repository.getMinEstimatedCostUserStory(managerId));
 		dashboard.setMaxEstimatedCostUserStory(this.repository.getMaxEstimatedCostUserStory(managerId));
 
-		dashboard.setAverageCostProject(this.repository.getAverageCostProject(managerId));
-		dashboard.setDeviationCostProject(this.repository.getDeviationCostProject(managerId));
-		dashboard.setMinCostProject(this.repository.getMinCostProject(managerId));
-		dashboard.setMaxCostProject(this.repository.getMaxCostProject(managerId));
+		averageCostProject.put("EUR", this.repository.getAverageCostProjectEUR(managerId));
+		averageCostProject.put("GBP", this.repository.getAverageCostProjectGBP(managerId));
+		averageCostProject.put("USD", this.repository.getAverageCostProjectUSD(managerId));
+
+		deviationCostProject.put("EUR", this.repository.getDeviationCostProjectEUR(managerId));
+		deviationCostProject.put("GBP", this.repository.getDeviationCostProjectGBP(managerId));
+		deviationCostProject.put("USD", this.repository.getDeviationCostProjectUSD(managerId));
+
+		minCostProject.put("EUR", this.repository.getMinCostProjectEUR(managerId));
+		minCostProject.put("GBP", this.repository.getMinCostProjectGBP(managerId));
+		minCostProject.put("USD", this.repository.getMinCostProjectUSD(managerId));
+
+		maxCostProject.put("EUR", this.repository.getMaxCostProjectEUR(managerId));
+		maxCostProject.put("GBP", this.repository.getMaxCostProjectGBP(managerId));
+		maxCostProject.put("USD", this.repository.getMaxCostProjectUSD(managerId));
+
+		dashboard.setAverageCostProject(averageCostProject);
+		dashboard.setDeviationCostProject(deviationCostProject);
+		dashboard.setMinCostProject(minCostProject);
+		dashboard.setMaxCostProject(maxCostProject);
 
 		super.getBuffer().addData(dashboard);
 
