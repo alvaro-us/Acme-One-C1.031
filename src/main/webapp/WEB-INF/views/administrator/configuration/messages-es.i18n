@@ -8,3 +8,11 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
+
+administrator.configuration.form.title = Configuración de la Moneda
+
+administrator.configuration.form.label.currency = Moneda
+administrator.configuration.form.label.acceptedCurrency = Monedas Aceptadas
+
+administrator.configuration.form.button.update = Actualizar
+

@@ -1,14 +1,11 @@
 
 package acme.features.manager.userStory;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
-import acme.entities.projects.Assignment;
 import acme.entities.projects.UserStory;
 import acme.roles.Manager;
 
@@ -63,16 +60,20 @@ public class AuthenticatedManagerUserStoryDeleteService extends AbstractService<
 	public void validate(final UserStory object) {
 		assert object != null;
 
+		int id;
+		boolean status;
+
+		id = super.getRequest().getData("id", int.class);
+		int numberAssignments = this.repository.findNumberAssignmentOfUserStory(id);
+
+		status = numberAssignments == 0;
+
+		super.state(status, "*", "manager.user-story.delete.exist-assignment");
+
 	}
 	@Override
 	public void perform(final UserStory object) {
 		assert object != null;
-
-		Collection<Assignment> assignments;
-
-		assignments = this.repository.findAllAssignmentsOfUserStory(object.getId());
-
-		this.repository.deleteAll(assignments);
 
 		this.repository.delete(object);
 	}
