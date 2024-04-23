@@ -33,6 +33,8 @@
 			<acme:menu-suboption code="master.menu.administrator.populate-initial" action="/administrator/system/populate-initial"/>
 			<acme:menu-suboption code="master.menu.administrator.populate-sample" action="/administrator/system/populate-sample"/>			
 			<acme:menu-separator/>
+			<acme:menu-suboption code="master.menu.administrator.configuration" action="/administrator/configuration/show" access="isAuthenticated()"/>
+			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.shut-down" action="/administrator/system/shut-down"/>
 		</acme:menu-option>
 
@@ -57,6 +59,8 @@
 			
 		</acme:menu-option>
 		<acme:menu-option code="master.menu.sponsorships" action="/any/sponsorship/list"/>
+		<acme:menu-option code="master.menu.claims" action="/any/claim/list"/>
+		
 	</acme:menu-left>
 
 	<acme:menu-right>

@@ -20,7 +20,7 @@ public class AuthenticatedSponsorCreateService extends AbstractService<Authentic
 	@Autowired
 	private AuthenticatedSponsorRepository repository;
 
-	// AbstractService<Authenticated, Consumer> ---------------------------
+	// AbstractService<Authenticated, Sponsor> ---------------------------
 
 
 	@Override
