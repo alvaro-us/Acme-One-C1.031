@@ -18,6 +18,8 @@ manager.assignment.form.label.project = Proyecto
 manager.assignment.form.label.story = Historia de usuario
 
 manager.assignment.list.button.create = Crear
+manager.assignment.list.button.create.project = Crear un proyecto
+manager.assignment.list.button.create.user-story = Crear una historia de usuario
 
 manager.assignment.form.button.delete = Eliminar
 manager.assignment.form.button.create = Crear

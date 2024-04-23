@@ -44,11 +44,8 @@ public class Project extends AbstractEntity {
 
 	private boolean				indicator;
 
-
 	@NotNull
 	@Valid
-	@PositiveOrZero
-
 	private Money				cost;
 
 	@URL

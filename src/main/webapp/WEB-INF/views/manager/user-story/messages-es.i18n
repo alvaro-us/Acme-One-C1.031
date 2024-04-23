@@ -16,6 +16,7 @@ manager.user-story.form.label.description = Indicador
 manager.user-story.form.label.priorityType = Tipo de prioridad
 manager.user-story.form.label.estimatedCost = Coste
 manager.user-story.form.label.acceptanceCriteria = Criterio aceptación
+manager.user-story.form.label.link = Enlace (Opcional)
 
 manager.user-story.list.label.title = Título
 manager.user-story.list.label.description = Indicador
