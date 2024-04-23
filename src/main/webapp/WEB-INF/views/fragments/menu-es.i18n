@@ -36,6 +36,12 @@ master.menu.administrator.populate-sample = Poblar BD (ejemplos)
 master.menu.administrator.shut-down = Parar el sistema
 master.menu.administrator.configuration = Configuración de la moneda
 
+# master.menu.client ########################################################
+
+master.menu.client = Cliente
+master.menu.client.contract-list = Lista de contratos publicados
+
+
 # master.menu.provider ########################################################
 
 master.menu.provider = Proveedor
