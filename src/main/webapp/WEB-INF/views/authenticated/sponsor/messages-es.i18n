@@ -1,4 +1,4 @@
-# messages-en.i18n
+# messages-es.i18n
 #
 # Copyright (C) 2012-2024 Rafael Corchuelo.
 #
@@ -8,11 +8,11 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
+authenticated.sponsor.form.title = Datos del patrocinador
 
-administrator.configuration.form.title = Currency Configuration
+authenticated.sponsor.form.label.expectedBenefits = Beneficios esperados
+authenticated.sponsor.form.label.webPage = Página web
 
-administrator.configuration.form.label.currency = Currency
-administrator.configuration.form.label.acceptedCurrency = Accepted Currencies
 
-administrator.configuration.form.button.update = Update
-
+authenticated.sponsor.form.button.create = Registrar
+authenticated.sponsor.form.button.update = Actualizar

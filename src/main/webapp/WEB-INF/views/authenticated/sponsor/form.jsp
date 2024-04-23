@@ -17,12 +17,10 @@
 
 <acme:form>
 
-	<acme:input-textbox code="administrator.configuration.form.label.currency" path="currency"/>	
-	<acme:input-textbox code="administrator.configuration.form.label.acceptedCurrency" path="acceptedCurrency"/>
+	<acme:input-textarea code="authenticated.sponsor.form.label.expectedBenefits" path="expectedBenefits"/>
+	<acme:input-url code="authenticated.sponsor.form.label.webPage" path="webPage"/>
 
-	<jstl:if test="${acme:anyOf(_command, 'show|update')}">
-		<acme:submit code="administrator.configuration.form.button.update" action="/administrator/configuration/update"/>
-	</jstl:if>
+	
+	<acme:submit test="${_command == 'create'}" code="authenticated.sponsor.form.button.create" action="/authenticated/sponsor/create"/>
+	<acme:submit test="${_command == 'update'}" code="authenticated.sponsor.form.button.update" action="/authenticated/sponsor/update"/>
 </acme:form>
-
-

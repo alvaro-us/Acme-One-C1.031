@@ -1,5 +1,5 @@
 
-package acme.features.sponsor.sponsorship;
+package acme.features.sponsor.invoice;
 
 import javax.annotation.PostConstruct;
 
@@ -7,42 +7,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import acme.client.controllers.AbstractController;
-import acme.entities.sponsorship.Sponsorship;
+import acme.entities.invoice.Invoice;
 import acme.roles.Sponsor;
 
 @Controller
-public class AuthenticatedSponsorSponsorshipController extends AbstractController<Sponsor, Sponsorship> {
+public class AuthenticatedSponsorInvoiceController extends AbstractController<Sponsor, Invoice> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	protected AuthenticatedSponsorSponsorshipListMineService	listMineService;
+	protected AuthenticatedSponsorInvoiceListService	listService;
 
 	@Autowired
-	protected AuthenticatedSponsorSponsorshipShowService		showService;
+	protected AuthenticatedSponsorInvoiceCreateService	createService;
 
 	@Autowired
-	protected AuthenticatedSponsorSponsorshipUpdateService		updateService;
+	protected AuthenticatedSponsorInvoiceUpdateService	updateService;
 
 	@Autowired
-	protected AuthenticatedSponsorSponsorshipDeleteService		deleteService;
+	protected AuthenticatedSponsorInvoiceShowService	showService;
 
 	@Autowired
-	protected AuthenticatedSponsorSponsorshipCreateService		createService;
+	protected AuthenticatedSponsorInvoiceDeleteService	deleteService;
 
 	@Autowired
-	protected AuthenticatedSponsorSponsorshipPublishService		publishService;
+	protected AuthenticatedSponsorInvoicePublishService	publishService;
 
 	// Constructors -----------------------------------------------------------
 
 
 	@PostConstruct
 	protected void initialise() {
-		super.addBasicCommand("list", this.listMineService);
+		super.addBasicCommand("list", this.listService);
 		super.addBasicCommand("show", this.showService);
 		super.addBasicCommand("update", this.updateService);
 		super.addBasicCommand("delete", this.deleteService);
 		super.addBasicCommand("create", this.createService);
 		super.addCustomCommand("publish", "update", this.publishService);
+
 	}
+
 }

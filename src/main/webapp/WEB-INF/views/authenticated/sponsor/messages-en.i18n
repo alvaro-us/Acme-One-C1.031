@@ -8,11 +8,11 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
+authenticated.manager.form.title = Sponsor Data
 
-administrator.configuration.form.title = Currency Configuration
+authenticated.sponsor.form.label.expectedBenefits = Expected benefits
+authenticated.sponsor.form.label.webPage = Web page
 
-administrator.configuration.form.label.currency = Currency
-administrator.configuration.form.label.acceptedCurrency = Accepted Currencies
 
-administrator.configuration.form.button.update = Update
-
+authenticated.sponsor.form.button.create = Register
+authenticated.sponsor.form.button.update = Update

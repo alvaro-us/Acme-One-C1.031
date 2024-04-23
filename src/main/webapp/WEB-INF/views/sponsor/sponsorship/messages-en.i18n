@@ -1,0 +1,59 @@
+# messages-en.i18n
+#
+# Copyright (C) 2012-2024 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+sponsor.sponsorship.form.title = Sponsorship 
+sponsor.sponsorship.list.title = Listing of yours sponsorships
+
+sponsor.sponsorship.form.label.code = Code
+sponsor.sponsorship.form.label.moment = Moment
+sponsor.sponsorship.form.label.durationStart = Start
+sponsor.sponsorship.form.label.durationEnd = End
+sponsor.sponsorship.form.label.amount = Amount
+sponsor.sponsorship.form.label.type = Type
+sponsor.sponsorship.form.label.email = Email
+sponsor.sponsorship.form.label.link = Link
+sponsor.sponsorship.form.label.project = Project
+
+
+sponsor.sponsorship.list.label.code = Code
+sponsor.sponsorship.list.label.durationStart = Start
+sponsor.sponsorship.list.label.durationEnd = End
+sponsor.sponsorship.list.label.type = Type
+sponsor.sponsorship.list.label.invoices = Number of Invoices
+sponsor.sponsorship.list.label.published = Published
+
+
+sponsor.sponsorship.list.button.create = Create
+sponsor.sponsorship.form.button.create = Create
+sponsor.sponsorship.form.button.update = Update
+sponsor.sponsorship.form.button.delete = Delete
+sponsor.sponsorship.form.button.publish = Publish
+sponsor.sponsorship.form.button.invoice = Invoices
+
+validation.sponsorship.code = Incorrect Code Scheme
+
+sponsor.sponsorship.form.error.correctAmount = The sum of the invoice prices does not match the price of this field
+sponsor.sponsorship.form.error.publishedInvoices = The invoices of the sponsorship with this code are not published
+sponsor.sponsorship.form.error.noInvoices = This sponsorship has not invoices
+sponsor.sponsorship.form.error.codeDuplicated = Code is already in use
+sponsor.sponsorship.form.error.momentBeforeDurationStart = The sponsorship start must be after the moment
+sponsor.sponsorship.form.error.durationStart1MothBeforeDurationEnd = The duration must be at least 1 month
+sponsor.sponsorship.form.error.amountPositive = The amount must be positive
+sponsor.sponsorship.form.error.amountLessInvoicesAmount = The cost of the invoices cannot exceed that of this field
+
+
+sponsor.sponsorship.code = Sponsorship code
+sponsor.sponsorship.durationStart = Sponsorship Start
+sponsor.sponsorship.durationEnd = Sponsorship End
+sponsor.sponsorship.type = Sponsorship type
+sponsor.sponsorship.link = Sponsorship link
+
+sponsor.sponsorship.form.button.invoices = Invoices
+
