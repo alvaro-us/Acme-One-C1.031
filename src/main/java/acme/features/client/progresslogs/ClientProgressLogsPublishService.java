@@ -19,6 +19,7 @@ public class ClientProgressLogsPublishService extends AbstractService<Client, Pr
 	@Autowired
 	protected ClientProgressLogsRepository repository;
 
+	
 	// AbstractService<Employer, Job> -------------------------------------
 
 

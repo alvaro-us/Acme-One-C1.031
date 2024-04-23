@@ -53,6 +53,7 @@ public class ClientContractShowService extends AbstractService<Client, Contract>
 		if (object == null)
 			throw new IllegalArgumentException("No object found");
 		Dataset dataset;
+
 		dataset = super.unbind(object, "id", "code", "instationMoment", "providerName", "customerName", "goals", "budget", "published", "project", "client");
 		final List<ProgressLogs> progressLogs = (List<ProgressLogs>) this.repository.findProgressLogsByContract(object.getId());
 		dataset.put("hasProgressLogs", !progressLogs.isEmpty());

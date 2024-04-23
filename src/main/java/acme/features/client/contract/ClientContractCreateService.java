@@ -107,6 +107,7 @@ public class ClientContractCreateService extends AbstractService<Client, Contrac
 		if (object == null)
 			throw new IllegalArgumentException("No object found");
 		Dataset dataset;
+		SelectChoices choicesP;
 		dataset = super.unbind(object, "code", "instationMoment", "providerName", "customerName", "goals", "budget", "project", "client", "published");
 
 		final SelectChoices choices = new SelectChoices();
