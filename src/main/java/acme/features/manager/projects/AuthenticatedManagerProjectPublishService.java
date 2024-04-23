@@ -64,6 +64,15 @@ public class AuthenticatedManagerProjectPublishService extends AbstractService<M
 	public void validate(final Project object) {
 		assert object != null;
 
+		int id;
+		boolean status;
+
+		id = super.getRequest().getData("id", int.class);
+		int numberAssignments = this.repository.findNumberUserStoryNotPublishedOfProject(id);
+
+		status = numberAssignments == 0;
+		super.state(status, "*", "manager.project.delete.userStory.notPublished");
+
 		if (!super.getBuffer().getErrors().hasErrors("indicator")) {
 			boolean indicator;
 			indicator = object.isIndicator();
@@ -83,11 +92,11 @@ public class AuthenticatedManagerProjectPublishService extends AbstractService<M
 			Configuration config;
 			config = this.repository.findConfiguration();
 
-			super.state(Arrays.asList(config.getAcceptedCurrency().trim().split(",")).contains(object.getCost().getCurrency()), "cost", "manager.project.currency");
+			super.state(Arrays.asList(config.getAcceptedCurrency().trim().split(",")).contains(object.getCost().getCurrency()), "cost", "manager.project.error.cost.currency");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("cost"))
-			super.state(object.getCost().getAmount() >= 0., "retailPrice", "manager.project.negative-price");
+			super.state(object.getCost().getAmount() >= 0., "retailPrice", "manager.project.error.cost.negative-price");
 	}
 
 	@Override

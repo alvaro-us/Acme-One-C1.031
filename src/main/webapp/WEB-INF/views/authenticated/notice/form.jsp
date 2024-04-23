@@ -16,8 +16,8 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form>
-	<acme:input-textbox code="authenticated.notice.form.label.title" path="title"/>
-	<acme:input-textarea code="authenticated.notice.form.label.message" path="message"/>
+	<acme:input-textbox code="authenticated.notice.form.label.title" path="title" placeholder ="authenticated.notice.form.placeholder.title"/>
+	<acme:input-textarea code="authenticated.notice.form.label.message" path="message" placeholder = "authenticated.notice.form.placeholder.message"/>
 	<acme:input-email code="authenticated.notice.form.label.email" path="email"/>
 	<acme:input-url code="authenticated.notice.form.label.link" path="link"/>
 	<acme:input-checkbox code="authenticate.notice.form.button.confirmation" path="confirmation"/>

@@ -29,4 +29,10 @@ manager.user-story.form.button.delete = Delete
 manager.user-story.form.button.publish = Publish
 manager.user-story.form.button.create = Create
 
+manager.user-story.form.placeholder.title = Title
+manager.user-story.form.placeholder.description = Description
+manager.user-story.form.placeholder.estimatedCost = XX.XX
+manager.user-story.form.placeholder.acceptance-criteria = Acceptance criteria
+manager.user-story.form.placeholder.link = Link
+
 manager.user-story.delete.exist-assignment = There are assignments related to this user story

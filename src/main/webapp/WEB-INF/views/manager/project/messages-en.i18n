@@ -30,16 +30,18 @@ manager.project.form.button.delete = Delete
 manager.project.form.button.publish = Publish
 manager.project.form.button.user-stories = User stories
 
-validation.project.code = Incorrect Code Scheme
-
 manager.project.title = Project title
 manager.project.abstrat = Project abstract
 manager.project.cost = Project cost
 manager.project.link = Project link
 
-validation.project.code = Incorrect Code Scheme
-manager.project.form.error.duplicated = Code already exists
-manager.project.delete.exist-contract = There are contracts related to this project
-manager.project.delete.exist-assignment = There are assignments related to this project
+validation.project.code = Incorrect Code Scheme.
+manager.project.error.indicator.notFalse = You can´t publish a project with errors.
+manager.project.form.error.duplicated = Code already exists.
+manager.project.error.cost.currency = Please select a valid type of currency.
+manager.project.error.cost.negative-price = Please insert a positive amount of cost.
+manager.project.delete.exist-contract = There are contracts related to this project.
+manager.project.delete.exist-assignment = There are assignments related to this project.
+manager.project.delete.userStory.notPublished = There are user stories not published assigned to this project.
 
 

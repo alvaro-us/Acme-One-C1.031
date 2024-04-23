@@ -39,6 +39,9 @@ public interface AuthenticatedManagerProjectRepository extends AbstractRepositor
 	@Query("select count(a) from Assignment a where a.project.id = :id")
 	int findNumberAssignmentOfProject(int id);
 
+	@Query("select count(a) from Assignment a where a.project.id = :id and a.userStory.draftMode = true")
+	int findNumberUserStoryNotPublishedOfProject(int id);
+
 	@Query("select count(a) from Contract a where a.project.id = :id")
 	int findNumberContractOfProject(int id);
 

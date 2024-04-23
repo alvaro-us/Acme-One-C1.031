@@ -24,3 +24,6 @@ authenticated.notice.list.label.title = Title
 authenticated.notice.list.label.author = Author
 
 authenticate.notice.form.button.confirmation = Confirmation
+
+authenticated.notice.form.placeholder.title = Title
+authenticated.notice.form.placeholder.message = Message

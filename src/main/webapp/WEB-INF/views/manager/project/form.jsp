@@ -20,7 +20,7 @@
 	<acme:input-textbox code="manager.project.form.label.title" path="title" placeholder="manager.project.title"/>
 	<acme:input-textbox code="manager.project.form.label.abstrat" path="abstrat" placeholder="manager.project.abstrat"/>
 	<acme:input-checkbox code="manager.project.form.label.indicator" path="indicator"/>
-	<acme:input-integer code="manager.project.form.label.cost" path="cost" placeholder="manager.project.cost"/>
+	<acme:input-textbox code="manager.project.form.label.cost" path="cost" placeholder="manager.project.cost"/>
 	<acme:input-textbox code="manager.project.form.label.link" path="link" placeholder="manager.project.link"/>	
 	<acme:hidden-data path="draftMode"/>
 	

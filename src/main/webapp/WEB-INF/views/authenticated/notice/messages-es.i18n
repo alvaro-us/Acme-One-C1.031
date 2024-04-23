@@ -24,3 +24,6 @@ authenticated.notice.list.label.title = Titulo
 authenticated.notice.list.label.author = Autor
 
 authenticate.notice.form.button.confirmation = Confirmación
+
+authenticated.notice.form.placeholder.title = Titulo
+authenticated.notice.form.placeholder.message = Mensaje
