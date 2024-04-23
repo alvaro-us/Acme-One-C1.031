@@ -41,6 +41,8 @@ master.menu.client = Client
 master.menu.client.contract-list = List of published contracts
 master.menu.client.dashboard = Dashboard
 
+
+
 # master.menu.provider ########################################################
 
 master.menu.provider = Provider

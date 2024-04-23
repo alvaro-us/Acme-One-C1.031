@@ -1,0 +1,33 @@
+# messages-en.i18n
+
+client.progress-logs.form.title = ProgressLog form
+client.progress-logs.list.title = Listing of progressLogs
+
+client.ProgressLogs.form.label.recordId = RecordId:
+client.ProgressLogs.form.label.completeness = Completeness:
+client.ProgressLogs.form.label.comment = Comment: 
+client.ProgressLogs.form.label.registrationMoment = Registration Moment:
+client.ProgressLogs.form.label.responsable = Responsible Person:
+
+client.ProgressLogs.form.button.create = Create		
+client.ProgressLogs.form.button.update = Update
+client.ProgressLogs.form.button.delete = Delete
+
+client.ProgressLogs.list.label.recordId = RecordId
+client.ProgressLogs.list.label.completeness = Completeness
+client.ProgressLogs.list.label.comment = Comment
+client.ProgressLogs.list.label.registrationMoment = Registration Moment
+client.ProgressLogs.list.label.responsable = Responsible Person
+
+client.ProgressLogs.list.button.create = Create
+
+client.contract.list.button.create = Create contract
+client.contract.form.button.create = Create
+client.contract.form.button.update = Update contract
+client.contract.form.button.delete = Delete contract
+
+client.contract.form.error.duplicated = This reference is taken
+client.contract.form.error.higher-cost = The budget can't be higher than project cost
+
+
+

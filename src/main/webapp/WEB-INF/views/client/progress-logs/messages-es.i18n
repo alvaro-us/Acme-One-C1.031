@@ -1,0 +1,23 @@
+# messages-es.i18n
+
+
+client.progress-logs.form.title = Detalles del registro de progreso
+client.progress-logs.list.title = Lista del registro de progreso
+
+client.ProgressLogs.form.label.recordId = RecordId:
+client.ProgressLogs.form.label.completeness = Completitud:
+client.ProgressLogs.form.label.comment = Comentario: 
+client.ProgressLogs.form.label.registrationMoment = Momento de registro:
+client.ProgressLogs.form.label.responsable = Persona responsable:
+
+client.ProgressLogs.form.button.create = Crear	
+client.ProgressLogs.form.button.update = Actualizar
+client.ProgressLogs.form.button.delete = Borrar
+
+client.ProgressLogs.list.label.recordId = RecordId
+client.ProgressLogs.list.label.completeness = Completitud
+client.ProgressLogs.list.label.comment = Comentario
+client.ProgressLogs.list.label.registrationMoment = Momento de registro
+client.ProgressLogs.list.label.responsable = Persona responsable
+
+client.ProgressLogs.list.button.create = Crear

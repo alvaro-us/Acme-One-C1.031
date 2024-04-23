@@ -51,7 +51,7 @@ public class ProgressLogs extends AbstractEntity {
 	private Integer				completeness;
 
 	@NotBlank
-	@Length(max = 75)
+	@Length(max = 75, min = 0)
 	private String				responsable;
 
 	// Relationships ----------------------------------------------

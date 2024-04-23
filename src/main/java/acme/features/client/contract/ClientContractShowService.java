@@ -57,25 +57,14 @@ public class ClientContractShowService extends AbstractService<Client, Contract>
 	@Override
 	public void unbind(final Contract object) {
 		assert object != null;
+		SelectChoices choicesP;
+		Collection<Project> projects = this.repository.findAllProjects();
 
-		int clientId;
-		Collection<Project> projects;
-		SelectChoices choices;
 		Dataset dataset;
-
-		if (object.isPublished())
-			projects = this.repository.findAllProjects();
-		else {
-			clientId = super.getRequest().getPrincipal().getActiveRoleId();
-			projects = this.repository.findManyProjectsByClientId(clientId);
-		}
-
-		choices = SelectChoices.from(projects, "title", object.getProject());
+		choicesP = SelectChoices.from(projects, "code", object.getProject());
 
 		dataset = super.unbind(object, "code", "instationMoment", "providerName", "customerName", "goals", "budget", "published");
-		dataset.put("project", choices.getSelected().getKey());
-		dataset.put("projects", choices);
-
+		dataset.put("projects", choicesP);
 		super.getResponse().addData(dataset);
 	}
 

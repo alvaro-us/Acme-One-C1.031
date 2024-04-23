@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
-import acme.client.views.SelectChoices;
 import acme.entities.contract.Contract;
 import acme.entities.progressLogs.ProgressLogs;
 import acme.entities.projects.Project;
@@ -85,19 +84,9 @@ public class ClientContractDeleteService extends AbstractService<Client, Contrac
 	public void unbind(final Contract object) {
 		assert object != null;
 
-		int clientId;
-		Collection<Project> projects;
-		SelectChoices choices;
 		Dataset dataset;
 
-		clientId = super.getRequest().getPrincipal().getActiveRoleId();
-		projects = this.repository.findManyProjectsByClientId(clientId);
-
-		choices = SelectChoices.from(projects, "title", object.getProject());
-
 		dataset = super.unbind(object, "code", "instationMoment", "providerName", "customerName", "goals", "budget", "published");
-		dataset.put("project", choices.getSelected().getKey());
-		dataset.put("projects", choices);
 
 		super.getResponse().addData(dataset);
 	}

@@ -50,14 +50,8 @@ public class ClientContractCreateService extends AbstractService<Client, Contrac
 	public void bind(final Contract object) {
 		assert object != null;
 
-		int projectId;
-		Project project;
+		super.bind(object, "code", "instationMoment", "providerName", "customerName", "goals", "budget");
 
-		projectId = super.getRequest().getData("project", int.class);
-		project = this.repository.findOneProjectById(projectId);
-
-		super.bind(object, "code", "instationMoment", "providerName", "customerName", "goals", "budget", "published");
-		object.setProject(project);
 	}
 
 	@Override
@@ -74,9 +68,6 @@ public class ClientContractCreateService extends AbstractService<Client, Contrac
 			super.state(existing == null, "code", "client.contract.form.error.duplicated");
 		}
 
-		if (!super.getBuffer().getErrors().hasErrors("budget"))
-
-			super.state(totalAmount * object.getBudget().getAmount() < object.getProject().getCost().getAmount() && object.getBudget().getCurrency().equals(object.getProject().getCost().getCurrency()), "budget", "client.contract.form.error.higher-cost");
 	}
 
 	@Override
@@ -89,21 +80,14 @@ public class ClientContractCreateService extends AbstractService<Client, Contrac
 	@Override
 	public void unbind(final Contract object) {
 		assert object != null;
+		SelectChoices choicesP;
+		Collection<Project> projects = this.repository.findAllProjects();
 
-		int clientId;
-		Collection<Project> projects;
-		SelectChoices choices;
 		Dataset dataset;
-
-		clientId = super.getRequest().getPrincipal().getActiveRoleId();
-		projects = this.repository.findAllProjects();
-
-		choices = SelectChoices.from(projects, "title", object.getProject());
+		choicesP = SelectChoices.from(projects, "code", object.getProject());
 
 		dataset = super.unbind(object, "code", "instationMoment", "providerName", "customerName", "goals", "budget", "published");
-		dataset.put("project", choices.getSelected().getKey());
-		dataset.put("projects", choices);
-
+		dataset.put("projects", choicesP);
 		super.getResponse().addData(dataset);
 	}
 
