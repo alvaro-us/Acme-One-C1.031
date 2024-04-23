@@ -1,23 +1,23 @@
-# messages-es.i18n
+lient.progress-logs.list.title = Tus actas de progreso
+client.progress-logs.form.title = Detalles del acta
 
+client.progress-logs.list.label.recordId = Id de registro
+client.progress-logs.list.label.completeness = Completitud
+client.progress-logs.list.label.responsiblePerson = Responsable
 
-client.progress-logs.form.title = Detalles del registro de progreso
-client.progress-logs.list.title = Lista del registro de progreso
+client.progress-logs.form.label.recordId = Id de registro
+client.progress-logs.form.label.completeness = Completitud
+client.progress-logs.form.label.comment = Comentarios
+client.progress-logs.form.label.registrationMoment = Registro
+client.progress-logs.form.label.responsiblePerson = Responsable
+client.progress-logs.form.label.contract = Contrato
 
-client.ProgressLogs.form.label.recordId = RecordId:
-client.ProgressLogs.form.label.completeness = Completitud:
-client.ProgressLogs.form.label.comment = Comentario: 
-client.ProgressLogs.form.label.registrationMoment = Momento de registro:
-client.ProgressLogs.form.label.responsable = Persona responsable:
+client.progressLogs.form.error.recordId = El registro se debe de componer en el siguiente patron: 2 letras - 2 letras - 4 numeros
+client.progressLogs.form.error.published =  No puedes editar o eliminar un acta ya publicada
+client.progressLogs.form.error.moment = Debe de estar en el pasado
 
-client.ProgressLogs.form.button.create = Crear	
-client.ProgressLogs.form.button.update = Actualizar
-client.ProgressLogs.form.button.delete = Borrar
-
-client.ProgressLogs.list.label.recordId = RecordId
-client.ProgressLogs.list.label.completeness = Completitud
-client.ProgressLogs.list.label.comment = Comentario
-client.ProgressLogs.list.label.registrationMoment = Momento de registro
-client.ProgressLogs.list.label.responsable = Persona responsable
-
-client.ProgressLogs.list.button.create = Crear
+client.progress-logs.create = Crear
+client.progress-logs.form.button.delete = Eliminar
+client.progress-logs.form.button.update = Actualizar
+client.progress-logs.form.button.publish = Publicar
+client.progress-logs.form.button.create = Crear

@@ -1,33 +1,24 @@
-# messages-en.i18n
+client.progress-logs.list.title = Your progress logs
+client.progress-logs.form.title = Your progress log
 
-client.progress-logs.form.title = ProgressLog form
-client.progress-logs.list.title = Listing of progressLogs
+client.progress-logs.list.label.recordId = Record Id
+client.progress-logs.list.label.completeness = Completeness
+client.progress-logs.list.label.responsiblePerson = ResponsiblePerson
 
-client.ProgressLogs.form.label.recordId = RecordId:
-client.ProgressLogs.form.label.completeness = Completeness:
-client.ProgressLogs.form.label.comment = Comment: 
-client.ProgressLogs.form.label.registrationMoment = Registration Moment:
-client.ProgressLogs.form.label.responsable = Responsible Person:
+client.progress-logs.form.label.recordId = Record Id
+client.progress-logs.form.label.completeness = completeness
+client.progress-logs.form.label.comment = Comment
+client.progress-logs.form.label.registrationMoment = Registration Moment
+client.progress-logs.form.label.responsiblePerson = Responsible person
+client.progress-logs.form.label.contract = Contract
 
-client.ProgressLogs.form.button.create = Create		
-client.ProgressLogs.form.button.update = Update
-client.ProgressLogs.form.button.delete = Delete
-
-client.ProgressLogs.list.label.recordId = RecordId
-client.ProgressLogs.list.label.completeness = Completeness
-client.ProgressLogs.list.label.comment = Comment
-client.ProgressLogs.list.label.registrationMoment = Registration Moment
-client.ProgressLogs.list.label.responsable = Responsible Person
-
-client.ProgressLogs.list.button.create = Create
-
-client.contract.list.button.create = Create contract
-client.contract.form.button.create = Create
-client.contract.form.button.update = Update contract
-client.contract.form.button.delete = Delete contract
-
-client.contract.form.error.duplicated = This reference is taken
-client.contract.form.error.higher-cost = The budget can't be higher than project cost
+client.progressLogs.form.error.recordId = The Record Id must created by this pattern: 2 letters - 2 letters - 4  numbers
+client.progressLogs.form.error.published =  You cannot update or delete a Progress Log already published
+client.progressLogs.form.error.moment = Must be in the past
 
 
-
+client.progress-logs.create = Create
+client.progress-logs.form.button.delete = Delete
+client.progress-logs.form.button.update = Update
+client.progress-logs.form.button.publish = Publish
+client.progress-logs.form.button.create = Create

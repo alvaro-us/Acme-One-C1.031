@@ -1,4 +1,3 @@
-
 <%@page language="java"%>
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -9,8 +8,11 @@
 	<acme:list-column code="client.contract.list.label.providerName" path="providerName" width="35%" />
 	<acme:list-column code="client.contract.list.label.customerName" path="customerName" width="40%" />
 	<acme:list-column code="client.contract.list.label.budget" path="budget" width="25%" />
+	<acme:list-column code="client.contract.list.label.published" path="published" width="25%" />
+	
+	<acme:button code="client.contract.create" action="/client/contract/create"/>
 </acme:list>
 
-<jstl:if test="${masterId==null}">
+<jstl:if test="${_command == 'list'}">
 	<acme:button code="client.contract.create" action="/client/contract/create"/>
-</jstl:if>
+</jstl:if>	

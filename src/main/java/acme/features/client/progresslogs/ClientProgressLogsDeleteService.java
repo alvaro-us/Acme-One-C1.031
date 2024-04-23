@@ -4,9 +4,9 @@ package acme.features.client.progresslogs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.client.data.accounts.Principal;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
-import acme.entities.contract.Contract;
 import acme.entities.progressLogs.ProgressLogs;
 import acme.roles.client.Client;
 
@@ -16,65 +16,59 @@ public class ClientProgressLogsDeleteService extends AbstractService<Client, Pro
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private ClientProgressLogsRepository repository;
+	protected ClientProgressLogsRepository repository;
 
 	// AbstractService interface ----------------------------------------------
 
 
 	@Override
 	public void authorise() {
-		boolean status;
-		int progressLogId;
-		Contract contract;
-
-		progressLogId = super.getRequest().getData("id", int.class);
-		contract = this.repository.findOneContractByProgressLogsId(progressLogId);
-		status = contract != null && !contract.isPublished() && super.getRequest().getPrincipal().hasRole(contract.getClient());
-
-		super.getResponse().setAuthorised(status);
+		ProgressLogs object;
+		int id;
+		id = super.getRequest().getData("id", int.class);
+		object = this.repository.findProgressLogsById(id);
+		final Principal principal = super.getRequest().getPrincipal();
+		final int userAccountId = principal.getAccountId();
+		super.getResponse().setAuthorised(object.getContract().getClient().getUserAccount().getId() == userAccountId && !object.isPublished());
 	}
 
 	@Override
 	public void load() {
 		ProgressLogs object;
 		int id;
-
 		id = super.getRequest().getData("id", int.class);
-		object = this.repository.findOneProgressLogsById(id);
-
+		object = this.repository.findProgressLogsById(id);
 		super.getBuffer().addData(object);
 	}
 
 	@Override
 	public void bind(final ProgressLogs object) {
-		assert object != null;
-
+		if (object == null)
+			throw new IllegalArgumentException("No object found");
 		super.bind(object, "recordId", "completeness", "comment", "registrationMoment", "responsable");
 	}
 
 	@Override
 	public void validate(final ProgressLogs object) {
-		assert object != null;
+		if (object == null)
+			throw new IllegalArgumentException("No object found");
+		if (!super.getBuffer().getErrors().hasErrors("published"))
+			super.state(!object.isPublished(), "published", "client.progressLogs.form.error.published");
 	}
 
 	@Override
 	public void perform(final ProgressLogs object) {
-		assert object != null;
-
+		if (object == null)
+			throw new IllegalArgumentException("No object found");
 		this.repository.delete(object);
 	}
 
 	@Override
 	public void unbind(final ProgressLogs object) {
-		assert object != null;
-
+		if (object == null)
+			throw new IllegalArgumentException("No object found");
 		Dataset dataset;
-
-		dataset = super.unbind(object, "recordId", "completeness", "comment", "registrationMoment", "responsable");
-		dataset.put("masterId", object.getContract().getId());
-		dataset.put("published", object.getContract().isPublished());
-
+		dataset = super.unbind(object, "recordId", "completeness", "comment", "registrationMoment", "responsable", "published", "contract");
 		super.getResponse().addData(dataset);
 	}
-
 }

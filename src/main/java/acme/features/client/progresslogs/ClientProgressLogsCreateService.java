@@ -1,11 +1,15 @@
 
 package acme.features.client.progresslogs;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
+import acme.client.views.SelectChoices;
 import acme.entities.contract.Contract;
 import acme.entities.progressLogs.ProgressLogs;
 import acme.roles.client.Client;
@@ -13,81 +17,69 @@ import acme.roles.client.Client;
 @Service
 public class ClientProgressLogsCreateService extends AbstractService<Client, ProgressLogs> {
 
-	// Internal state ---------------------------------------------------------
-
 	@Autowired
-	private ClientProgressLogsRepository repository;
+	protected ClientProgressLogsRepository repository;
 
 	// AbstractService interface ----------------------------------------------
 
 
 	@Override
 	public void authorise() {
-		boolean status;
-		int masterId;
-		Contract contract;
-
-		masterId = super.getRequest().getData("masterId", int.class);
-		contract = this.repository.findOneContractById(masterId);
-		status = contract != null && super.getRequest().getPrincipal().hasRole(contract.getClient());
-
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(true);
 	}
 
 	@Override
 	public void load() {
 		ProgressLogs object;
-		int masterId;
-		Contract contract;
-
-		masterId = super.getRequest().getData("masterId", int.class);
-		contract = this.repository.findOneContractById(masterId);
-
 		object = new ProgressLogs();
-		object.setRecordId("");
-		object.setComment("");
-		object.setResponsable("");
-		object.setContract(contract);
-
+		object.setPublished(false);
 		super.getBuffer().addData(object);
 	}
 
 	@Override
 	public void bind(final ProgressLogs object) {
-		assert object != null;
-
-		super.bind(object, "recordId", "completeness", "comment", "registrationMoment", "responsable");
+		if (object == null)
+			throw new IllegalArgumentException("No object found");
+		super.bind(object, "recordId", "completeness", "comment", "registrationMoment", "responsable", "contract");
 	}
 
 	@Override
 	public void validate(final ProgressLogs object) {
-		assert object != null;
-
+		if (object == null)
+			throw new IllegalArgumentException("No object found");
 		if (!super.getBuffer().getErrors().hasErrors("recordId")) {
 			ProgressLogs existing;
-
-			existing = this.repository.findOneProgressLogsByRecordId(object.getRecordId());
-			super.state(existing == null, "recordId", "client.progressLog.form.error.duplicated");
+			existing = this.repository.findProgressLogsByRecordId(object.getRecordId());
+			super.state(existing == null, "code", "client.progressLogs.form.error.recordId");
 		}
+
+		if (!super.getBuffer().getErrors().hasErrors("registrationMoment"))
+			super.state(MomentHelper.isBefore(object.getRegistrationMoment(), MomentHelper.getCurrentMoment()), "instantiationMoment", "client.progressLogs.form.error.registrationMoment");
+
 	}
 
 	@Override
 	public void perform(final ProgressLogs object) {
-		assert object != null;
-
+		if (object == null)
+			throw new IllegalArgumentException("No object found");
 		this.repository.save(object);
 	}
 
 	@Override
 	public void unbind(final ProgressLogs object) {
-		assert object != null;
-
+		if (object == null)
+			throw new IllegalArgumentException("No object found");
 		Dataset dataset;
+		dataset = super.unbind(object, "recordId", "completeness", "comment", "registrationMoment", "responsable", "contract", "published");
 
-		dataset = super.unbind(object, "recordId", "completeness", "comment", "registrationMoment", "responsable");
-		dataset.put("masterId", super.getRequest().getData("masterId", int.class));
-		dataset.put("published", object.getContract().isPublished());
+		final SelectChoices choices = new SelectChoices();
+		Collection<Contract> contracts;
+		int id = super.getRequest().getPrincipal().getActiveRoleId();
+		contracts = this.repository.findContractsByClient(id);
+		for (final Contract c : contracts)
+			choices.add(Integer.toString(c.getId()), c.getCode(), false);
 
+		dataset.put("contractsList", choices);
 		super.getResponse().addData(dataset);
 	}
 

@@ -13,24 +13,26 @@ import acme.roles.client.Client;
 @Controller
 public class ClientProgressLogsController extends AbstractController<Client, ProgressLogs> {
 
-	// Internal state ---------------------------------------------------------
+	@Autowired
+	protected ClientProgressLogsListService		listService;
 
 	@Autowired
-	private ClientProgressLogsListService	listService;
+	protected ClientProgressLogsShowService		showService;
 
 	@Autowired
-	private ClientProgressLogsShowService	showService;
+	protected ClientProgressLogsCreateService	createService;
 
 	@Autowired
-	private ClientProgressLogsCreateService	createService;
+	protected ClientProgressLogsUpdateService	updateService;
 
 	@Autowired
-	private ClientProgressLogsUpdateService	updateService;
+	protected ClientProgressLogsPublishService	publishService;
 
 	@Autowired
-	private ClientProgressLogsDeleteService	deleteService;
+	protected ClientProgressLogsDeleteService	deleteService;
 
-	// Constructors -----------------------------------------------------------
+	@Autowired
+	protected ClientProgressLogsListAllService	listAllService;
 
 
 	@PostConstruct
@@ -38,8 +40,9 @@ public class ClientProgressLogsController extends AbstractController<Client, Pro
 		super.addBasicCommand("list", this.listService);
 		super.addBasicCommand("show", this.showService);
 		super.addBasicCommand("create", this.createService);
-		super.addBasicCommand("update", this.updateService);
 		super.addBasicCommand("delete", this.deleteService);
+		super.addBasicCommand("update", this.updateService);
+		super.addCustomCommand("publish", "update", this.publishService);
+		super.addCustomCommand("list-all", "list", this.listAllService);
 	}
-
 }
