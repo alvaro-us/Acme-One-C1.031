@@ -22,3 +22,5 @@ authenticated.notice.form.button.create = Crear
 
 authenticated.notice.list.label.title = Titulo
 authenticated.notice.list.label.author = Autor
+
+authenticate.notice.form.button.confirmation = Confirmación
