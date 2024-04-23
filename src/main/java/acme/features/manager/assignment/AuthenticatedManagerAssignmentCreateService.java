@@ -49,30 +49,21 @@ public class AuthenticatedManagerAssignmentCreateService extends AbstractService
 	public void bind(final Assignment object) {
 		assert object != null;
 
-		int projectId;
-		int storyId;
-		Project project;
-		UserStory story;
-		projectId = super.getRequest().getData("project", int.class);
-		project = this.repository.findProjectById(projectId);
-		storyId = super.getRequest().getData("userStory", int.class);
-		story = this.repository.findUserStorytById(storyId);
-
-		super.bind(object);
+		int projectId = super.getRequest().getData("project", int.class);
+		Project project = this.repository.findProjectById(projectId);
 		object.setProject(project);
-		object.setUserStory(story);
 
+		int storyId = super.getRequest().getData("userStory", int.class);
+		UserStory story = this.repository.findUserStoryById(storyId);
+		object.setUserStory(story);
 	}
 
 	@Override
 	public void validate(final Assignment object) {
 		assert object != null;
 
-		if (!super.getBuffer().getErrors().hasErrors("userStory"))
-			super.state(!object.getProject().isDraftMode() == false, "userStory", "manager.assignment.project.notDraftMode");
-
 		if (!super.getBuffer().getErrors().hasErrors("project"))
-			super.state(!object.getUserStory().isDraftMode() == false, "project", "manager.assignment.userStory.notDraftMode");
+			super.state(object.getUserStory().isDraftMode(), "project", "manager.assignment.project.notDraftMode");
 
 	}
 

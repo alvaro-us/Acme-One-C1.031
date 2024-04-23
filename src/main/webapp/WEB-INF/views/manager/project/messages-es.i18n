@@ -19,7 +19,7 @@ manager.project.form.label.cost = Coste:
 manager.project.form.label.link = Enlace:
 
 manager.project.list.label.title = Título
-manager.project.form.label.indicator = Indicador
+manager.project.list.label.code = Código
 manager.project.list.label.cost = Coste
 
 manager.project.list.button.create = Crear

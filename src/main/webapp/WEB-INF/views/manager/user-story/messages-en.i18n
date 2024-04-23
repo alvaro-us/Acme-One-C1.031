@@ -27,3 +27,5 @@ manager.user-story.form.button.update = Update
 manager.user-story.form.button.delete = Delete
 manager.user-story.form.button.publish = Publish
 manager.user-story.form.button.create = Create
+
+manager.user-story.delete.exist-assignment = There are assignments related to this user story

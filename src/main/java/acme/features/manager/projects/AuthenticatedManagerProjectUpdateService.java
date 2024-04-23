@@ -67,7 +67,7 @@ public class AuthenticatedManagerProjectUpdateService extends AbstractService<Ma
 		if (!super.getBuffer().getErrors().hasErrors("code")) {
 			Project existing;
 
-			existing = this.repository.findOneProjectByCode(object.getCode());
+			existing = this.repository.findOneCourseByCodeAndDistinctId(object.getCode(), object.getId());
 
 			super.state(existing == null, "code", "manager.project.form.error.duplicated");
 		}

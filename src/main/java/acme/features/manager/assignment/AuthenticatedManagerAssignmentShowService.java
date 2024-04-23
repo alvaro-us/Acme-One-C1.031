@@ -55,7 +55,7 @@ public class AuthenticatedManagerAssignmentShowService extends AbstractService<M
 		SelectChoices choices1;
 
 		stories = this.repository.findUserStories();
-		projects = this.repository.findProjects();
+		projects = this.repository.findAllProjects();
 
 		choices = SelectChoices.from(stories, "title", object.getUserStory());
 		choices1 = SelectChoices.from(projects, "title", object.getProject());

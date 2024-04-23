@@ -43,7 +43,7 @@ public class AuthenticatedManagerProjectController extends AbstractController<Ma
 		super.addBasicCommand("update", this.updateService);
 		super.addBasicCommand("delete", this.deleteService);
 		super.addBasicCommand("create", this.createService);
-		super.addCustomCommand("finalise", "update", this.publishService);
+		super.addCustomCommand("publish", "update", this.publishService);
 
 	}
 }

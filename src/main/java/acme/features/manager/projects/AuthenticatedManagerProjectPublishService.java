@@ -1,11 +1,14 @@
 
 package acme.features.manager.projects;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
+import acme.entities.configuration.Configuration;
 import acme.entities.projects.Project;
 import acme.roles.Manager;
 
@@ -55,6 +58,36 @@ public class AuthenticatedManagerProjectPublishService extends AbstractService<M
 
 		super.bind(object, "code", "title", "abstrat", "indicator", "cost", "link");
 
+	}
+
+	@Override
+	public void validate(final Project object) {
+		assert object != null;
+
+		if (!super.getBuffer().getErrors().hasErrors("indicator")) {
+			boolean indicator;
+			indicator = object.isIndicator();
+
+			super.state(indicator == false, "indicator", "manager.project.error.indicator.notFalse");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("code")) {
+			Project existing;
+
+			existing = this.repository.findOneCourseByCodeAndDistinctId(object.getCode(), object.getId());
+
+			super.state(existing == null || !object.getCode().equals(existing.getCode()), "code", "manager.project.form.error.duplicated");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("cost")) {
+			Configuration config;
+			config = this.repository.findConfiguration();
+
+			super.state(Arrays.asList(config.getAcceptedCurrency().trim().split(",")).contains(object.getCost().getCurrency()), "cost", "manager.project.currency");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("cost"))
+			super.state(object.getCost().getAmount() >= 0., "retailPrice", "manager.project.negative-price");
 	}
 
 	@Override

@@ -33,6 +33,9 @@ public interface AuthenticatedManagerProjectRepository extends AbstractRepositor
 	@Query("select c from Project c where c.code = :code")
 	Project findOneProjectByCode(String code);
 
+	@Query("select c from Project c where c.code = :code and c.id != :id")
+	Project findOneCourseByCodeAndDistinctId(String code, int id);
+
 	@Query("select count(a) from Assignment a where a.project.id = :id")
 	int findNumberAssignmentOfProject(int id);
 

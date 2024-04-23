@@ -6,4 +6,4 @@ user-story-04,Agregar función de búsqueda avanzada,Los usuarios deben poder bu
 user-story-05,Desarrollar módulo de notificaciones,Los usuarios deben recibir notificaciones sobre actividades importantes.,23,Los usuarios recibirán notificaciones por correo y en la plataforma,SHOULD,,manager-02
 user-story-06,Implementar sistema de comentarios,Los usuarios deben poder comentar en publicaciones y contenido.,18,Los usuarios pueden escribir comentarios y responder a otros comentarios,COULD,https://example.com/comments,manager-02
 user-story-07,Agregar función de carrito de compras,Los usuarios deben poder agregar productos a un carrito de compras.,26,Los usuarios pueden ver los productos en su carrito antes de pagar,MUST,https://example.com/cart,manager-02
-user-story-08,Desarrollar funcionalidad de pago,a,30,a,MUST,,manager-02
+user-story-08,Desarrollar funcionalidad de pago,a,30,ñ,MUST,,manager-02

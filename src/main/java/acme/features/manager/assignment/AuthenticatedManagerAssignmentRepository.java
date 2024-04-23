@@ -24,11 +24,14 @@ public interface AuthenticatedManagerAssignmentRepository extends AbstractReposi
 	Project findProjectById(int id);
 
 	@Query("SELECT  a FROM UserStory a WHERE a.id = :id")
-	UserStory findUserStorytById(int id);
+	UserStory findUserStoryById(int id);
 
 	@Query("SELECT  a FROM UserStory a")
 	Collection<UserStory> findUserStories();
 
 	@Query("SELECT  a FROM Project a WHERE a.draftMode = true")
 	Collection<Project> findProjects();
+
+	@Query("SELECT  a FROM Project a")
+	Collection<Project> findAllProjects();
 }

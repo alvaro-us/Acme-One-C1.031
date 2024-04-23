@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
+import acme.client.views.SelectChoices;
 import acme.entities.projects.UserStory;
+import acme.entities.projects.prioType;
 import acme.roles.Manager;
 
 @Service
@@ -73,13 +75,14 @@ public class AuthenticatedManagerUserStoryPublishService extends AbstractService
 	@Override
 	public void unbind(final UserStory object) {
 		assert object != null;
-
-		int managerId;
 		Dataset dataset;
+		SelectChoices choices;
 
-		managerId = super.getRequest().getPrincipal().getActiveRoleId();
+		choices = SelectChoices.from(prioType.class, object.getPriorityType());
 
-		dataset = super.unbind(object, "title", "description", "estimatedCost", "acceptanceCriteria", "priorityType", "link", "draftMode");
+		dataset = super.unbind(object, "title", "description", "estimatedCost", "acceptanceCriteria", "link", "draftMode");
+		dataset.put("priorityType", choices.getSelected().getKey());
+		dataset.put("priorityTypes", choices);
 
 		super.getResponse().addData(dataset);
 	}
