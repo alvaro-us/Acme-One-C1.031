@@ -76,7 +76,7 @@ public class ClientContractCreateService extends AbstractService<Client, Contrac
 
 		if (!super.getBuffer().getErrors().hasErrors("budget"))
 
-			super.state(totalAmount * object.getBudget().getAmount() > object.getProject().getCost().getAmount() && object.getBudget().getCurrency().equals(object.getProject().getCost().getCurrency()), "budget", "client.contract.form.error.higher-cost");
+			super.state(totalAmount * object.getBudget().getAmount() < object.getProject().getCost().getAmount() && object.getBudget().getCurrency().equals(object.getProject().getCost().getCurrency()), "budget", "client.contract.form.error.higher-cost");
 	}
 
 	@Override

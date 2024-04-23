@@ -39,6 +39,7 @@ master.menu.administrator.configuration = System Configuration
 
 master.menu.client = Client
 master.menu.client.contract-list = List of published contracts
+master.menu.client.dashboard = Dashboard
 
 # master.menu.provider ########################################################
 

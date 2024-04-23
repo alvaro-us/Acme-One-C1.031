@@ -26,7 +26,7 @@ client.contract.form.label.budget = Presupuesto:
 cleint.contract.form.label.project = Proyectos:
 client.contract.form.label.published = Publicado
 
-client.contract.form.button.progressLog = Registros de progreso
+client.contract.form.button.progressLogs = Registros de progreso
 
 client.contract.form.error.duplicated = Esta referencia esta ocupada
 client.contract.form.error.higher-cost = El presupuesto no puede ser mayor al coste del proyecto
