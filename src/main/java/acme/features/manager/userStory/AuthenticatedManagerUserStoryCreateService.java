@@ -60,6 +60,9 @@ public class AuthenticatedManagerUserStoryCreateService extends AbstractService<
 	public void validate(final UserStory object) {
 		assert object != null;
 
+		if (!super.getBuffer().getErrors().hasErrors("estimatedCost"))
+			super.state(object.getEstimatedCost() >= 0.0, "retailPrice", "manager.project.error.cost.negative-price");
+
 	}
 	@Override
 	public void perform(final UserStory object) {
