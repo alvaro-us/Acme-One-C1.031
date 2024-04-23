@@ -39,7 +39,8 @@ master.menu.administrator.configuration = Configuración de la moneda
 # master.menu.client ########################################################
 
 master.menu.client = Cliente
-master.menu.client.contract-list = Lista de contratos publicados
+master.menu.client.contract = Lista de contratos
+master.menu.client.progress-log = Lista de actas de progreso
 master.menu.client.dashboard = Dashboard
 
 

@@ -6,37 +6,35 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.client.data.accounts.Principal;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
+// import acme.entities.components.AuxiliarService;
 import acme.entities.contract.Contract;
 import acme.entities.progressLogs.ProgressLogs;
-import acme.entities.projects.Project;
 import acme.roles.client.Client;
 
 @Service
 public class ClientContractDeleteService extends AbstractService<Client, Contract> {
 
-	// Internal state ---------------------------------------------------------
-
 	@Autowired
-	private ClientContractRepository repository;
+	protected ClientContractRepository repository;
+
+	//@Autowired
+	//protected AuxiliarService			auxiliarService;
 
 	// AbstractService interface ----------------------------------------------
 
 
 	@Override
 	public void authorise() {
-		boolean status;
-		int masterId;
-		Contract contract;
-		Client client;
-
-		masterId = super.getRequest().getData("id", int.class);
-		contract = this.repository.findOneContractById(masterId);
-		client = contract == null ? null : contract.getClient();
-		status = contract != null && !contract.isPublished() && super.getRequest().getPrincipal().hasRole(client);
-
-		super.getResponse().setAuthorised(status);
+		Contract object;
+		int id;
+		id = super.getRequest().getData("id", int.class);
+		object = this.repository.findContractById(id);
+		final Principal principal = super.getRequest().getPrincipal();
+		final int userAccountId = principal.getAccountId();
+		super.getResponse().setAuthorised(object.getClient().getUserAccount().getId() == userAccountId && !object.isPublished());
 	}
 
 	@Override
@@ -45,7 +43,7 @@ public class ClientContractDeleteService extends AbstractService<Client, Contrac
 		int id;
 
 		id = super.getRequest().getData("id", int.class);
-		object = this.repository.findOneContractById(id);
+		object = this.repository.findContractById(id);
 
 		super.getBuffer().addData(object);
 	}
@@ -53,15 +51,7 @@ public class ClientContractDeleteService extends AbstractService<Client, Contrac
 	@Override
 	public void bind(final Contract object) {
 		assert object != null;
-
-		int projectId;
-		Project project;
-
-		projectId = super.getRequest().getData("project", int.class);
-		project = this.repository.findOneProjectById(projectId);
-
-		super.bind(object, "code", "instationMoment", "providerName", "customerName", "goals", "budget", "published");
-		object.setProject(project);
+		super.bind(object, "id", "code", "instationMoment", "providerName", "customerName", "goals", "budget");
 	}
 
 	@Override
@@ -72,23 +62,18 @@ public class ClientContractDeleteService extends AbstractService<Client, Contrac
 	@Override
 	public void perform(final Contract object) {
 		assert object != null;
-
-		Collection<ProgressLogs> progressLogs;
-
-		progressLogs = this.repository.findManyProgressLogByContractId(object.getId());
-		this.repository.deleteAll(progressLogs);
+		final Collection<ProgressLogs> progressLogs = this.repository.findProgressLogsByContract(object.getId());
+		for (final ProgressLogs pl : progressLogs)
+			this.repository.delete(pl);
 		this.repository.delete(object);
 	}
 
 	@Override
 	public void unbind(final Contract object) {
 		assert object != null;
-
 		Dataset dataset;
-
-		dataset = super.unbind(object, "code", "instationMoment", "providerName", "customerName", "goals", "budget", "published");
-
+		dataset = super.unbind(object, "code", "instationMoment", "providerName", "customerName", "goals", "budget");
+		//dataset.put("money", this.auxiliarService.changeCurrency(object.getBudget()));
 		super.getResponse().addData(dataset);
 	}
-
 }

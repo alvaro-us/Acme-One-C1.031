@@ -49,7 +49,7 @@ public class ClientProgressLogsUpdateService extends AbstractService<Client, Pro
 	public void bind(final ProgressLogs object) {
 		assert object != null;
 
-		super.bind(object, "recordId", "completeness", "comment", "registrationMoment", "responsiblePerson");
+		super.bind(object, "recordId", "completeness", "comment", "registrationMoment", "responsable");
 	}
 
 	@Override

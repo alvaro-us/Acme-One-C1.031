@@ -49,7 +49,7 @@ public class ClientProgressLogsDeleteService extends AbstractService<Client, Pro
 	public void bind(final ProgressLogs object) {
 		assert object != null;
 
-		super.bind(object, "recordId", "completeness", "comment", "registrationMoment", "responsiblePerson");
+		super.bind(object, "recordId", "completeness", "comment", "registrationMoment", "responsable");
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class ClientProgressLogsDeleteService extends AbstractService<Client, Pro
 
 		Dataset dataset;
 
-		dataset = super.unbind(object, "recordId", "completeness", "comment", "registrationMoment", "responsiblePerson");
+		dataset = super.unbind(object, "recordId", "completeness", "comment", "registrationMoment", "responsable");
 		dataset.put("masterId", object.getContract().getId());
 		dataset.put("published", object.getContract().isPublished());
 
