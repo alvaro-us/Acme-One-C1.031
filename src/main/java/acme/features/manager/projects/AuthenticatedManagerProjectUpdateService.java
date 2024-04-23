@@ -80,7 +80,7 @@ public class AuthenticatedManagerProjectUpdateService extends AbstractService<Ma
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("cost"))
-			super.state(object.getCost().getAmount() >= 0., "retailPrice", "manager.project.negative-price");
+			super.state(object.getCost().getAmount() >= 0.0, "retailPrice", "manager.project.negative-price");
 
 	}
 

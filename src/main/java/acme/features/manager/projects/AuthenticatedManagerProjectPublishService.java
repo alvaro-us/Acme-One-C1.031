@@ -68,10 +68,15 @@ public class AuthenticatedManagerProjectPublishService extends AbstractService<M
 		boolean status;
 
 		id = super.getRequest().getData("id", int.class);
-		int numberAssignments = this.repository.findNumberUserStoryNotPublishedOfProject(id);
+		int notPublishedUserStory = this.repository.findNumberUserStoryNotPublishedOfProject(id);
 
-		status = numberAssignments == 0;
-		super.state(status, "*", "manager.project.delete.userStory.notPublished");
+		int hasAssignments = this.repository.findNumberAssignmentOfProject(id);
+
+		boolean status1 = hasAssignments != 0;
+		super.state(status1, "*", "manager.project.publish.userStory.noUserStories");
+
+		status = notPublishedUserStory == 0;
+		super.state(status, "*", "manager.project.publish.userStory.notPublished");
 
 		if (!super.getBuffer().getErrors().hasErrors("indicator")) {
 			boolean indicator;

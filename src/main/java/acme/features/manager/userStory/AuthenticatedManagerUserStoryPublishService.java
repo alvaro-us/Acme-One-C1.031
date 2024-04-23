@@ -35,7 +35,7 @@ public class AuthenticatedManagerUserStoryPublishService extends AbstractService
 		id1 = super.getRequest().getPrincipal().getAccountId();
 
 		manager = userStory.getManager();
-		status = userStory != null && userStory.isDraftMode() && super.getRequest().getPrincipal().hasRole(Manager.class) && userStory.getManager().getUserAccount().getId() == id1;
+		status = userStory != null && userStory.isDraftMode() && super.getRequest().getPrincipal().hasRole(Manager.class);
 
 		super.getResponse().setAuthorised(status);
 	}

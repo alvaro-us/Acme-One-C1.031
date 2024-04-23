@@ -12,7 +12,7 @@ manager.user-story.form.title = Historia de usuario
 manager.user-story.list.title = Listado de historias de usuario
 
 manager.user-story.form.label.title = Título
-manager.user-story.form.label.description = Indicador
+manager.user-story.form.label.description = Descripción
 manager.user-story.form.label.priorityType = Tipo de prioridad
 manager.user-story.form.label.estimatedCost = Coste
 manager.user-story.form.label.acceptanceCriteria = Criterio aceptación
