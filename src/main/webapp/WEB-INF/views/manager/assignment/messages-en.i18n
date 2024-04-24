@@ -24,3 +24,6 @@ manager.assignment.list.button.create.user-story = Create an User Story
 manager.assignment.form.button.delete = Delete
 manager.assignment.form.button.create = Create
 
+manager.assignment.project.exists = This assignment already exists
+manager.assignment.project.notDraftMode = This project is not published
+

@@ -35,7 +35,7 @@ public class AuthenticatedManagerUserStoryUpdateService extends AbstractService<
 		id1 = super.getRequest().getPrincipal().getAccountId();
 
 		manager = userStory.getManager();
-		status = userStory != null && userStory.isDraftMode() && super.getRequest().getPrincipal().hasRole(Manager.class);
+		status = userStory != null && userStory.isDraftMode() && super.getRequest().getPrincipal().hasRole(Manager.class) && userStory.getManager().getUserAccount().getId() == id1;
 
 		super.getResponse().setAuthorised(status);
 	}

@@ -63,7 +63,12 @@ public class AuthenticatedManagerAssignmentCreateService extends AbstractService
 		assert object != null;
 
 		if (!super.getBuffer().getErrors().hasErrors("project"))
-			super.state(object.getUserStory().isDraftMode(), "project", "manager.assignment.project.notDraftMode");
+			super.state(!object.getUserStory().isDraftMode(), "project", "manager.assignment.project.notDraftMode");
+
+		if (!super.getBuffer().getErrors().hasErrors("project")) {
+			int exists = this.repository.existsAssignmentWithProjectAndUserStory(object.getProject(), object.getUserStory());
+			super.state(exists == 0, "*", "manager.assignment.project.exists");
+		}
 
 	}
 
@@ -85,7 +90,7 @@ public class AuthenticatedManagerAssignmentCreateService extends AbstractService
 		SelectChoices choices1;
 		Manager manager = this.repository.findManagerById(super.getRequest().getPrincipal().getActiveRoleId());
 
-		stories = this.repository.findUserStories();
+		stories = this.repository.findUserStories(manager);
 		projects = this.repository.findProjects(manager);
 
 		choices = SelectChoices.from(stories, "title", object.getUserStory());

@@ -60,10 +60,8 @@ public class AuthenticatedManagerAssignmentDeleteService extends AbstractService
 	public void validate(final Assignment object) {
 		assert object != null;
 
-		int id;
 		boolean status;
 
-		id = super.getRequest().getData("id", int.class);
 		status = object.getProject().isDraftMode();
 
 		super.state(status, "*", "manager.project.delete.projectPublished");
@@ -86,7 +84,7 @@ public class AuthenticatedManagerAssignmentDeleteService extends AbstractService
 		SelectChoices choices;
 		SelectChoices choices1;
 
-		stories = this.repository.findUserStories();
+		stories = this.repository.findAllUserStories();
 		projects = this.repository.findAllProjects();
 
 		choices = SelectChoices.from(stories, "title", object.getUserStory());

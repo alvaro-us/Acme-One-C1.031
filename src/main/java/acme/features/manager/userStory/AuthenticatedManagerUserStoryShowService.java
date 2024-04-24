@@ -26,8 +26,16 @@ public class AuthenticatedManagerUserStoryShowService extends AbstractService<Ma
 	public void authorise() {
 
 		boolean status;
+		UserStory object;
+		Manager manager;
+		int id;
+		int id1;
+		id = super.getRequest().getData("id", int.class);
+		object = this.repository.findUserStoryById(id);
+		id1 = super.getRequest().getPrincipal().getAccountId();
 
-		status = super.getRequest().getPrincipal().hasRole(Manager.class);
+		manager = this.repository.findManagerById(super.getRequest().getPrincipal().getActiveRoleId());
+		status = super.getRequest().getPrincipal().hasRole(Manager.class) && object.getManager().equals(manager) && object.getManager().getUserAccount().getId() == id1;
 
 		super.getResponse().setAuthorised(status);
 	}

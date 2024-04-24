@@ -16,9 +16,11 @@ authenticated.notice.form.label.author = Author
 authenticated.notice.form.label.message = Message
 authenticated.notice.form.label.email = Email (Optional)
 authenticated.notice.form.label.link = Link (Optional)
+authenticated.notice.form.label.Moment = Creation Moment
 authenticated.notice.form.button.confirmation = Confirm that everything is correct
 
 authenticated.notice.form.button.create = Create
+authenticated.notice.list.button.create = Create
 
 authenticated.notice.list.label.title = Title
 authenticated.notice.list.label.author = Author

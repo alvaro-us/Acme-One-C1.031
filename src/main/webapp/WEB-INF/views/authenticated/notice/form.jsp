@@ -19,14 +19,19 @@
 	<acme:input-textbox code="authenticated.notice.form.label.title" path="title" placeholder ="authenticated.notice.form.placeholder.title"/>
 	<acme:input-textarea code="authenticated.notice.form.label.message" path="message" placeholder = "authenticated.notice.form.placeholder.message"/>
 	<acme:input-email code="authenticated.notice.form.label.email" path="email"/>
+	<jstl:if test="${_command == 'show'}">
+		<acme:input-textbox code="authenticated.notice.form.label.Moment" path="instMoment"/>
+	</jstl:if>
 	<acme:input-url code="authenticated.notice.form.label.link" path="link"/>
-	<acme:input-checkbox code="authenticate.notice.form.button.confirmation" path="confirmation"/>
+	<jstl:if test="${_command == 'create'}">
+		<acme:input-checkbox code="authenticate.notice.form.button.confirmation" path="confirmation"/>
+	</jstl:if>
 	<acme:hidden-data path= "id"/>
 	<acme:hidden-data path= "instMoment"/>
 	<acme:hidden-data path= "author"/>
 	
 	<jstl:if test="${_command == 'create'}">
-		<acme:submit code="authenticated.note.list.button.create" action="/authenticated/notice/create"/>
+		<acme:submit code="authenticated.notice.form.button.create" action="/authenticated/notice/create"/>
 	</jstl:if>
 </acme:form>
 

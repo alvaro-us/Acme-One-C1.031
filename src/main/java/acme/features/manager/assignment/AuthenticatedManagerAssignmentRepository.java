@@ -27,8 +27,8 @@ public interface AuthenticatedManagerAssignmentRepository extends AbstractReposi
 	@Query("SELECT  a FROM UserStory a WHERE a.id = :id")
 	UserStory findUserStoryById(int id);
 
-	@Query("SELECT  a FROM UserStory a")
-	Collection<UserStory> findUserStories();
+	@Query("SELECT  a FROM UserStory a WHERE a.manager = :manager")
+	Collection<UserStory> findUserStories(Manager manager);
 
 	@Query("SELECT  a FROM Project a WHERE a.draftMode = true and a.manager = :manager")
 	Collection<Project> findProjects(Manager manager);
@@ -36,6 +36,12 @@ public interface AuthenticatedManagerAssignmentRepository extends AbstractReposi
 	@Query("SELECT  a FROM Project a")
 	Collection<Project> findAllProjects();
 
+	@Query("SELECT  a FROM UserStory a")
+	Collection<UserStory> findAllUserStories();
+
 	@Query("SELECT a FROM Manager a WHERE a.id = :id")
 	Manager findManagerById(int id);
+
+	@Query("SELECT count(a) FROM Assignment a WHERE a.project = :project AND a.userStory = :userStory")
+	int existsAssignmentWithProjectAndUserStory(Project project, UserStory userStory);
 }
