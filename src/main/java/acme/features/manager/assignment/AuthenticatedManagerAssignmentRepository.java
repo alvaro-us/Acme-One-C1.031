@@ -10,12 +10,13 @@ import acme.client.repositories.AbstractRepository;
 import acme.entities.projects.Assignment;
 import acme.entities.projects.Project;
 import acme.entities.projects.UserStory;
+import acme.roles.Manager;
 
 @Repository
 public interface AuthenticatedManagerAssignmentRepository extends AbstractRepository {
 
-	@Query("SELECT a FROM Assignment a")
-	Collection<Assignment> findAllAssignments();
+	@Query("SELECT a FROM Assignment a WHERE a.project.manager = :manager")
+	Collection<Assignment> findAllAssignments(Manager manager);
 
 	@Query("SELECT  a FROM Assignment a WHERE a.id = :id")
 	Assignment findAssignmentById(int id);
@@ -29,9 +30,12 @@ public interface AuthenticatedManagerAssignmentRepository extends AbstractReposi
 	@Query("SELECT  a FROM UserStory a")
 	Collection<UserStory> findUserStories();
 
-	@Query("SELECT  a FROM Project a WHERE a.draftMode = true")
-	Collection<Project> findProjects();
+	@Query("SELECT  a FROM Project a WHERE a.draftMode = true and a.manager = :manager")
+	Collection<Project> findProjects(Manager manager);
 
 	@Query("SELECT  a FROM Project a")
 	Collection<Project> findAllProjects();
+
+	@Query("SELECT a FROM Manager a WHERE a.id = :id")
+	Manager findManagerById(int id);
 }

@@ -83,9 +83,10 @@ public class AuthenticatedManagerAssignmentCreateService extends AbstractService
 		Collection<UserStory> stories;
 		SelectChoices choices;
 		SelectChoices choices1;
+		Manager manager = this.repository.findManagerById(super.getRequest().getPrincipal().getActiveRoleId());
 
 		stories = this.repository.findUserStories();
-		projects = this.repository.findProjects();
+		projects = this.repository.findProjects(manager);
 
 		choices = SelectChoices.from(stories, "title", object.getUserStory());
 		choices1 = SelectChoices.from(projects, "title", object.getProject());
