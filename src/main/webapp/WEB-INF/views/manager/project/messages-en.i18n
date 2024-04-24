@@ -39,8 +39,12 @@ manager.project.error.indicator.notFalse = You can´t publish a project with err
 manager.project.form.error.duplicated = Code already exists
 manager.project.error.cost.currency = Please select a valid type of currency
 manager.project.error.cost.negative-price = Please insert a positive amount of cost
+
 manager.project.delete.exist-contract = There are contracts related to this project
-manager.project.delete.exist-assignment = There are assignments related to this project
+manager.project.delete.exist-assignment = There are user stories related to this project
+manager.project.delete.exist-sponsorship = There are sponsorships related to this project
+manager.project.delete.exist-training-module = There are training modules related to this project
+
 manager.project.publish.userStory.notPublished = There are user stories not published assigned to this project
 manager.project.publish.userStory.noUserStories = There are no user stories assigned to this project
 

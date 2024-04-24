@@ -18,7 +18,7 @@
 <acme:form>
 	<acme:input-textbox code="any.project.form.label.title" path="title"/>
 	<acme:input-textbox code="any.project.form.label.abstrat" path="abstrat"/>
-	<acme:input-textarea code="any.project.form.label.indicator" path="indicator"/>
+	<acme:input-checkbox code="any.project.form.label.indicator" path="indicator"/>
 	<acme:input-double code="any.project.form.label.cost" path="cost"/>
 	<acme:input-double code="any.project.form.label.link" path="link"/>		
 </acme:form>

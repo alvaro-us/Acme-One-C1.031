@@ -49,13 +49,13 @@ public interface AuthenticatedManagerProjectRepository extends AbstractRepositor
 	//int findNumberObjectiveOfProject(int id);
 
 	//@Query("select count(a) from Risk a where a.project.id = :id")
-	//int findNumberRiskOfProject(int id);
+	//int findNumberRisksOfProject(int id);
 
-	//@Query("select count(a) from Sponsorship a where a.project.id = :id")
-	//int findNumberSponsorshipOfProject(int id);
+	@Query("select count(a) from Sponsorship a where a.project.id = :id")
+	int findNumberSponsorshipOfProject(int id);
 
-	//@Query("select count(a) from TrainingModule a where a.project.id = :id")
-	//int findNumberTrainingModuleOfProject(int id);
+	@Query("select count(a) from TrainingModule a where a.project.id = :id")
+	int findNumberTrainingModuleOfProject(int id);
 
 	@Query("select c from Configuration c")
 	Configuration findConfiguration();
