@@ -14,7 +14,8 @@ master.menu.home = Inicio
 master.menu.sign-up = Registrarse
 master.menu.sign-in = Entrar
 master.menu.sign-out = Salir
-master.menu.sponsorships = Sponsorships
+master.menu.sponsorships = Anuncios
+master.menu.claims = Reclamaciones 
 
 
 # master.menu.anonymous #######################################################

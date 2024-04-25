@@ -45,6 +45,11 @@ sponsor.sponsorship.form.error.momentBeforeDurationStart = El comienzo del patro
 sponsor.sponsorship.form.error.durationStart1MothBeforeDurationEnd = La duracion debe ser de al menos 1 mes
 sponsor.sponsorship.form.error.amountPositive = El coste tiene que ser positivo
 sponsor.sponsorship.form.error.amountLessInvoicesAmount = El coste de las facturas no puede ser superior al de este campo
+sponsor.sponsorship.form.error.correctStart = El inicio de la duración del patrocinio no es correcto
+sponsor.sponsorship.form.error.correctEnd = El final de la duración del patrocinio no es correcto
+sponsor.sponsorship.form.error.correctMoment = El momento del patrocinio no es correcto
+sponsor.sponsorship.form.error.isAcceptedCurrency = La moneda no es aceptada
+
 
 sponsor.sponsorship.code = Código de patrocinio
 sponsor.sponsorship.durationStart = Inicio del patrocinio
