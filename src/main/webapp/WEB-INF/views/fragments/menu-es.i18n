@@ -63,6 +63,7 @@ master.menu.manager = Gerente
 master.menu.manager.ListProjects = Mis proyectos
 master.menu.manager.Dashboard = Mi dashboard
 master.menu.manager.Assignments = Asignaciones
+master.menu.manager.liststories = Mis historias de usuario
 
 # master.menu.sponsor ##########################################################
 

@@ -18,6 +18,11 @@ manager.assignment.form.label.project = Proyecto
 manager.assignment.form.label.story = Historia de usuario
 
 manager.assignment.list.button.create = Crear
+manager.assignment.list.button.create.project = Crear un proyecto
+manager.assignment.list.button.create.user-story = Crear una historia de usuario
 
 manager.assignment.form.button.delete = Eliminar
 manager.assignment.form.button.create = Crear
+
+manager.assignment.project.exists = Esta asignación ya existe
+manager.assignment.project.notDraftMode = Has introducido un proyecto que no se encuentra publicado

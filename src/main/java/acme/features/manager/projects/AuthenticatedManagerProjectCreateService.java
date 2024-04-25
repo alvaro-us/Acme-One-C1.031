@@ -67,11 +67,11 @@ public class AuthenticatedManagerProjectCreateService extends AbstractService<Ma
 			Configuration config;
 			config = this.repository.findConfiguration();
 
-			super.state(Arrays.asList(config.getAcceptedCurrency().trim().split(",")).contains(object.getCost().getCurrency()), "cost", "manager.project.currency");
+			super.state(Arrays.asList(config.getAcceptedCurrency().trim().split(",")).contains(object.getCost().getCurrency()), "cost", "manager.project.error.cost.currency");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("cost"))
-			super.state(object.getCost().getAmount() >= 0., "retailPrice", "manager.project.negative-price");
+			super.state(object.getCost().getAmount() >= 0., "cost", "manager.project.error.cost.negative-price");
 
 	}
 

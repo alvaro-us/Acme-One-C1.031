@@ -16,9 +16,9 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:list>
-	<acme:list-column code="manager.project.list.label.title" path="title" width="80%"/>	
-	<acme:list-column code="manager.project.list.label.indicator" path="indicator" width="20%"/>
-	<acme:list-column code="manager.project.list.label.cost" path="cost" width="80%"/>	
+	<acme:list-column code="manager.project.list.label.code" path="code" width="20%"/>	
+	<acme:list-column code="manager.project.list.label.title" path="title" width="80%"/>
+	<acme:list-column code="manager.project.list.label.cost" path="cost" width="20%"/>	
 	
 	<acme:button code="manager.project.list.button.create" action="/manager/project/create"/>
 </acme:list>

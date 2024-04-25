@@ -1,5 +1,5 @@
 
-package acme.features.manager.projects;
+package acme.features.manager.userStory;
 
 import java.util.Collection;
 
@@ -8,16 +8,16 @@ import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
-import acme.entities.projects.Project;
+import acme.entities.projects.UserStory;
 import acme.roles.Manager;
 
 @Service
-public class AuthenticatedManagerProjectListMineService extends AbstractService<Manager, Project> {
+public class AuthenticatedManagerUserStoryListMineService extends AbstractService<Manager, UserStory> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AuthenticatedManagerProjectRepository repository;
+	private AuthenticatedManagerUserStoryRepository repository;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -34,21 +34,21 @@ public class AuthenticatedManagerProjectListMineService extends AbstractService<
 	public void load() {
 		int userAccountId;
 
-		Collection<Project> objects;
+		Collection<UserStory> objects;
 		userAccountId = super.getRequest().getPrincipal().getActiveRoleId();
 
-		objects = this.repository.findAllProjectsOfManager(userAccountId);
+		objects = this.repository.findAllUserStoryOfManager(userAccountId);
 		super.getBuffer().addData(objects);
 	}
 
 	@Override
-	public void unbind(final Project object) {
+	public void unbind(final UserStory object) {
 		assert object != null;
-
 		Dataset dataset;
 
-		dataset = super.unbind(object, "code", "title", "cost", "draftMode");
-
+		dataset = super.unbind(object, "title", "description", "priorityType", "estimatedCost");
 		super.getResponse().addData(dataset);
+
 	}
+
 }

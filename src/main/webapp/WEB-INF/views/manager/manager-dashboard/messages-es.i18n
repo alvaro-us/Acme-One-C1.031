@@ -27,12 +27,12 @@ manager.manager-dashboard.deviationCostProject.EUR = Desviación del coste de lo
 manager.manager-dashboard.minCostProject.EUR = Mínimo coste de los proyectos con euros
 manager.manager-dashboard.maxCostProject.EUR = Máximo coste de los proyectos con euros
 
-manager.manager-dashboard.averageCostProject.GBP = Media del coste de los proyectos con euros
-manager.manager-dashboard.deviationCostProject.GBP = Desviación del coste de los proyectos con euros
+manager.manager-dashboard.averageCostProject.GBP = Media del coste de los proyectos con libras
+manager.manager-dashboard.deviationCostProject.GBP = Desviación del coste de los proyectos con libras
 manager.manager-dashboard.minCostProject.GBP = Mínimo coste de los proyectos con libras
 manager.manager-dashboard.maxCostProject.GBP = Máximo coste de los proyectos con libras
 
-manager.manager-dashboard.averageCostProject.USD = Media del coste de los proyectos con euros
-manager.manager-dashboard.deviationCostProject.USD = Desviación del coste de los proyectos con euros
+manager.manager-dashboard.averageCostProject.USD = Media del coste de los proyectos con dólares
+manager.manager-dashboard.deviationCostProject.USD = Desviación del coste de los proyectos con dólares
 manager.manager-dashboard.minCostProject.USD = Mínimo coste de los proyectos con dólares
 manager.manager-dashboard.maxCostProject.USD = Máximo coste de los proyectos con dólares

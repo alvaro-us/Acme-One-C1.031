@@ -48,24 +48,23 @@ public class AuthenticatedManagerAssignmentDeleteService extends AbstractService
 	public void bind(final Assignment object) {
 		assert object != null;
 
-		int projectId;
-		int storyId;
-		Project project;
-		UserStory story;
-		projectId = super.getRequest().getData("project", int.class);
-		project = this.repository.findProjectById(projectId);
-		storyId = super.getRequest().getData("userStory", int.class);
-		story = this.repository.findUserStorytById(storyId);
-
-		super.bind(object);
+		int projectId = super.getRequest().getData("project", int.class);
+		Project project = this.repository.findProjectById(projectId);
 		object.setProject(project);
+
+		int storyId = super.getRequest().getData("userStory", int.class);
+		UserStory story = this.repository.findUserStoryById(storyId);
 		object.setUserStory(story);
-
 	}
-
 	@Override
 	public void validate(final Assignment object) {
 		assert object != null;
+
+		boolean status;
+
+		status = object.getProject().isDraftMode();
+
+		super.state(status, "*", "manager.project.delete.projectPublished");
 	}
 
 	@Override
@@ -85,8 +84,8 @@ public class AuthenticatedManagerAssignmentDeleteService extends AbstractService
 		SelectChoices choices;
 		SelectChoices choices1;
 
-		stories = this.repository.findUserStories();
-		projects = this.repository.findProjects();
+		stories = this.repository.findAllUserStories();
+		projects = this.repository.findAllProjects();
 
 		choices = SelectChoices.from(stories, "title", object.getUserStory());
 		choices1 = SelectChoices.from(projects, "title", object.getProject());

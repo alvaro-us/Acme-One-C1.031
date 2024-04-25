@@ -62,6 +62,9 @@ public class AuthenticatedManagerUserStoryUpdateService extends AbstractService<
 	public void validate(final UserStory object) {
 		assert object != null;
 
+		if (!super.getBuffer().getErrors().hasErrors("estimatedCost"))
+			super.state(object.getEstimatedCost() >= 0.0, "retailPrice", "manager.project.error.cost.negative-price");
+
 	}
 	@Override
 	public void perform(final UserStory object) {
@@ -73,17 +76,15 @@ public class AuthenticatedManagerUserStoryUpdateService extends AbstractService<
 	@Override
 	public void unbind(final UserStory object) {
 		assert object != null;
-
-		int managerId;
 		Dataset dataset;
 
-		managerId = super.getRequest().getPrincipal().getActiveRoleId();
 		SelectChoices choices;
 
 		choices = SelectChoices.from(prioType.class, object.getPriorityType());
 
-		dataset = super.unbind(object, "title", "description", "estimatedCost", "acceptanceCriteria", "priorityType", "link", "draftMode");
+		dataset = super.unbind(object, "title", "description", "estimatedCost", "acceptanceCriteria", "link", "draftMode");
 		dataset.put("priorityType", choices.getSelected().getKey());
+		dataset.put("priorityTypes", choices);
 		super.getResponse().addData(dataset);
 	}
 

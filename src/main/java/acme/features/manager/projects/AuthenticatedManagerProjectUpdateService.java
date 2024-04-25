@@ -64,10 +64,12 @@ public class AuthenticatedManagerProjectUpdateService extends AbstractService<Ma
 	public void validate(final Project object) {
 		assert object != null;
 
+		System.out.println(object.getCost().getAmount());
+
 		if (!super.getBuffer().getErrors().hasErrors("code")) {
 			Project existing;
 
-			existing = this.repository.findOneProjectByCode(object.getCode());
+			existing = this.repository.findOneCourseByCodeAndDistinctId(object.getCode(), object.getId());
 
 			super.state(existing == null, "code", "manager.project.form.error.duplicated");
 		}
@@ -76,11 +78,9 @@ public class AuthenticatedManagerProjectUpdateService extends AbstractService<Ma
 			Configuration config;
 			config = this.repository.findConfiguration();
 
-			super.state(Arrays.asList(config.getAcceptedCurrency().trim().split(",")).contains(object.getCost().getCurrency()), "cost", "manager.project.currency");
+			super.state(object.getCost().getAmount() >= 0.0, "retailPrice", "manager.project.error.cost.negative-price");
+			super.state(Arrays.asList(config.getAcceptedCurrency().trim().split(",")).contains(object.getCost().getCurrency()), "cost", "manager.project.error.cost.currency");
 		}
-
-		if (!super.getBuffer().getErrors().hasErrors("cost"))
-			super.state(object.getCost().getAmount() >= 0., "retailPrice", "manager.project.negative-price");
 
 	}
 

@@ -28,8 +28,15 @@ public class AuthenticatedManagerAssignmentShowService extends AbstractService<M
 	@Override
 	public void authorise() {
 		boolean status;
+		Assignment object;
+		Manager manager;
+		int id;
+		id = super.getRequest().getData("id", int.class);
+		object = this.repository.findAssignmentById(id);
 
-		status = super.getRequest().getPrincipal().hasRole(Manager.class);
+		manager = this.repository.findManagerById(super.getRequest().getPrincipal().getActiveRoleId());
+		status = super.getRequest().getPrincipal().hasRole(Manager.class) && object.getProject().getManager().equals(manager);
+
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -54,8 +61,8 @@ public class AuthenticatedManagerAssignmentShowService extends AbstractService<M
 		SelectChoices choices;
 		SelectChoices choices1;
 
-		stories = this.repository.findUserStories();
-		projects = this.repository.findProjects();
+		stories = this.repository.findAllUserStories();
+		projects = this.repository.findAllProjects();
 
 		choices = SelectChoices.from(stories, "title", object.getUserStory());
 		choices1 = SelectChoices.from(projects, "title", object.getProject());
