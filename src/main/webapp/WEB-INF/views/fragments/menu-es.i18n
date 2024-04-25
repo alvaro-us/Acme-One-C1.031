@@ -84,5 +84,7 @@ master.menu.user-account.become-manager = Hazte Manager
 master.menu.user-account.manager = Datos de Gerente
 master.menu.user-account.become-sponsor = Hazte patrocinador
 master.menu.user-account.sponsor = Datos del patrocinador
+master.menu.user-account.become-client = Hazte cliente
+master.menu.user-account.client = Datos de cliente
 master.menu.user-account.projects = Proyectos
 master.menu.user-account.notices = Notificaciones
