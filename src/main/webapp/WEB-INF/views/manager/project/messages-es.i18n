@@ -1,0 +1,49 @@
+# messages-es.i18n
+#
+# Copyright (C) 2012-2024 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+manager.project.form.title = Proyecto
+manager.project.list.title = Listado de proyectos
+
+manager.project.form.label.code = Código
+manager.project.form.label.title = Titulo
+manager.project.form.label.abstrat = Abstracto
+manager.project.form.label.indicator = Indicador
+manager.project.form.label.cost = Coste
+manager.project.form.label.link = Enlace (Opcional)
+
+manager.project.list.label.title = Título
+manager.project.list.label.code = Código
+manager.project.list.label.cost = Coste
+
+manager.project.list.button.create = Crear
+
+manager.project.form.button.create = Crear
+manager.project.form.button.update = Actualizar
+manager.project.form.button.delete = Eliminar
+manager.project.form.button.publish = Publicar
+manager.project.form.button.user-stories = Historias de usuario
+
+manager.project.title = Título de proyecto
+manager.project.abstrat = Abstracto del proyecto
+manager.project.cost = Coste del proyecto
+
+validation.project.code = Esquema de código incorrecto
+manager.project.form.error.duplicated = Este código ya está en uso
+manager.project.error.cost.currency = Por favor elija un tipo de moneda válido
+manager.project.error.cost.negative-price = Por favor introduzca un valor positivo
+manager.project.error.indicator.notFalse = No puedes publicar un proyecto con errores
+
+manager.project.delete.exist-contract = Hay contratos relacionados con este proyecto
+manager.project.delete.exist-assignment = Hay historias de usuario relacionadas con este proyecto
+manager.project.delete.exist-sponsorship = Hay patrocinaciones asignadas a este proyecto
+manager.project.delete.exist-training-module = Hay modulos de entrenamiento asignados a este proyecto
+
+manager.project.publish.userStory.notPublished = Hay historias de usuario no publicadas asignadas a este proyecto
+manager.project.publish.userStory.noUserStories = No hay historias de usuario asignadas a este proyecto

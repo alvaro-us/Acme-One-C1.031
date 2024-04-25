@@ -1,13 +1,15 @@
 
 package acme.forms;
 
+import java.util.Map;
+
 import acme.client.data.AbstractForm;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Managerdashboard extends AbstractForm {
+public class ManagerDashboard extends AbstractForm {
 
 	// Serialisation Identifier
 
@@ -25,9 +27,9 @@ public class Managerdashboard extends AbstractForm {
 	int							minEstimatedCostUserStory;
 	int							maxEstimatedCostUserStory;
 
-	double						averageCostProject;
-	double						deviationCostProject;
-	int							minCostProject;
-	int							maxCostProject;
+	Map<String, Double>			averageCostProject;
+	Map<String, Double>			deviationCostProject;
+	Map<String, Integer>		minCostProject;
+	Map<String, Integer>		maxCostProject;
 
 }
