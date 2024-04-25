@@ -8,11 +8,15 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-authenticated.manager.form.title = Sponsor Data
+authenticated.sponsor.form.title = Sponsor Data
 
-authenticated.sponsor.form.label.expectedBenefits = Expected benefits
-authenticated.sponsor.form.label.webPage = Web page
+authenticated.sponsor.form.label.expectedBenefits = Expected Benefits
+authenticated.sponsor.form.label.webPage = Website
 
+sponsor.sponsorship.form.error.youAreSponsorAlready = You are already a sponsor
+
+authenticated.sponsor.form.title = Become a Sponsor
 
 authenticated.sponsor.form.button.create = Register
 authenticated.sponsor.form.button.update = Update
+

@@ -65,7 +65,7 @@ public class AuthenticatedSponsorSponsorshipShowService extends AbstractService<
 		Dataset dataset;
 		SelectChoices choices;
 		SelectChoices choicesProjects;
-		Collection<Project> projects = this.repository.findAllProjects();
+		Collection<Project> projects = this.repository.findAllProjectsPublished();
 
 		choices = SelectChoices.from(SponsorshipType.class, object.getType());
 		choicesProjects = SelectChoices.from(projects, "code", object.getProject());
@@ -74,7 +74,6 @@ public class AuthenticatedSponsorSponsorshipShowService extends AbstractService<
 		Money amountBase = this.service.changeCurrencyToBase(object.getAmount());
 		dataset.put("amountBase", amountBase);
 		dataset.put("types", choices);
-
 		dataset.put("projects", choicesProjects);
 		super.getResponse().addData(dataset);
 

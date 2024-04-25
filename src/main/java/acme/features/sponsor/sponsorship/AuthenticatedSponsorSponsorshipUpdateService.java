@@ -75,38 +75,52 @@ public class AuthenticatedSponsorSponsorshipUpdateService extends AbstractServic
 		int sponsorshipId = super.getRequest().getData("id", int.class);
 		Sponsorship sponsorship = this.repository.findSponsorshipById(sponsorshipId);
 		Collection<Invoice> invoices = this.repository.findInvoiceBySponsorshipId(sponsorshipId);
+
 		double totalAmount = 0.;
-
-		boolean isAcceptedCurrency = this.service.isAcceptedCurrency(object.getAmount().getCurrency());
-
 		for (Invoice invoice : invoices)
 			totalAmount += invoice.getTotalAmount().getAmount();
 
-		if (!Objects.equals(object.getCode(), sponsorship.getCode())) {
-			Boolean codeDuplicated = this.repository.findSponsorshipByCode(object.getCode()) == null;
-			super.state(codeDuplicated, "code", "sponsor.sponsorship.form.error.codeDuplicated");
+		// Code
+		if (!super.getBuffer().getErrors().hasErrors("code")) {
+			String code = object.getCode();
+			if (!Objects.equals(code, sponsorship.getCode())) {
+				boolean codeDuplicated = this.repository.findSponsorshipByCode(object.getCode()) == null;
+				super.state(codeDuplicated, "code", "sponsor.sponsorship.form.error.codeDuplicated");
+
+			}
+		}
+
+		// Date
+
+		if (!super.getBuffer().getErrors().hasErrors("durationStart") && !super.getBuffer().getErrors().hasErrors("moment")) {
+			boolean momentBeforeDurationStart = MomentHelper.isAfter(object.getDurationStart(), MomentHelper.deltaFromMoment(object.getMoment(), 0l, ChronoUnit.DAYS));
+			super.state(momentBeforeDurationStart, "durationStart", "sponsor.sponsorship.form.error.momentBeforeDurationStart");
 
 		}
 
-		Boolean amountLessInvoicesAmount = object.getAmount().getAmount() >= totalAmount;
-		Boolean amountPositive = object.getAmount().getAmount() >= 0;
-		Boolean momentBeforeDurationStart = MomentHelper.isAfter(object.getDurationStart(), MomentHelper.deltaFromMoment(object.getMoment(), 0l, ChronoUnit.DAYS));
-		Boolean durationStart1MothBeforeDurationEnd = MomentHelper.isAfter(object.getDurationEnd(), MomentHelper.deltaFromMoment(object.getDurationStart(), 1l, ChronoUnit.MONTHS));
-		super.state(momentBeforeDurationStart, "durationStart", "sponsor.sponsorship.form.error.momentBeforeDurationStart");
-		super.state(durationStart1MothBeforeDurationEnd, "durationEnd", "sponsor.sponsorship.form.error.durationStart1MothBeforeDurationEnd");
-
-		if (isAcceptedCurrency) {
-			super.state(amountPositive, "amount", "sponsor.sponsorship.form.error.amountPositive");
-			super.state(amountLessInvoicesAmount, "amount", "sponsor.sponsorship.form.error.amountLessInvoicesAmount");
+		if (!super.getBuffer().getErrors().hasErrors("durationStart") && !super.getBuffer().getErrors().hasErrors("durationEnd")) {
+			boolean durationStart1MothBeforeDurationEnd = MomentHelper.isAfter(object.getDurationEnd(), MomentHelper.deltaFromMoment(object.getDurationStart(), 1l, ChronoUnit.MONTHS));
+			super.state(durationStart1MothBeforeDurationEnd, "durationEnd", "sponsor.sponsorship.form.error.durationStart1MothBeforeDurationEnd");
 		}
-		super.state(isAcceptedCurrency, "amount", "sponsor.sponsorship.form.error.isAcceptedCurrency");
+
+		if (!super.getBuffer().getErrors().hasErrors("amount")) {
+			boolean isAcceptedCurrency = this.service.isAcceptedCurrency(object.getAmount().getCurrency());
+			boolean amountLessInvoicesAmount = object.getAmount().getAmount() >= totalAmount;
+			boolean amountPositive = object.getAmount().getAmount() >= 0;
+
+			if (isAcceptedCurrency) {
+				super.state(amountPositive, "amount", "sponsor.sponsorship.form.error.amountPositive");
+				super.state(amountLessInvoicesAmount, "amount", "sponsor.sponsorship.form.error.amountLessInvoicesAmount");
+			}
+			super.state(isAcceptedCurrency, "amount", "sponsor.sponsorship.form.error.isAcceptedCurrency");
+
+		}
 
 	}
 
 	@Override
 	public void perform(final Sponsorship object) {
 		assert object != null;
-
 		this.repository.save(object);
 	}
 
@@ -115,14 +129,14 @@ public class AuthenticatedSponsorSponsorshipUpdateService extends AbstractServic
 		assert object != null;
 		SelectChoices choices;
 		SelectChoices choicesProjects;
-		Collection<Project> projects = this.repository.findAllProjects();
+		Collection<Project> projects = this.repository.findAllProjectsPublished();
 
 		choices = SelectChoices.from(SponsorshipType.class, object.getType());
 		choicesProjects = SelectChoices.from(projects, "code", object.getProject());
 
 		Dataset dataset;
 
-		dataset = super.unbind(object, "code", "moment", "durationStart", "durationEnd", "amount", "type", "email", "link", "project", "draftMode");
+		dataset = super.unbind(object, "code", "moment", "durationStart", "durationEnd", "amount", "type", "email", "link", "draftMode");
 
 		dataset.put("types", choices);
 		dataset.put("projects", choicesProjects);
