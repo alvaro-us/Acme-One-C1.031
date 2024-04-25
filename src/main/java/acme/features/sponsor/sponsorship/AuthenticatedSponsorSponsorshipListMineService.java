@@ -28,7 +28,6 @@ public class AuthenticatedSponsorSponsorshipListMineService extends AbstractServ
 
 		status = super.getRequest().getPrincipal().hasRole(Sponsor.class);
 		super.getResponse().setAuthorised(status);
-		super.authorise();
 	}
 
 	@Override
@@ -46,7 +45,9 @@ public class AuthenticatedSponsorSponsorshipListMineService extends AbstractServ
 		assert object != null;
 		Dataset dataset;
 
-		dataset = super.unbind(object, "code", "moment", "durationStart", "durationEnd", "amount", "link");
+		dataset = super.unbind(object, "code", "durationStart", "durationEnd", "type", "link", "draftMode");
+		dataset.put("published", object.isDraftMode() ? "❌" : "✅");
+		dataset.put("invoices", this.repository.findInvoiceBySponsorshipId(object.getId()).size());
 		super.getResponse().addData(dataset);
 	}
 
