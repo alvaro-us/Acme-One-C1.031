@@ -14,10 +14,12 @@ import acme.roles.Manager;
 @Service
 public class AuthenticatedManagerUserStoryUpdateService extends AbstractService<Manager, UserStory> {
 
+	private static final String							ESTIMATEDCOST	= "estimatedCost";
+
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	protected AuthenticatedManagerUserStoryRepository repository;
+	protected AuthenticatedManagerUserStoryRepository	repository;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -27,15 +29,13 @@ public class AuthenticatedManagerUserStoryUpdateService extends AbstractService<
 		final boolean status;
 		int userStoryId;
 		UserStory userStory;
-		Manager manager;
 		int id1;
 
 		userStoryId = super.getRequest().getData("id", int.class);
 		userStory = this.repository.findUserStoryById(userStoryId);
 		id1 = super.getRequest().getPrincipal().getAccountId();
 
-		manager = userStory.getManager();
-		status = userStory != null && userStory.isDraftMode() && super.getRequest().getPrincipal().hasRole(Manager.class) && userStory.getManager().getUserAccount().getId() == id1;
+		status = userStory.isDraftMode() && super.getRequest().getPrincipal().hasRole(Manager.class) && userStory.getManager().getUserAccount().getId() == id1;
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -55,14 +55,14 @@ public class AuthenticatedManagerUserStoryUpdateService extends AbstractService<
 	public void bind(final UserStory object) {
 		assert object != null;
 
-		super.bind(object, "title", "description", "estimatedCost", "acceptanceCriteria", "priorityType", "link", "draftMode");
+		super.bind(object, "title", "description", AuthenticatedManagerUserStoryUpdateService.ESTIMATEDCOST, "acceptanceCriteria", "priorityType", "link", "draftMode");
 	}
 
 	@Override
 	public void validate(final UserStory object) {
 		assert object != null;
 
-		if (!super.getBuffer().getErrors().hasErrors("estimatedCost"))
+		if (!super.getBuffer().getErrors().hasErrors(AuthenticatedManagerUserStoryUpdateService.ESTIMATEDCOST))
 			super.state(object.getEstimatedCost() >= 0.0, "retailPrice", "manager.project.error.cost.negative-price");
 
 	}
@@ -82,7 +82,7 @@ public class AuthenticatedManagerUserStoryUpdateService extends AbstractService<
 
 		choices = SelectChoices.from(prioType.class, object.getPriorityType());
 
-		dataset = super.unbind(object, "title", "description", "estimatedCost", "acceptanceCriteria", "link", "draftMode");
+		dataset = super.unbind(object, "title", "description", AuthenticatedManagerUserStoryUpdateService.ESTIMATEDCOST, "acceptanceCriteria", "link", "draftMode");
 		dataset.put("priorityType", choices.getSelected().getKey());
 		dataset.put("priorityTypes", choices);
 		super.getResponse().addData(dataset);

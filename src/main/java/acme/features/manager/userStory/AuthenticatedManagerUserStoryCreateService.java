@@ -14,10 +14,13 @@ import acme.roles.Manager;
 @Service
 public class AuthenticatedManagerUserStoryCreateService extends AbstractService<Manager, UserStory> {
 
+	private static final String							ESTIMATEDCOST	= "estimatedCost";
+	private static final String							PRIORITYTYPE	= "priorityType";
+
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	protected AuthenticatedManagerUserStoryRepository repository;
+	protected AuthenticatedManagerUserStoryRepository	repository;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -48,9 +51,9 @@ public class AuthenticatedManagerUserStoryCreateService extends AbstractService<
 	public void bind(final UserStory object) {
 		assert object != null;
 
-		super.bind(object, "title", "description", "estimatedCost", "acceptanceCriteria", "priorityType", "link", "draftMode");
+		super.bind(object, "title", "description", AuthenticatedManagerUserStoryCreateService.ESTIMATEDCOST, "acceptanceCriteria", AuthenticatedManagerUserStoryCreateService.PRIORITYTYPE, "link", "draftMode");
 		final prioType pType;
-		pType = super.getRequest().getData("priorityType", prioType.class);
+		pType = super.getRequest().getData(AuthenticatedManagerUserStoryCreateService.PRIORITYTYPE, prioType.class);
 
 		object.setPriorityType(pType);
 
@@ -60,8 +63,8 @@ public class AuthenticatedManagerUserStoryCreateService extends AbstractService<
 	public void validate(final UserStory object) {
 		assert object != null;
 
-		if (!super.getBuffer().getErrors().hasErrors("estimatedCost"))
-			super.state(object.getEstimatedCost() >= 0.0, "retailPrice", "manager.project.error.cost.negative-price");
+		if (!super.getBuffer().getErrors().hasErrors(AuthenticatedManagerUserStoryCreateService.ESTIMATEDCOST))
+			super.state(object.getEstimatedCost() >= 0.0, AuthenticatedManagerUserStoryCreateService.ESTIMATEDCOST, "manager.project.error.cost.negative-price");
 
 	}
 	@Override
@@ -79,8 +82,8 @@ public class AuthenticatedManagerUserStoryCreateService extends AbstractService<
 
 		choices = SelectChoices.from(prioType.class, object.getPriorityType());
 
-		dataset = super.unbind(object, "title", "description", "estimatedCost", "acceptanceCriteria", "link", "draftMode");
-		dataset.put("priorityType", choices.getSelected().getKey());
+		dataset = super.unbind(object, "title", "description", AuthenticatedManagerUserStoryCreateService.ESTIMATEDCOST, "acceptanceCriteria", "link", "draftMode");
+		dataset.put(AuthenticatedManagerUserStoryCreateService.PRIORITYTYPE, choices.getSelected().getKey());
 		dataset.put("priorityTypes", choices);
 		super.getResponse().addData(dataset);
 	}

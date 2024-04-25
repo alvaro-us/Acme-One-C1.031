@@ -15,10 +15,12 @@ import acme.roles.Manager;
 @Service
 public class AuthenticatedManagerProjectPublishService extends AbstractService<Manager, Project> {
 
+	private static final String						INDICATOR	= "indicator";
+
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	protected AuthenticatedManagerProjectRepository repository;
+	protected AuthenticatedManagerProjectRepository	repository;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -28,15 +30,13 @@ public class AuthenticatedManagerProjectPublishService extends AbstractService<M
 		final boolean status;
 		int projectId;
 		Project project;
-		Manager manager;
 		int id1;
 
 		projectId = super.getRequest().getData("id", int.class);
 		project = this.repository.findProjectById(projectId);
 		id1 = super.getRequest().getPrincipal().getAccountId();
 
-		manager = project.getManager();
-		status = project != null && project.isDraftMode() && super.getRequest().getPrincipal().hasRole(Manager.class) && project.getManager().getUserAccount().getId() == id1;
+		status = project.isDraftMode() && super.getRequest().getPrincipal().hasRole(Manager.class) && project.getManager().getUserAccount().getId() == id1;
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -56,7 +56,7 @@ public class AuthenticatedManagerProjectPublishService extends AbstractService<M
 	public void bind(final Project object) {
 		assert object != null;
 
-		super.bind(object, "code", "title", "abstrat", "indicator", "cost", "link");
+		super.bind(object, "code", "title", "abstrat", AuthenticatedManagerProjectPublishService.INDICATOR, "cost", "link");
 
 	}
 
@@ -78,11 +78,11 @@ public class AuthenticatedManagerProjectPublishService extends AbstractService<M
 		status = notPublishedUserStory == 0;
 		super.state(status, "*", "manager.project.publish.userStory.notPublished");
 
-		if (!super.getBuffer().getErrors().hasErrors("indicator")) {
+		if (!super.getBuffer().getErrors().hasErrors(AuthenticatedManagerProjectPublishService.INDICATOR)) {
 			boolean indicator;
 			indicator = object.isIndicator();
 
-			super.state(indicator == false, "indicator", "manager.project.error.indicator.notFalse");
+			super.state(!indicator, AuthenticatedManagerProjectPublishService.INDICATOR, "manager.project.error.indicator.notFalse");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("code")) {
@@ -119,7 +119,7 @@ public class AuthenticatedManagerProjectPublishService extends AbstractService<M
 
 		Dataset dataset;
 
-		dataset = super.unbind(object, "code", "title", "abstrat", "indicator", "cost", "link", "draftMode");
+		dataset = super.unbind(object, "code", "title", "abstrat", AuthenticatedManagerProjectPublishService.INDICATOR, "cost", "link", "draftMode");
 
 		super.getResponse().addData(dataset);
 	}
