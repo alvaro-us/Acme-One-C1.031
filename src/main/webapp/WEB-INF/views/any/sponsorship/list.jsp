@@ -16,13 +16,9 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:list>
-	<acme:list-column code="sponsor.sponsorship.list.label.code" path="code" width="80%"/>	
-	<acme:list-column code="sponsor.sponsorship.list.label.moment" path="moment" width="20%"/>
-	<acme:list-column code="sponsor.sponsorship.list.label.amount" path="amount" width="80%"/>	
-	
-	<acme:button code="sponsor.sponsorship.list.button.create" action="/sponsor/sponsorship/create"/>
+	<acme:list-column code="any.sponsorship.list.label.code" path="code" width="20%"/>	
+	<acme:list-column code="any.sponsorship.list.label.durationStart" path="durationStart" width="20%"/>
+	<acme:list-column code="any.sponsorship.list.label.durationEnd" path="durationEnd" width="20%"/>
+	<acme:list-column code="any.sponsorship.list.label.type" path="type" width="20%"/>
+	<acme:list-column code="any.sponsorship.list.label.sponsorName" path="sponsorName" width="20%"/>	
 </acme:list>
-
-<jstl:if test="${_command == 'list'}">
-	<acme:button code="sponsor.sponsorship.list.button.create" action="/sponsor/sponsorship/create"/>
-</jstl:if>	

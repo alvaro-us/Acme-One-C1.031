@@ -1,0 +1,15 @@
+# messages-en.i18n
+
+
+client.client-dashboard.form.title = Client dashboard
+
+client.dashboard.form.title.general-indicators = General indicators
+
+client.dashboard.form.label.total-Number-Of-ProgressLogs-Below-25-Percent = Percentage Of total Number Completeness less than 25
+client.dashboard.form.label.total-Number-Of-ProgressLogs-25-To-50-Percent = Percentage Of total Number Completeness between 25 and 50
+client.dashboard.form.label.total-Number-Of-ProgressLogs-50-To-75-Percent = Percentage Of total Number Completeness between 50 and 75
+client.dashboard.form.label.total-Number-Of-ProgressLogs-Above-75-Percent =  Percentage Of total Number Completeness greater than 75
+client.dashboard.form.label.average-Budget-Of-Contracts =  Average Budget Of Contract
+client.dashboard.form.label.deviation-Budget-Of-Contracts = Deviation Budget Of Contract
+client.dashboard.form.label.min-Budget-Of-Contracts = Minimum Budget Of Contract
+client.dashboard.form.label.max-Budget-Of-Contracts = Maximum Budget Of Contract

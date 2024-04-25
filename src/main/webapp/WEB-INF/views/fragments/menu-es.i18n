@@ -14,6 +14,8 @@ master.menu.home = Inicio
 master.menu.sign-up = Registrarse
 master.menu.sign-in = Entrar
 master.menu.sign-out = Salir
+master.menu.sponsorships = Sponsorships
+
 
 # master.menu.anonymous #######################################################
 
@@ -39,7 +41,9 @@ master.menu.administrator.configuration = Configuración de la moneda
 # master.menu.client ########################################################
 
 master.menu.client = Cliente
-master.menu.client.contract-list = Lista de contratos publicados
+master.menu.client.contract = Lista de contratos
+master.menu.client.progress-log = Lista de actas de progreso
+master.menu.client.dashboard = Dashboard
 
 
 # master.menu.provider ########################################################
@@ -64,7 +68,9 @@ master.menu.manager.liststories = Mis historias de usuario
 # master.menu.sponsor ##########################################################
 
 master.menu.sponsor = Patrocinador
-master.menu.sponsor.ListSponsorship = Tus anuncios
+master.menu.sponsor.ListSponsorship = Mis anuncios
+master.menu.sponsor.Dashboard = Mi panel de control
+
 
 
 # master.menu.user-account ####################################################
@@ -77,5 +83,7 @@ master.menu.user-account.consumer = Datos de consumidor
 master.menu.user-account.become-consumer = Hazte consumidor
 master.menu.user-account.become-manager = Hazte Manager
 master.menu.user-account.manager = Datos de Gerente
+master.menu.user-account.become-sponsor = Hazte patrocinador
+master.menu.user-account.sponsor = Datos del patrocinador
 master.menu.user-account.projects = Proyectos
 master.menu.user-account.notices = Notificaciones

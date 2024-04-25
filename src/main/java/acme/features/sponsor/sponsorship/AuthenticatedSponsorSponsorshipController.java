@@ -16,7 +16,22 @@ public class AuthenticatedSponsorSponsorshipController extends AbstractControlle
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	protected AuthenticatedSponsorSponsorshipListMineService listMineService;
+	protected AuthenticatedSponsorSponsorshipListMineService	listMineService;
+
+	@Autowired
+	protected AuthenticatedSponsorSponsorshipShowService		showService;
+
+	@Autowired
+	protected AuthenticatedSponsorSponsorshipUpdateService		updateService;
+
+	@Autowired
+	protected AuthenticatedSponsorSponsorshipDeleteService		deleteService;
+
+	@Autowired
+	protected AuthenticatedSponsorSponsorshipCreateService		createService;
+
+	@Autowired
+	protected AuthenticatedSponsorSponsorshipPublishService		publishService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -24,5 +39,10 @@ public class AuthenticatedSponsorSponsorshipController extends AbstractControlle
 	@PostConstruct
 	protected void initialise() {
 		super.addBasicCommand("list", this.listMineService);
+		super.addBasicCommand("show", this.showService);
+		super.addBasicCommand("update", this.updateService);
+		super.addBasicCommand("delete", this.deleteService);
+		super.addBasicCommand("create", this.createService);
+		super.addCustomCommand("publish", "update", this.publishService);
 	}
 }
