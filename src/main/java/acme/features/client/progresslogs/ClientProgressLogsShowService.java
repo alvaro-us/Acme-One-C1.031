@@ -29,6 +29,7 @@ public class ClientProgressLogsShowService extends AbstractService<Client, Progr
 		int id;
 
 		id = super.getRequest().getData("id", int.class);
+
 		object = this.repository.findProgressLogsById(id);
 		super.getBuffer().addData(object);
 

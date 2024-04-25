@@ -1,15 +1,12 @@
 
 package acme.features.client.progresslogs;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
 import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
-import acme.client.views.SelectChoices;
 import acme.entities.contract.Contract;
 import acme.entities.progressLogs.ProgressLogs;
 import acme.roles.client.Client;
@@ -32,6 +29,11 @@ public class ClientProgressLogsCreateService extends AbstractService<Client, Pro
 	public void load() {
 		ProgressLogs object;
 		object = new ProgressLogs();
+		int contractId = super.getRequest().getData("masterId", int.class);
+		Contract contract = this.repository.findContractById(contractId);
+
+		object.setRegistrationMoment(MomentHelper.getCurrentMoment());
+		object.setContract(contract);
 		object.setPublished(false);
 		super.getBuffer().addData(object);
 	}
@@ -40,21 +42,19 @@ public class ClientProgressLogsCreateService extends AbstractService<Client, Pro
 	public void bind(final ProgressLogs object) {
 		if (object == null)
 			throw new IllegalArgumentException("No object found");
-		super.bind(object, "recordId", "completeness", "comment", "registrationMoment", "responsable", "contract");
+		super.bind(object, "recordId", "completeness", "comment", "registrationMoment", "responsable");
 	}
 
 	@Override
 	public void validate(final ProgressLogs object) {
 		if (object == null)
 			throw new IllegalArgumentException("No object found");
+
 		if (!super.getBuffer().getErrors().hasErrors("recordId")) {
 			ProgressLogs existing;
 			existing = this.repository.findProgressLogsByRecordId(object.getRecordId());
-			super.state(existing == null, "code", "client.progressLogs.form.error.recordId");
+			super.state(existing == null, "recordId", "client.progressLogs.form.error.codeDuplicate");
 		}
-
-		if (!super.getBuffer().getErrors().hasErrors("registrationMoment"))
-			super.state(MomentHelper.isBefore(object.getRegistrationMoment(), MomentHelper.getCurrentMoment()), "instantiationMoment", "client.progressLogs.form.error.registrationMoment");
 
 	}
 
@@ -70,16 +70,10 @@ public class ClientProgressLogsCreateService extends AbstractService<Client, Pro
 		if (object == null)
 			throw new IllegalArgumentException("No object found");
 		Dataset dataset;
-		dataset = super.unbind(object, "recordId", "completeness", "comment", "registrationMoment", "responsable", "contract", "published");
+		dataset = super.unbind(object, "recordId", "completeness", "comment", "registrationMoment", "responsable", "published");
 
-		final SelectChoices choices = new SelectChoices();
-		Collection<Contract> contracts;
-		int id = super.getRequest().getPrincipal().getActiveRoleId();
-		contracts = this.repository.findContractsByClient(id);
-		for (final Contract c : contracts)
-			choices.add(Integer.toString(c.getId()), c.getCode(), false);
+		dataset.put("masterId", super.getRequest().getData("masterId", int.class));
 
-		dataset.put("contractsList", choices);
 		super.getResponse().addData(dataset);
 	}
 

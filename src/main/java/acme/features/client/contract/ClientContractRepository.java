@@ -24,7 +24,7 @@ public interface ClientContractRepository extends AbstractRepository {
 	@Query("select p from Project p where p.id in (select id from Contract c where c.project.id = :id)")
 	Project findProjectByContract(int id);
 
-	@Query("select p from Project p where p.published = true")
+	@Query("select p from Project p where p.draftMode = false")
 	Collection<Project> findPublishedProjects();
 
 	@Query("select p from Project p where p.code = :code")
@@ -42,7 +42,7 @@ public interface ClientContractRepository extends AbstractRepository {
 	@Query("select c from Contract c where c.project.id = :id")
 	Collection<Contract> findContractsFromProject(int id);
 
-	@Query("select c from Contract c")
-	Collection<Contract> findAllContracts();
+	@Query("select p from Project p")
+	Collection<Project> findAllProjects();
 
 }

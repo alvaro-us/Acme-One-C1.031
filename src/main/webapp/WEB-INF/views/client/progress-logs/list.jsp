@@ -10,7 +10,8 @@
 
 
 </acme:list>
-<jstl:if test="${masterId==null}">
-	<acme:button code="client.progress-logs.create" action="/client/progress-logs/create"/>
-</jstl:if>
+<jstl:if test="${_command == 'list'}">
 
+	<acme:button code="client.progress-logs.list.button.create" action="/client/progress-logs/create?masterId=${masterId}"/>
+	
+</jstl:if>	
