@@ -12,7 +12,7 @@ any.project.form.title = Proyecto
 any.project.list.title = Listado de proyectos
 
 any.project.form.label.title = Titulo:
-any.project.form.label.abstrat = Abstracto:
+any.project.form.label.abstrat = Resumen:
 any.project.form.label.indicator = Indicador:
 any.project.form.label.cost = Coste: 
 any.project.form.label.link = Enlace:
