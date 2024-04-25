@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
-import acme.entities.projects.Assignment;
-import acme.entities.projects.Project;
 import acme.entities.projects.UserStory;
 import acme.entities.projects.prioType;
 import acme.roles.Manager;
@@ -35,16 +33,12 @@ public class AuthenticatedManagerUserStoryCreateService extends AbstractService<
 	@Override
 	public void load() {
 		UserStory object;
-		Assignment object1;
+		Manager manager;
 
 		object = new UserStory();
-		object1 = new Assignment();
-
-		final int projectId = super.getRequest().getData("projectId", int.class);
-		final Project project = this.repository.findProjectById(projectId);
-		object1.setProject(project);
-		object1.setUserStory(object);
 		object.setDraftMode(true);
+		manager = this.repository.findManagerById(super.getRequest().getPrincipal().getActiveRoleId());
+		object.setManager(manager);
 
 		super.getBuffer().addData(object);
 
@@ -66,6 +60,9 @@ public class AuthenticatedManagerUserStoryCreateService extends AbstractService<
 	public void validate(final UserStory object) {
 		assert object != null;
 
+		if (!super.getBuffer().getErrors().hasErrors("estimatedCost"))
+			super.state(object.getEstimatedCost() >= 0.0, "retailPrice", "manager.project.error.cost.negative-price");
+
 	}
 	@Override
 	public void perform(final UserStory object) {
@@ -82,8 +79,9 @@ public class AuthenticatedManagerUserStoryCreateService extends AbstractService<
 
 		choices = SelectChoices.from(prioType.class, object.getPriorityType());
 
-		dataset = super.unbind(object, "title", "description", "estimatedCost", "acceptanceCriteria", "priorityType", "link", "draftMode");
+		dataset = super.unbind(object, "title", "description", "estimatedCost", "acceptanceCriteria", "link", "draftMode");
 		dataset.put("priorityType", choices.getSelected().getKey());
+		dataset.put("priorityTypes", choices);
 		super.getResponse().addData(dataset);
 	}
 

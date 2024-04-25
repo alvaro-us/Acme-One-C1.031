@@ -17,6 +17,5 @@
 
 <acme:list>
 	<acme:list-column code="any.project.list.label.title" path="title" width="80%"/>	
-	<acme:list-column code="any.project.list.label.indicator" path="indicator" width="20%"/>
 	<acme:list-column code="any.project.list.label.cost" path="cost" width="80%"/>	
 </acme:list>

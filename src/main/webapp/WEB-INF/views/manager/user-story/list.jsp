@@ -22,6 +22,6 @@
 	<acme:list-column code="manager.user-story.list.label.estimatedCost" path="estimatedCost"/>	
 </acme:list>
 
-<jstl:if test="${_command == 'list'}">
+<jstl:if test="${acme:anyOf(_command, 'list|listmine')}">
 	<acme:button code="manager.user-story.list.button.create" action="/manager/user-story/create"/>
 </jstl:if>	

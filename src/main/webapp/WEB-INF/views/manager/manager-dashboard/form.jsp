@@ -26,10 +26,114 @@
 	<acme:input-integer code="manager.manager-dashboard.minEstimatedCostUserStory" path="minEstimatedCostUserStory"/>
 	<acme:input-integer code="manager.manager-dashboard.maxEstimatedCostUserStory" path="maxEstimatedCostUserStory"/>
 	
-	<acme:input-integer code="manager.manager-dashboard.averageCostProject" path="averageCostProject"/>
-	<acme:input-integer code="manager.manager-dashboard.deviationCostProject" path="deviationCostProject"/>
-	<acme:input-integer code="manager.manager-dashboard.minCostProject" path="minCostProject"/>
-	<acme:input-integer code="manager.manager-dashboard.maxCostProject" path="maxCostProject"/>
+	<table class="table table-sm">
+		<tr>
+			<th scope="row">
+				<acme:message code="manager.manager-dashboard.averageCostProject.EUR"/>
+			</th>
+			<td>
+				<acme:print value="${ averageCostProject.get('EUR')}"/>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row">
+				<acme:message code="manager.manager-dashboard.averageCostProject.GBP"/>
+			</th>
+			<td>
+				<acme:print value="${ averageCostProject.get('GBP')}"/>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row">
+				<acme:message code="manager.manager-dashboard.averageCostProject.USD"/>
+			</th>
+			<td>
+				<acme:print value="${ averageCostProject.get('USD')}"/>
+			</td>
+		</tr>
+	</table>
+	
+	<table class="table table-sm">
+		<tr>
+			<th scope="row">
+				<acme:message code="manager.manager-dashboard.deviationCostProject.EUR"/>
+			</th>
+			<td>
+				<acme:print value="${ deviationCostProject.get('EUR')}"/>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row">
+				<acme:message code="manager.manager-dashboard.deviationCostProject.GBP"/>
+			</th>
+			<td>
+				<acme:print value="${ deviationCostProject.get('GBP')}"/>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row">
+				<acme:message code="manager.manager-dashboard.deviationCostProject.USD"/>
+			</th>
+			<td>
+				<acme:print value="${ deviationCostProject.get('USD')}"/>
+			</td>
+		</tr>
+	</table>
+	
+	<table class="table table-sm">
+		<tr>
+			<th scope="row">
+				<acme:message code="manager.manager-dashboard.minCostProject.EUR"/>
+			</th>
+			<td>
+				<acme:print value="${ minCostProject.get('EUR')}"/>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row">
+				<acme:message code="manager.manager-dashboard.minCostProject.GBP"/>
+			</th>
+			<td>
+				<acme:print value="${ minCostProject.get('GBP')}"/>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row">
+				<acme:message code="manager.manager-dashboard.minCostProject.USD"/>
+			</th>
+			<td>
+				<acme:print value="${ minCostProject.get('USD')}"/>
+			</td>
+		</tr>
+	</table>
+	
+	<table class="table table-sm">
+		<tr>
+			<th scope="row">
+				<acme:message code="manager.manager-dashboard.maxCostProject.EUR"/>
+			</th>
+			<td>
+				<acme:print value="${ maxCostProject.get('EUR')}"/>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row">
+				<acme:message code="manager.manager-dashboard.maxCostProject.GBP"/>
+			</th>
+			<td>
+				<acme:print value="${ maxCostProject.get('GBP')}"/>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row">
+				<acme:message code="manager.manager-dashboard.maxCostProject.USD"/>
+			</th>
+			<td>
+				<acme:print value="${ maxCostProject.get('USD')}"/>
+			</td>
+		</tr>
+	</table>
+
 	
 </acme:form> 
 

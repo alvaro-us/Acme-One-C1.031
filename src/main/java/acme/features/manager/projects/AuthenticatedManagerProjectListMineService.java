@@ -47,7 +47,7 @@ public class AuthenticatedManagerProjectListMineService extends AbstractService<
 
 		Dataset dataset;
 
-		dataset = super.unbind(object, "title", "indicator", "cost", "draftMode");
+		dataset = super.unbind(object, "code", "title", "cost", "draftMode");
 
 		super.getResponse().addData(dataset);
 	}

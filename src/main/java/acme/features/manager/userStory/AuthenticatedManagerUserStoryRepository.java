@@ -24,10 +24,16 @@ public interface AuthenticatedManagerUserStoryRepository extends AbstractReposit
 	@Query("SELECT a.userStory FROM Assignment a WHERE a.project.id = :id")
 	Collection<UserStory> findAllUserStoryOfProject(int id);
 
+	@Query("SELECT a FROM UserStory a WHERE a.manager.id = :id")
+	Collection<UserStory> findAllUserStoryOfManager(int id);
+
 	@Query("SELECT a FROM Assignment a WHERE a.userStory.id = :id")
 	Collection<Assignment> findAllAssignmentsOfUserStory(int id);
 
 	@Query("SELECT a FROM Manager a WHERE a.id = :id")
 	Manager findManagerById(int id);
+
+	@Query("select count(a) from Assignment a where a.userStory.id = :id")
+	int findNumberAssignmentOfUserStory(int id);
 
 }

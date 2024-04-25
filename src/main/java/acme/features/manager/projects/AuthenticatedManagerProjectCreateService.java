@@ -1,11 +1,14 @@
 
 package acme.features.manager.projects;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
+import acme.entities.configuration.Configuration;
 import acme.entities.projects.Project;
 import acme.roles.Manager;
 
@@ -52,6 +55,23 @@ public class AuthenticatedManagerProjectCreateService extends AbstractService<Ma
 	@Override
 	public void validate(final Project object) {
 		assert object != null;
+		if (!super.getBuffer().getErrors().hasErrors("code")) {
+			Project existing;
+
+			existing = this.repository.findOneProjectByCode(object.getCode());
+
+			super.state(existing == null, "code", "manager.project.form.error.duplicated");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("cost")) {
+			Configuration config;
+			config = this.repository.findConfiguration();
+
+			super.state(Arrays.asList(config.getAcceptedCurrency().trim().split(",")).contains(object.getCost().getCurrency()), "cost", "manager.project.error.cost.currency");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("cost"))
+			super.state(object.getCost().getAmount() >= 0., "cost", "manager.project.error.cost.negative-price");
 
 	}
 

@@ -1,0 +1,30 @@
+client.contract.list.title = Lista de tus contratos
+client.contract.list.label.code = Code
+client.contract.list.label.providerName = Nombre de proveedor
+client.contract.list.label.customerName = Nombre de cliente
+client.contract.list.label.budget = Presupuesto
+
+client.contract.form.title = Detalles del proyecto
+client.contract.form.label.code = Código
+client.contract.form.label.providerName = Nombre de proveedor
+client.contract.form.label.customerName = Nombre de cliente
+client.contract.form.label.goals = Metas
+client.contract.form.label.budget = Presupuesto
+client.contract.form.label.instationMoment = Fecha de creacion
+client.contract.form.label.published = Publicado
+client.contract.form.label.money = Coste en divisa del sistema
+client.contract.form.label.project = Proyecto
+
+client.contract.progressLogs = Actas de progreso
+
+
+client.contract.form.error.budget = El presupuesto debe ser inferior a la mitad del coste del proyecto
+client.contract.form.error.budget2 = La moneda introducida no es aceptada por el sistema
+client.contract.form.error.code = El codigo debe ser 3 mayusculas y 4 números divididos por 1 -
+client.contract.form.error.moment = Debe estar en el pasado
+
+client.contract.create = Crear
+client.contract.form.button.delete = Eliminar
+client.contract.form.button.update = Actualizar
+client.contract.form.button.publish = Publicar
+client.contract.form.button.create = Crear

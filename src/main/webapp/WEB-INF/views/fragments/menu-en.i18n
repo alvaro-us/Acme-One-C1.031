@@ -36,6 +36,15 @@ master.menu.administrator.user-accounts = User accounts
 master.menu.administrator.populate-initial = Populate DB (initial)
 master.menu.administrator.populate-sample = Populate DB (samples)
 master.menu.administrator.shut-down = Shut down
+master.menu.administrator.configuration = System Configuration
+
+# master.menu.client ########################################################
+
+master.menu.client = Client
+master.menu.client.dashboard = Dashboard
+master.menu.client.contract = List of contracts
+master.menu.client.progress-logs = List of progress logs
+
 
 # master.menu.provider ########################################################
 
@@ -52,6 +61,8 @@ master.menu.consumer.favourite-link = Favourite link
 master.menu.manager = Manager
 master.menu.manager.ListProjects = My projects
 master.menu.manager.Dashboard = My dashboard
+master.menu.manager.Assignments = Assignments
+master.menu.manager.liststories = My user stories
 
 # master.menu.sponsor ##########################################################
 
@@ -73,3 +84,4 @@ master.menu.user-account.become-sponsor = Become a sponsor
 master.menu.user-account.manager = Manager Data
 master.menu.user-account.sponsor = Sponsor Data
 master.menu.user-account.projects = Projects
+master.menu.user-account.notices = Notices

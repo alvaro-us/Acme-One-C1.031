@@ -12,10 +12,11 @@ manager.user-story.form.title = Historia de usuario
 manager.user-story.list.title = Listado de historias de usuario
 
 manager.user-story.form.label.title = Título
-manager.user-story.form.label.description = Indicador
+manager.user-story.form.label.description = Descripción
 manager.user-story.form.label.priorityType = Tipo de prioridad
 manager.user-story.form.label.estimatedCost = Coste
 manager.user-story.form.label.acceptanceCriteria = Criterio aceptación
+manager.user-story.form.label.link = Enlace (Opcional)
 
 manager.user-story.list.label.title = Título
 manager.user-story.list.label.description = Indicador
@@ -27,3 +28,11 @@ manager.user-story.form.button.update = Actualizar
 manager.user-story.form.button.delete = Eliminar
 manager.user-story.form.button.publish = Publicar
 manager.user-story.form.button.create = Crear
+
+manager.user-story.delete.exist-assignment = Hay asignaciones relacionadas a esta historia de usuario.
+
+manager.user-story.form.placeholder.title = Titulo
+manager.user-story.form.placeholder.description = Descripción
+manager.user-story.form.placeholder.estimatedCost = XX.XX
+manager.user-story.form.placeholder.acceptance-criteria = Criterios de aceptación
+manager.user-story.form.placeholder.link = Enlace

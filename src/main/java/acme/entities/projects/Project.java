@@ -8,12 +8,12 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.PositiveOrZero;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 
 import acme.client.data.AbstractEntity;
+import acme.client.data.datatypes.Money;
 import acme.roles.Manager;
 import lombok.Getter;
 import lombok.Setter;
@@ -44,8 +44,9 @@ public class Project extends AbstractEntity {
 
 	private boolean				indicator;
 
-	@PositiveOrZero
-	private int					cost;
+	@NotNull
+	@Valid
+	private Money				cost;
 
 	@URL
 	@Length(max = 255)
