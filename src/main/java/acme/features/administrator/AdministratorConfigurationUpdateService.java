@@ -1,5 +1,5 @@
 
-package acme.features.administrator.configuration;
+package acme.features.administrator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,22 +10,18 @@ import acme.client.services.AbstractService;
 import acme.entities.configuration.Configuration;
 
 @Service
-public class AuthenticatedAdministratorConfigurationUpdateService extends AbstractService<Administrator, Configuration> {
-
+public class AdministratorConfigurationUpdateService extends AbstractService<Administrator, Configuration> {
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	protected AuthenticatedAdministratorConfigurationRepository repository;
+	protected AdministratorConfigurationRepository repository;
 
 	// AbstractService interface ----------------------------------------------
 
 
 	@Override
 	public void authorise() {
-
-		boolean status;
-		status = super.getRequest().getPrincipal().hasRole(Administrator.class);
-
+		boolean status = super.getRequest().getPrincipal().hasRole(Administrator.class);
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -33,22 +29,23 @@ public class AuthenticatedAdministratorConfigurationUpdateService extends Abstra
 	public void load() {
 		Configuration object;
 
-		object = this.repository.findConfiguration();
+		object = this.repository.findCurrentSystemConfiguration();
 
 		super.getBuffer().addData(object);
 	}
-
 	@Override
 	public void bind(final Configuration object) {
 		assert object != null;
 
 		super.bind(object, "currency", "acceptedCurrency");
-
 	}
 
 	@Override
 	public void validate(final Configuration object) {
 		assert object != null;
+
+		if (!super.getBuffer().getErrors().hasErrors("systemCurrency"))
+			super.state(object.getAcceptedCurrency().contains(object.getCurrency()), "systemCurrency", "administrator.system-configuration.form.error.system-currency");
 	}
 
 	@Override

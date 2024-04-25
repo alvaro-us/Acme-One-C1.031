@@ -16,8 +16,13 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form>
-	<acme:input-textbox code="administrator.configuration.form.label.currency" path="currency"/>
+
+	<acme:input-textbox code="administrator.configuration.form.label.currency" path="currency"/>	
 	<acme:input-textbox code="administrator.configuration.form.label.acceptedCurrency" path="acceptedCurrency"/>
-	
-	<acme:submit test="${_command == 'show'}" code="administrator.configuration.form.button.update" action="/administrator/configuration/update"/>
+
+	<jstl:if test="${acme:anyOf(_command, 'show|update')}">
+		<acme:submit code="administrator.configuration.form.button.update" action="/administrator/configuration/update"/>
+	</jstl:if>
 </acme:form>
+
+

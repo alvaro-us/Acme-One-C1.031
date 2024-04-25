@@ -1,5 +1,5 @@
 
-package acme.features.administrator.configuration;
+package acme.features.administrator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,22 +10,18 @@ import acme.client.services.AbstractService;
 import acme.entities.configuration.Configuration;
 
 @Service
-public class AuthenticatedAdministratorConfigurationShowService extends AbstractService<Administrator, Configuration> {
-
+public class AdministratorConfigurationShowService extends AbstractService<Administrator, Configuration> {
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	protected AuthenticatedAdministratorConfigurationRepository repository;
+	protected AdministratorConfigurationRepository repository;
 
 	// AbstractService interface ----------------------------------------------
 
 
 	@Override
 	public void authorise() {
-
-		boolean status;
-		status = super.getRequest().getPrincipal().hasRole(Administrator.class);
-
+		boolean status = super.getRequest().getPrincipal().hasRole(Administrator.class);
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -33,7 +29,7 @@ public class AuthenticatedAdministratorConfigurationShowService extends Abstract
 	public void load() {
 		Configuration object;
 
-		object = this.repository.findConfiguration();
+		object = this.repository.findCurrentSystemConfiguration();
 
 		super.getBuffer().addData(object);
 	}

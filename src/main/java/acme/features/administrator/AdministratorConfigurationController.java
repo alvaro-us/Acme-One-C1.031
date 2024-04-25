@@ -1,5 +1,5 @@
 
-package acme.features.administrator.configuration;
+package acme.features.administrator;
 
 import javax.annotation.PostConstruct;
 
@@ -11,20 +11,24 @@ import acme.client.data.accounts.Administrator;
 import acme.entities.configuration.Configuration;
 
 @Controller
-public class AuthenticatedAdministratorConfigurationController extends AbstractController<Administrator, Configuration> {
+public class AdministratorConfigurationController extends AbstractController<Administrator, Configuration> {
+
+	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	protected AuthenticatedAdministratorConfigurationUpdateService	updateService;
+	protected AdministratorConfigurationShowService		showService;
 
 	@Autowired
-	protected AuthenticatedAdministratorConfigurationShowService	showService;
+	protected AdministratorConfigurationUpdateService	updateService;
+
+	// Constructors -----------------------------------------------------------
 
 
 	@PostConstruct
 	protected void initialise() {
+
 		super.addBasicCommand("show", this.showService);
 		super.addBasicCommand("update", this.updateService);
-
 	}
 
 }
