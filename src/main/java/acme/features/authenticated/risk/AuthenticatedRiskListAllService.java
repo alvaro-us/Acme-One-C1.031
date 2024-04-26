@@ -1,16 +1,18 @@
 
-package acme.features.authenticated.Risk;
+package acme.features.authenticated.risk;
+
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import acme.client.data.accounts.Any;
+import acme.client.data.accounts.Authenticated;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
 import acme.entities.risks.Risk;
 
 @Service
-public class AuthenticatedRiskShowService extends AbstractService<Any, Risk> {
+public class AuthenticatedRiskListAllService extends AbstractService<Authenticated, Risk> {
 
 	// Internal state ---------------------------------------------------------
 
@@ -29,14 +31,9 @@ public class AuthenticatedRiskShowService extends AbstractService<Any, Risk> {
 
 	@Override
 	public void load() {
-		Risk object;
-		int id;
-
-		id = super.getRequest().getData("id", int.class);
-		object = this.repository.findRiskById(id);
-
-		super.getBuffer().addData(object);
-
+		Collection<Risk> objects;
+		objects = this.repository.findAllRisk();
+		super.getBuffer().addData(objects);
 	}
 
 	@Override
@@ -45,9 +42,8 @@ public class AuthenticatedRiskShowService extends AbstractService<Any, Risk> {
 
 		Dataset dataset;
 
-		dataset = super.unbind(object, "reference", "instantiationMoment", "impact", "probability", "value", "description", "department", "link");
+		dataset = super.unbind(object, "reference", "identificationDate", "impact", "probability", "value", "description", "link");
 		dataset.put("project", object.getProject().getCode());
-
 		super.getResponse().addData(dataset);
 	}
 

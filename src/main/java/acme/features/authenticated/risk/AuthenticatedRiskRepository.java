@@ -1,5 +1,5 @@
 
-package acme.features.authenticated.Risk;
+package acme.features.authenticated.risk;
 
 import java.util.Collection;
 

@@ -38,7 +38,7 @@ public class AdministratorRiskUpdateService extends AbstractService<Administrato
 	public void bind(final Risk object) {
 		assert object != null;
 
-		super.bind(object, "reference", "instantiationMoment", "impact", "probability", "value", "description", "department", "link");
+		super.bind(object, "reference", "identificationDate", "impact", "probability", "value", "description", "link");
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class AdministratorRiskUpdateService extends AbstractService<Administrato
 
 		Dataset dataset;
 
-		dataset = super.unbind(object, "reference", "instantiationMoment", "impact", "probability", "value", "description", "department", "link");
+		dataset = super.unbind(object, "reference", "identificationDate", "impact", "probability", "value", "description", "link");
 
 		super.getResponse().addData(dataset);
 	}
