@@ -1,17 +1,20 @@
 
-package acme.entities;
+package acme.entities.Audit;
 
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 
 import acme.client.data.AbstractEntity;
@@ -28,21 +31,31 @@ public class AuditRecord extends AbstractEntity {
 
 	// Attributes -------------------------------------------------------------
 	@NotBlank
-	@Column(unique = true)
 	@Pattern(regexp = "AU-[0-9]{4}-[0-9]{3}")
+	@Column(unique = true)
 	private String				code;
 
 	@Past
-	private Date				period;
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				auditPeriodStart;
 
-	private AuditRecordType		type;
+	@Past
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date				auditPeriodEnd;
 
-	@URL
-	private String				url;
+	@NotNull
+	private AuditRecordType		mark;
 
-	// Relationships ----------------------------------------------------------
+	private boolean				published;
+
+	@ManyToOne(optional = false)
 	@NotNull
 	@Valid
-	@OneToMany
 	private CodeAudits			codeAudits;
+
+	@URL
+	@Length(max = 255)
+	private String				furtherInformation;
 }

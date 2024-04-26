@@ -7,34 +7,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import acme.client.controllers.AbstractController;
-import acme.entities.CodeAudits;
+import acme.entities.Audit.CodeAudits;
 import acme.roles.Auditor;
 
 @Controller
 public class AuditorCodeAuditsController extends AbstractController<Auditor, CodeAudits> {
 
 	@Autowired
-	private AuditorCodeAuditsListAllService	listAllService;
+	private AuditorCodeAuditsListPublishedService	listPublishedService;
 
 	@Autowired
-	private AuditorCodeAuditsShowService		showService;
+	private AuditorCodeAuditsPublishService			publishService;
 
 	@Autowired
-	private AuditorCodeAuditsCreateService	createService;
+	private AuditorCodeAuditsShowService			showService;
 
 	@Autowired
-	private AuditorCodeAuditsUpdateService	updateService;
+	private AuditorCodeAuditsCreateService			createService;
 
 	@Autowired
-	private AuditorCodeAuditsDeleteService	deleteService;
+	private AuditorCodeAuditsUpdateService			updateService;
+
+	@Autowired
+	private AuditorCodeAuditsDeleteService			deleteService;
 
 
 	@PostConstruct
 	protected void initialise() {
 		super.addBasicCommand("show", this.showService);
-		super.addBasicCommand("list-all", this.listAllService);
 		super.addBasicCommand("create", this.createService);
 		super.addBasicCommand("update", this.updateService);
 		super.addBasicCommand("delete", this.deleteService);
+		super.addCustomCommand("listPublished", "list", this.listPublishedService);
+		super.addCustomCommand("published", "update", this.publishService);
 	}
 }

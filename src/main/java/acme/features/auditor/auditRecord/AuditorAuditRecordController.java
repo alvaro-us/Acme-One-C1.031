@@ -7,34 +7,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import acme.client.controllers.AbstractController;
-import acme.entities.AuditRecord;
+import acme.entities.Audit.AuditRecord;
 import acme.roles.Auditor;
 
 @Controller
 public class AuditorAuditRecordController extends AbstractController<Auditor, AuditRecord> {
 
+	//Internal state ------------------------------------------
 	@Autowired
-	private AuditorAuditRecordListAllService	listAllService;
+	private AuditorAuditRecordCreateService				createService;
 
 	@Autowired
-	private AuditorAuditRecordShowService		showService;
+	private AuditorAuditRecordDeleteService				deleteService;
 
 	@Autowired
-	private AuditorAuditRecordCreateService		createService;
+	private AuditorAuditRecordListForCodeAuditsService	listForCodeAuditsService;
 
 	@Autowired
-	private AuditorAuditRecordUpdateService		updateService;
+	private AuditorAuditRecordListMineService			listMineService;
 
 	@Autowired
-	private AuditorAuditRecordDeleteService		deleteService;
+	private AuditorAuditRecordPublishService			publishService;
+
+	@Autowired
+	private AuditorAuditRecordShowService				showService;
+
+	@Autowired
+	private AuditorAuditRecordUpdateService				updateService;
 
 
 	@PostConstruct
 	protected void initialise() {
-		super.addBasicCommand("show", this.showService);
-		super.addBasicCommand("list-all", this.listAllService);
 		super.addBasicCommand("create", this.createService);
-		super.addBasicCommand("update", this.updateService);
 		super.addBasicCommand("delete", this.deleteService);
+		super.addBasicCommand("update", this.updateService);
+		super.addBasicCommand("show", this.showService);
+
+		super.addCustomCommand("listForCodeAudits", "list", this.listForCodeAuditsService);
+		super.addCustomCommand("listMine", "list", this.listMineService);
+		super.addCustomCommand("publish", "update", this.publishService);
+
 	}
 }
