@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import acme.client.data.models.Dataset;
 import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
-import acme.entities.CodeAudits;
-import acme.entities.EnumType;
+import acme.entities.Audit.CodeAudits;
+import acme.entities.Audit.EnumType;
 import acme.roles.Auditor;
 
 @Service
