@@ -13,7 +13,7 @@ authenticated.manager.form.title = Manager Data
 authenticated.manager.form.label.degree = Degree
 authenticated.manager.form.label.overview = Overview
 authenticated.manager.form.label.certifications = Certifications
-authenticated.manager.form.label.link = Link
+authenticated.manager.form.label.link = Link (Optional)
 
 authenticated.manager.form.button.create = Register
 authenticated.manager.form.button.update = Update

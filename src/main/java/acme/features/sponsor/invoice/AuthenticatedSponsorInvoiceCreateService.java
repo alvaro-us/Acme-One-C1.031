@@ -3,6 +3,7 @@ package acme.features.sponsor.invoice;
 
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,13 +67,21 @@ public class AuthenticatedSponsorInvoiceCreateService extends AbstractService<Sp
 			if (invoice != null)
 				totalAmount += invoice.getTotalAmount().getAmount();
 
+		String currency = object.getSponsorship().getAmount().getCurrency();
+
+		boolean correctCurrency = Objects.equals(object.getQuantity().getCurrency(), currency);
 		boolean totalAmountLessOrEqualThanSponsorshipAmount = totalAmount + object.getTotalAmount().getAmount() <= object.getSponsorship().getAmount().getAmount();
 		boolean codeDuplicated = this.repository.findInvoiceByCode(object.getCode()) == null;
 		boolean registrationTime1MothBeforeDueDate = MomentHelper.isAfter(object.getDueDate(), MomentHelper.deltaFromMoment(object.getRegistrationTime(), 1l, ChronoUnit.MONTHS));
 
 		super.state(codeDuplicated, "code", "sponsor.invoice.form.error.codeDuplicated");
 		super.state(registrationTime1MothBeforeDueDate, "dueDate", "sponsor.invoice.form.error.registrationTime1MothBeforeDueDate");
-		super.state(totalAmountLessOrEqualThanSponsorshipAmount, "quantity", "sponsor.invoice.form.error.totalAmountLessOrEqualThanSponsorshipAmount");
+		if (correctCurrency) {
+			super.state(totalAmountLessOrEqualThanSponsorshipAmount, "quantity", "sponsor.invoice.form.error.totalAmountLessOrEqualThanSponsorshipAmount");
+			super.state(totalAmountLessOrEqualThanSponsorshipAmount, "tax", "sponsor.invoice.form.error.totalAmountLessOrEqualThanSponsorshipAmount");
+		}
+
+		super.state(correctCurrency, "quantity", "sponsor.invoice.form.error.correctCurrency");
 
 	}
 	@Override

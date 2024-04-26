@@ -20,7 +20,9 @@
 	<acme:input-moment code="sponsor.invoice.form.label.registrationTime" path="registrationTime"/>
 	<acme:input-moment code="sponsor.invoice.form.label.dueDate" path="dueDate"/>
 	<acme:input-money code="sponsor.invoice.form.label.quantity" path="quantity"/>
+	<acme:message code="${quantityBase }" />
 	<acme:input-double code="sponsor.invoice.form.label.tax" path="tax"/>
+	<acme:message code="${quantityBaseTax }" />
 	<acme:input-url code="sponsor.invoice.form.label.link" path="link"/>
 	
     			

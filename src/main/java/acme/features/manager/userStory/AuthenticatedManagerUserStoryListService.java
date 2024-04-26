@@ -15,10 +15,12 @@ import acme.roles.Manager;
 @Service
 public class AuthenticatedManagerUserStoryListService extends AbstractService<Manager, UserStory> {
 
+	private static final String						PROJECTID	= "projectId";
+
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AuthenticatedManagerUserStoryRepository repository;
+	private AuthenticatedManagerUserStoryRepository	repository;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -30,7 +32,7 @@ public class AuthenticatedManagerUserStoryListService extends AbstractService<Ma
 		final int id;
 		Project project;
 		id = super.getRequest().getPrincipal().getAccountId();
-		projectId = super.getRequest().getData("projectId", int.class);
+		projectId = super.getRequest().getData(AuthenticatedManagerUserStoryListService.PROJECTID, int.class);
 		project = this.repository.findProjectById(projectId);
 		status = project != null && project.getManager().getUserAccount().getId() == id;
 		super.getResponse().setAuthorised(status);
@@ -39,7 +41,7 @@ public class AuthenticatedManagerUserStoryListService extends AbstractService<Ma
 	@Override
 	public void load() {
 		Collection<UserStory> objects;
-		final int projectId = super.getRequest().getData("projectId", int.class);
+		final int projectId = super.getRequest().getData(AuthenticatedManagerUserStoryListService.PROJECTID, int.class);
 		objects = this.repository.findAllUserStoryOfProject(projectId);
 
 		super.getBuffer().addData(objects);
@@ -50,14 +52,14 @@ public class AuthenticatedManagerUserStoryListService extends AbstractService<Ma
 		assert object != null;
 		Project project;
 
-		final int projectId = super.getRequest().getData("projectId", int.class);
+		final int projectId = super.getRequest().getData(AuthenticatedManagerUserStoryListService.PROJECTID, int.class);
 		Dataset dataset;
 
 		project = this.repository.findProjectById(projectId);
 
 		dataset = super.unbind(object, "title", "description", "priorityType", "estimatedCost");
 
-		super.getResponse().addGlobal("projectId", projectId);
+		super.getResponse().addGlobal(AuthenticatedManagerUserStoryListService.PROJECTID, projectId);
 		super.getResponse().addGlobal("draftMode1", project.isDraftMode());
 		super.getResponse().addData(dataset);
 

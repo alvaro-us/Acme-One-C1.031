@@ -33,6 +33,9 @@ public class AuthenticatedManagerUserStoryController extends AbstractController<
 	@Autowired
 	protected AuthenticatedManagerUserStoryDeleteService	deleteService;
 
+	@Autowired
+	protected AuthenticatedManagerUserStoryListMineService	listmineservice;
+
 	// Constructors -----------------------------------------------------------
 
 
@@ -43,7 +46,8 @@ public class AuthenticatedManagerUserStoryController extends AbstractController<
 		super.addBasicCommand("update", this.updateService);
 		super.addBasicCommand("delete", this.deleteService);
 		super.addBasicCommand("create", this.createService);
-		super.addCustomCommand("finalise", "update", this.publishService);
+		super.addCustomCommand("publish", "update", this.publishService);
+		super.addCustomCommand("listmine", "list", this.listmineservice);
 
 	}
 

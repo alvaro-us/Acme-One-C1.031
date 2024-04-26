@@ -21,3 +21,7 @@
 </acme:list>
 
 <acme:button code="manager.assignment.list.button.create" action="/manager/assignment/create"/>
+
+<acme:button code="manager.assignment.list.button.create.project" action="/manager/project/create"/>
+
+<acme:button code="manager.assignment.list.button.create.user-story" action="/manager/user-story/create"/>

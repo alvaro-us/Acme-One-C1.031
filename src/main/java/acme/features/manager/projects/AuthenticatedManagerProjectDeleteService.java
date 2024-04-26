@@ -25,15 +25,12 @@ public class AuthenticatedManagerProjectDeleteService extends AbstractService<Ma
 		final boolean status;
 		int projectId;
 		Project project;
-		Manager manager;
 		int id1;
 
 		projectId = super.getRequest().getData("id", int.class);
 		project = this.repository.findProjectById(projectId);
 		id1 = super.getRequest().getPrincipal().getAccountId();
-
-		manager = project.getManager();
-		status = project != null && project.isDraftMode() && super.getRequest().getPrincipal().hasRole(Manager.class) && project.getManager().getUserAccount().getId() == id1;
+		status = project.isDraftMode() && super.getRequest().getPrincipal().hasRole(Manager.class) && project.getManager().getUserAccount().getId() == id1;
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -67,18 +64,20 @@ public class AuthenticatedManagerProjectDeleteService extends AbstractService<Ma
 		int numberContracts = this.repository.findNumberContractOfProject(id);
 		//int numberRisks = this.repository.findNumberRisksOfProject(id);
 		//int numberObjective = this.repository.findNumberObjectiveOfProject(id);
-		//int numberSponsorship = this.repository.findNumberSponsorshipOfProject(id);
-		//int numberTrainingModule = this.repository.findNumberTrainingModuleOfProject(id);
+		int numberSponsorship = this.repository.findNumberSponsorshipOfProject(id);
+		int numberTrainingModule = this.repository.findNumberTrainingModuleOfProject(id);
 
 		status = numberAssignments == 0;
 		boolean status1 = numberContracts == 0;
 		//boolean status2 = numberRisks == 0;
 		//boolean status3 = numberObjective == 0;
-		//boolean status4 = numberSponsorship == 0;
-		//boolean status5 = numberTrainingModule == 0;
+		boolean status4 = numberSponsorship == 0;
+		boolean status5 = numberTrainingModule == 0;
 
 		super.state(status1, "*", "manager.project.delete.exist-contract");
 		super.state(status, "*", "manager.project.delete.exist-assignment");
+		super.state(status4, "*", "manager.project.delete.exist-sponsorship");
+		super.state(status5, "*", "manager.project.delete.exist-training-module");
 
 	}
 

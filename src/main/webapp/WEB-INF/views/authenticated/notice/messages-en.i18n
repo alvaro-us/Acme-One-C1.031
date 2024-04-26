@@ -8,17 +8,24 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-uthenticated.notice.form.title = Notice 
-uthenticated.notice.list.title = Listing of notice
+authenticated.notice.form.title = Notice 
+authenticated.notice.list.title = Listing of notice
 
 authenticated.notice.form.label.title = Title
 authenticated.notice.form.label.author = Author
 authenticated.notice.form.label.message = Message
 authenticated.notice.form.label.email = Email (Optional)
 authenticated.notice.form.label.link = Link (Optional)
+authenticated.notice.form.label.Moment = Creation Moment
 authenticated.notice.form.button.confirmation = Confirm that everything is correct
 
 authenticated.notice.form.button.create = Create
+authenticated.notice.list.button.create = Create
 
 authenticated.notice.list.label.title = Title
 authenticated.notice.list.label.author = Author
+
+authenticate.notice.form.button.confirmation = Confirmation
+
+authenticated.notice.form.placeholder.title = Title
+authenticated.notice.form.placeholder.message = Message

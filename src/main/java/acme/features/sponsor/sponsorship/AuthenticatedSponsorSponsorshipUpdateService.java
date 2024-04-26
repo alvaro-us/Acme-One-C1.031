@@ -12,6 +12,7 @@ import acme.client.data.models.Dataset;
 import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
+import acme.entities.configuration.CurrencyService;
 import acme.entities.invoice.Invoice;
 import acme.entities.projects.Project;
 import acme.entities.sponsorship.Sponsorship;
@@ -24,7 +25,10 @@ public class AuthenticatedSponsorSponsorshipUpdateService extends AbstractServic
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	protected AuthenticatedSponsorSponsorshipRepository repository;
+	protected AuthenticatedSponsorSponsorshipRepository	repository;
+
+	@Autowired
+	protected CurrencyService							service;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -72,6 +76,9 @@ public class AuthenticatedSponsorSponsorshipUpdateService extends AbstractServic
 		Sponsorship sponsorship = this.repository.findSponsorshipById(sponsorshipId);
 		Collection<Invoice> invoices = this.repository.findInvoiceBySponsorshipId(sponsorshipId);
 		double totalAmount = 0.;
+
+		boolean isAcceptedCurrency = this.service.isAcceptedCurrency(object.getAmount().getCurrency());
+
 		for (Invoice invoice : invoices)
 			totalAmount += invoice.getTotalAmount().getAmount();
 
@@ -87,8 +94,12 @@ public class AuthenticatedSponsorSponsorshipUpdateService extends AbstractServic
 		Boolean durationStart1MothBeforeDurationEnd = MomentHelper.isAfter(object.getDurationEnd(), MomentHelper.deltaFromMoment(object.getDurationStart(), 1l, ChronoUnit.MONTHS));
 		super.state(momentBeforeDurationStart, "durationStart", "sponsor.sponsorship.form.error.momentBeforeDurationStart");
 		super.state(durationStart1MothBeforeDurationEnd, "durationEnd", "sponsor.sponsorship.form.error.durationStart1MothBeforeDurationEnd");
-		super.state(amountPositive, "amount", "sponsor.sponsorship.form.error.amountPositive");
-		super.state(amountLessInvoicesAmount, "amount", "sponsor.sponsorship.form.error.amountLessInvoicesAmount");
+
+		if (isAcceptedCurrency) {
+			super.state(amountPositive, "amount", "sponsor.sponsorship.form.error.amountPositive");
+			super.state(amountLessInvoicesAmount, "amount", "sponsor.sponsorship.form.error.amountLessInvoicesAmount");
+		}
+		super.state(isAcceptedCurrency, "amount", "sponsor.sponsorship.form.error.isAcceptedCurrency");
 
 	}
 

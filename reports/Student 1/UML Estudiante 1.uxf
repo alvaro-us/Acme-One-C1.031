@@ -38,7 +38,7 @@ Project
 + title: String{NotBlank, Length(max=75)}
 + abstrat: String{NotBlank, Length(max=100)}
 + indicator: boolean
-+ cost: Int {Transient, PositiveOrZero}
++ cost: Money {NotNUll, Valid}
 + link: String {URL, Length(max=255)}
 + draftMode: boolean
 bg=green
@@ -98,9 +98,9 @@ m2=0..n</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>156</x>
-      <y>246</y>
-      <w>138</w>
+      <x>84</x>
+      <y>234</y>
+      <w>216</w>
       <h>168</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Form&gt;&gt;
@@ -111,15 +111,15 @@ int: totalNumberOfShouldUserStory
 int: totalNumberOfCouldUserStory
 int: totalNumberOfWontUserStory
 
-double: averageEstimatedCostUserStory
-double: deviationEstimatedCostUserStory
-int: minEstimatedCostUserStory
-int: maxEstimatedCostUserStory
+Map&lt;String, Double&gt;: averageEstimatedCostUserStory
+Map&lt;String, Double&gt;: deviationEstimatedCostUserStory
+Map&lt;String, Integer&gt;: minEstimatedCostUserStory
+Map&lt;String, Integer&gt;: maxEstimatedCostUserStory
 
-double: averageCostProject
-double: deviationCostProject
-int: minCostProject
-int: maxCostProject
+Map&lt;String, Double&gt;: averageCostProject
+Map&lt;String, Double&gt;: deviationCostProject
+Map&lt;String, Integer&gt;: minCostProject
+Map&lt;String, Integer&gt;: maxCostProject
 bg=green
 </panel_attributes>
     <additional_attributes/>

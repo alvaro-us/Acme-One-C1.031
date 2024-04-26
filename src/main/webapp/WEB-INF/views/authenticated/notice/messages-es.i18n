@@ -16,9 +16,16 @@ authenticated.notice.form.label.author = Autor
 authenticated.notice.form.label.message = Mensaje
 authenticated.notice.form.label.email = Correo (Optional)
 authenticated.notice.form.label.link = Enlace (Optional)
+authenticated.notice.form.label.Moment = Momento de creación
 authenticated.notice.form.button.confirmation = Confirma que todo es correcto
 
 authenticated.notice.form.button.create = Crear
+authenticated.notice.list.button.create = Crear
 
 authenticated.notice.list.label.title = Titulo
 authenticated.notice.list.label.author = Autor
+
+authenticate.notice.form.button.confirmation = Confirmación
+
+authenticated.notice.form.placeholder.title = Titulo
+authenticated.notice.form.placeholder.message = Mensaje

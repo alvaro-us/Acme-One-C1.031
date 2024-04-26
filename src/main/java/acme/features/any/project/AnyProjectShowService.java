@@ -23,15 +23,14 @@ public class AnyProjectShowService extends AbstractService<Any, Project> {
 	@Override
 	public void authorise() {
 		int id;
-		boolean status;
 		Project project;
 
 		id = super.getRequest().getData("id", int.class);
 		project = this.repository.findProjectById(id);
 
-		status = !project.isDraftMode();
+		boolean status = project.isDraftMode();
 
-		super.getResponse().setAuthorised(true);
+		super.getResponse().setAuthorised(!status);
 	}
 
 	@Override

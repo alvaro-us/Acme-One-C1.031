@@ -72,8 +72,9 @@ public class AuthenticatedSponsorSponsorshipShowService extends AbstractService<
 		dataset = super.unbind(object, "code", "moment", "durationStart", "durationEnd", "amount", "type", "email", "link", "project", "draftMode");
 
 		Money amountBase = this.service.changeCurrencyToBase(object.getAmount());
-		dataset.put("types", choices);
 		dataset.put("amountBase", amountBase);
+		dataset.put("types", choices);
+
 		dataset.put("projects", choicesProjects);
 		super.getResponse().addData(dataset);
 

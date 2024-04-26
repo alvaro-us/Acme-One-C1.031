@@ -35,7 +35,8 @@ public class AuthenticatedManagerAssignmentListService extends AbstractService<M
 
 		Collection<Assignment> objects;
 
-		objects = this.repository.findAllAssignments();
+		Manager manager = this.repository.findManagerById(super.getRequest().getPrincipal().getActiveRoleId());
+		objects = this.repository.findAllAssignments(manager);
 		super.getBuffer().addData(objects);
 	}
 

@@ -16,6 +16,7 @@ manager.user-story.form.label.description = Description
 manager.user-story.form.label.priorityType = Priority type
 manager.user-story.form.label.estimatedCost = Estimated Cost
 manager.user-story.form.label.acceptanceCriteria = Acceptance criteria
+manager.user-story.form.label.link = Link (Optional)
 
 manager.user-story.list.label.title = Title
 manager.user-story.list.label.description = Description
@@ -27,3 +28,11 @@ manager.user-story.form.button.update = Update
 manager.user-story.form.button.delete = Delete
 manager.user-story.form.button.publish = Publish
 manager.user-story.form.button.create = Create
+
+manager.user-story.form.placeholder.title = Title
+manager.user-story.form.placeholder.description = Description
+manager.user-story.form.placeholder.estimatedCost = XX.XX
+manager.user-story.form.placeholder.acceptance-criteria = Acceptance criteria
+manager.user-story.form.placeholder.link = Link
+
+manager.user-story.delete.exist-assignment = There are assignments related to this user story

@@ -14,8 +14,14 @@ master.menu.home = Inicio
 master.menu.sign-up = Registrarse
 master.menu.sign-in = Entrar
 master.menu.sign-out = Salir
-master.menu.sponsorships = Sponsorships
+
+
 master.menu.authenticated = Autenticado
+
+master.menu.sponsorships = Anuncios
+master.menu.claims = Reclamaciones
+master.menu.training-module = Modulos entrenamiento
+
 
 
 # master.menu.anonymous #######################################################
@@ -72,12 +78,19 @@ master.menu.manager = Gerente
 master.menu.manager.ListProjects = Mis proyectos
 master.menu.manager.Dashboard = Mi dashboard
 master.menu.manager.Assignments = Asignaciones
+master.menu.manager.liststories = Mis historias de usuario
 
 # master.menu.sponsor ##########################################################
 
 master.menu.sponsor = Patrocinador
 master.menu.sponsor.ListSponsorship = Mis anuncios
 master.menu.sponsor.Dashboard = Mi panel de control
+
+# master.menu.developer ##########################################################
+
+master.menu.developer = Desarrollador
+master.menu.developer.ListTrainingModules = Mis modulos de entrenamiento
+master.menu.developer.Dashboard = My panel de control
 
 
 
@@ -89,11 +102,16 @@ master.menu.user-account.provider = Datos de proveedor
 master.menu.user-account.become-provider = Hazte proveedor
 master.menu.user-account.consumer = Datos de consumidor
 master.menu.user-account.become-consumer = Hazte consumidor
-master.menu.user-account.become-manager = Hazte Manager
+master.menu.user-account.become-manager = Hazte Gerente
 master.menu.user-account.manager = Datos de Gerente
 master.menu.user-account.become-sponsor = Hazte patrocinador
+master.menu.user-account.become-developer = Hazte desarrollador
 master.menu.user-account.sponsor = Datos del patrocinador
+
 master.menu.user-account.become-client = Hazte cliente
 master.menu.user-account.client = Datos de cliente
+
+master.menu.user-account.developer = Datos del desarrollador
+
 master.menu.user-account.projects = Proyectos
 master.menu.user-account.notices = Notificaciones

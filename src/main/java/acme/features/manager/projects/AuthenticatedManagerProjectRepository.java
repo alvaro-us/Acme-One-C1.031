@@ -33,8 +33,14 @@ public interface AuthenticatedManagerProjectRepository extends AbstractRepositor
 	@Query("select c from Project c where c.code = :code")
 	Project findOneProjectByCode(String code);
 
+	@Query("select c from Project c where c.code = :code and c.id != :id")
+	Project findOneCourseByCodeAndDistinctId(String code, int id);
+
 	@Query("select count(a) from Assignment a where a.project.id = :id")
 	int findNumberAssignmentOfProject(int id);
+
+	@Query("select count(a) from Assignment a where a.project.id = :id and a.userStory.draftMode = true")
+	int findNumberUserStoryNotPublishedOfProject(int id);
 
 	@Query("select count(a) from Contract a where a.project.id = :id")
 	int findNumberContractOfProject(int id);
@@ -43,13 +49,13 @@ public interface AuthenticatedManagerProjectRepository extends AbstractRepositor
 	//int findNumberObjectiveOfProject(int id);
 
 	//@Query("select count(a) from Risk a where a.project.id = :id")
-	//int findNumberRiskOfProject(int id);
+	//int findNumberRisksOfProject(int id);
 
-	//@Query("select count(a) from Sponsorship a where a.project.id = :id")
-	//int findNumberSponsorshipOfProject(int id);
+	@Query("select count(a) from Sponsorship a where a.project.id = :id")
+	int findNumberSponsorshipOfProject(int id);
 
-	//@Query("select count(a) from TrainingModule a where a.project.id = :id")
-	//int findNumberTrainingModuleOfProject(int id);
+	@Query("select count(a) from TrainingModule a where a.project.id = :id")
+	int findNumberTrainingModuleOfProject(int id);
 
 	@Query("select c from Configuration c")
 	Configuration findConfiguration();
