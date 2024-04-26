@@ -52,7 +52,7 @@ public class TrainingModule extends AbstractEntity {
 	private String				details;
 
 	@NotNull
-	private DifficultyType		difficultylevel;
+	private DifficultyType		difficultyType;
 
 	@URL
 	@Length(max = 255)

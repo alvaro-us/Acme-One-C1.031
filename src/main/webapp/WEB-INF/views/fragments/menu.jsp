@@ -72,6 +72,15 @@
 		<acme:menu-option code="master.menu.sponsorships" action="/any/sponsorship/list"/>
 		<acme:menu-option code="master.menu.claims" action="/any/claim/list"/>
 		
+		<acme:menu-option code="master.menu.developer" access="hasRole('Developer')">
+
+			<acme:menu-suboption code="master.menu.developer.ListTrainingModules" action="/developer/training-module/list"/>
+			<acme:menu-suboption code="master.menu.developer.Dashboard" action="/developer/developer-dashboard/show"/>
+			
+
+		</acme:menu-option>
+		<acme:menu-option code="master.menu.training-module" action="/any/training-module/list"/>
+		
 	</acme:menu-left>
 
 	<acme:menu-right>
@@ -88,6 +97,8 @@
 			<acme:menu-suboption code="master.menu.user-account.manager" action="/authenticated/manager/update" access="hasRole('Manager')"/>
 			<acme:menu-suboption code="master.menu.user-account.become-sponsor" action="/authenticated/sponsor/create" access="!hasRole('Sponsor')"/>
 			<acme:menu-suboption code="master.menu.user-account.sponsor" action="/authenticated/sponsor/update" access="hasRole('Sponsor')"/>
+			<acme:menu-suboption code="master.menu.user-account.become-developer" action="/authenticated/developer/create" access="!hasRole('Developer')"/>
+			<acme:menu-suboption code="master.menu.user-account.developer" action="/authenticated/developer/update" access="hasRole('Developer')"/>
 			<acme:menu-suboption code="master.menu.user-account.projects" action="/any/project/list"/>
 
 			<acme:menu-suboption code="master.menu.user-account.notices" action="/authenticated/notice/list"/>

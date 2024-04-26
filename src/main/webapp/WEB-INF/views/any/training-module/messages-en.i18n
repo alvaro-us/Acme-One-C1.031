@@ -1,0 +1,65 @@
+# messages-en.i18n
+#
+# Copyright (C) 2012-2024 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+any.training-module.form.title = Training Modules 
+any.training-module.list.title = Listing Training Modules
+
+any.training-module.form.label.code = Code
+any.training-module.form.label.creationmoment = Creation Moment
+any.training-module.form.label.updateMoment = Update moment
+any.training-module.form.label.details = details
+any.training-module.form.label.difficultyType= Difficulty level
+any.training-module.form.label.email = Email
+any.training-module.form.label.link = Link
+any.training-module.form.label.estimatedTotalTime = Estimated total time
+any.training-module.form.label.project = Project
+
+
+any.training-module.list.label.code = Code
+any.training-module.list.label.creationmoment = Creation
+any.training-module.list.label.details = Details
+any.training-module.list.label.updateMoment = Update moment
+any.training-module.list.label.difficultyType = Difficulty level
+any.training-module.list.label.training-sessions = Training sessions
+any.training-module.list.label.published = Published
+
+
+any.training-module.list.button.create = Create
+any.training-module.form.button.create = Create
+any.training-module.form.button.update = Update
+any.training-module.form.button.delete = Delete
+any.training-module.form.button.publish = Publish
+any.training-module.form.button.training-sessions = Training sessions
+
+validation.training-module.code = Incorrect Code Scheme
+
+any.training-module.form.error.correctAmount = The sum of the invoice prices does not match the price of this field
+any.training-module.form.error.publishedInvoices = The invoices of the sponsorship with this code are not published
+any.training-module.form.error.noInvoices = This sponsorship has not invoices
+any.training-module.form.error.codeDuplicated = Code is already in use
+any.training-module.form.error.momentBeforeDurationStart = The sponsorship start must be after the moment
+any.training-module.form.error.durationStart1MothBeforeDurationEnd = The duration must be at least 1 month
+any.training-module.form.error.amountPositive = The amount must be positive
+any.training-module.form.error.amountLessInvoicesAmount = The cost of the invoices cannot exceed that of this field
+any.training-module.form.error.correctStart = The start of the sponsorship duration is not correct
+any.training-module.form.error.correctEnd = The end of the sponsorship duration is not correct
+any.training-module.form.error.correctMoment = The moment of the sponsorship is not correct
+any.training-module.form.error.isAcceptedCurrency = The currency is not accepted
+
+
+
+any.training-module.code = Code
+any.training-module.creationMoment = Create moment
+any.training-module.UpdateMoment = Update moment
+any.training-module.difficultytype = Difficulty level
+any.training-module.link = Optional link
+
+any.training-module.form.button.training-sessions = Training sessions
+
