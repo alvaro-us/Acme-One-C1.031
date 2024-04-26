@@ -36,7 +36,14 @@
 			<acme:menu-suboption code="master.menu.administrator.configuration" action="/administrator/configuration/show" access="isAuthenticated()"/>
 			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.shut-down" action="/administrator/system/shut-down"/>
+			<acme:menu-suboption code="master.menu.administrator.objective" action="/administrator/objective/create"/>
+			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.configuration" action="/administrator/configuration/show"/>
+		</acme:menu-option>
+		
+		<acme:menu-option code="master.menu.authenticated" access="isAuthenticated()">
+			<acme:menu-suboption code="master.menu.authenticated.objectives-list" action="/authenticated/objective/list"/>
+			<acme:menu-separator/>
 		</acme:menu-option>
 		
 		<acme:menu-option code="master.menu.client" access="hasRole('Client')">
