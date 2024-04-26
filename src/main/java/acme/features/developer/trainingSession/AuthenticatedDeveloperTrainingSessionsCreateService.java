@@ -56,7 +56,7 @@ public class AuthenticatedDeveloperTrainingSessionsCreateService extends Abstrac
 	public void bind(final TrainingSession object) {
 		assert object != null;
 
-		super.bind(object, "code", "creationMoment", "updateMoment", "details", "difficultyLevel", "link", "estimatedTotalTime", "draftMode");
+		super.bind(object, "code", "startPeriod", "endPeriod", "location", "instructor", "email", "link", "draftmode");
 
 	}
 
@@ -103,7 +103,7 @@ public class AuthenticatedDeveloperTrainingSessionsCreateService extends Abstrac
 
 		Dataset dataset;
 
-		dataset = super.unbind(object, "code", "creationMoment", "updateMoment", "details", "difficultyLevel", "link", "estimatedTotalTime", "draftMode");
+		dataset = super.unbind(object, "code", "startPeriod", "endPeriod", "location", "instructor", "email", "link", "draftmode");
 		dataset.put("masterId", super.getRequest().getData("masterId", int.class));
 
 		super.getResponse().addData(dataset);

@@ -47,7 +47,7 @@ public class AuthenticatedDeveloperTrainingModuleListMineService extends Abstrac
 
 		Dataset dataset;
 
-		dataset = super.unbind(object, "code", "creationMoment", "updateMoment", "details", "difficultyLevel", "link", "estimatedTotalTime", "draftMode");
+		dataset = super.unbind(object, "code", "creationMoment", "updateMoment", "details", "difficultyType", "link", "estimatedTotalTime", "draftMode");
 
 		super.getResponse().addData(dataset);
 	}

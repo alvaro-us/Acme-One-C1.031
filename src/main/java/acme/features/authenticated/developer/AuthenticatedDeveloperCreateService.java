@@ -49,7 +49,7 @@ public class AuthenticatedDeveloperCreateService extends AbstractService<Authent
 	public void bind(final Developer object) {
 		assert object != null;
 
-		super.bind(object, "expectedBenefits", "webPage");
+		super.bind(object, "degree", "specialisation", "skills", "email", "link");
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class AuthenticatedDeveloperCreateService extends AbstractService<Authent
 	public void unbind(final Developer object) {
 		Dataset dataset;
 
-		dataset = super.unbind(object, "expectedBenefits", "webPage");
+		dataset = super.unbind(object, "degree", "specialisation", "skills", "email", "link");
 
 		super.getResponse().addData(dataset);
 	}

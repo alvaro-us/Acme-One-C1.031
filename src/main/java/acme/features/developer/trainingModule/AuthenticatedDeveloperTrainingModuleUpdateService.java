@@ -51,7 +51,7 @@ public class AuthenticatedDeveloperTrainingModuleUpdateService extends AbstractS
 	public void bind(final TrainingModule object) {
 		assert object != null;
 
-		super.bind(object, "code", "creationMoment", "updateMoment", "details", "difficultyLevel", "link", "estimatedTotalTime", "draftMode");
+		super.bind(object, "code", "creationMoment", "updateMoment", "details", "difficultyType", "link", "estimatedTotalTime", "draftMode");
 
 	}
 
@@ -84,7 +84,7 @@ public class AuthenticatedDeveloperTrainingModuleUpdateService extends AbstractS
 
 		Dataset dataset;
 
-		dataset = super.unbind(object, "code", "creationMoment", "updateMoment", "details", "difficultyLevel", "link", "estimatedTotalTime", "draftMode");
+		dataset = super.unbind(object, "code", "creationMoment", "updateMoment", "details", "difficultyType", "link", "estimatedTotalTime", "draftMode");
 
 		super.getResponse().addData(dataset);
 	}

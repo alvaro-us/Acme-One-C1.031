@@ -7,16 +7,20 @@ import org.springframework.stereotype.Service;
 import acme.client.data.models.Dataset;
 import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
+import acme.client.views.SelectChoices;
+import acme.entities.trainings.DifficultyType;
 import acme.entities.trainings.TrainingModule;
 import acme.roles.Developer;
 
 @Service
 public class AuthenticatedDeveloperTrainingModuleCreateService extends AbstractService<Developer, TrainingModule> {
 
+	private static final String									DIFFICULTYTYPE	= "difficultyType";
+
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	protected AuthenticatedDeveloperTrainingModuleRepository repository;
+	protected AuthenticatedDeveloperTrainingModuleRepository	repository;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -46,7 +50,11 @@ public class AuthenticatedDeveloperTrainingModuleCreateService extends AbstractS
 	public void bind(final TrainingModule object) {
 		assert object != null;
 
-		super.bind(object, "code", "creationMoment", "updateMoment", "details", "difficultyLevel", "link", "estimatedTotalTime", "draftMode");
+		super.bind(object, "code", "creationMoment", "updateMoment", "details", AuthenticatedDeveloperTrainingModuleCreateService.DIFFICULTYTYPE, "link", "estimatedTotalTime", "draftMode");
+		final DifficultyType dType;
+		dType = super.getRequest().getData(AuthenticatedDeveloperTrainingModuleCreateService.DIFFICULTYTYPE, DifficultyType.class);
+
+		object.setDifficultyType(dType);
 
 	}
 
@@ -76,9 +84,15 @@ public class AuthenticatedDeveloperTrainingModuleCreateService extends AbstractS
 	public void unbind(final TrainingModule object) {
 		assert object != null;
 
+		SelectChoices choices;
+
+		choices = SelectChoices.from(DifficultyType.class, object.getDifficultyType());
+
 		Dataset dataset;
 
-		dataset = super.unbind(object, "code", "creationMoment", "updateMoment", "details", "difficultyLevel", "link", "estimatedTotalTime", "draftMode");
+		dataset = super.unbind(object, "code", "creationMoment", "updateMoment", "details", "link", "estimatedTotalTime", "draftMode");
+		dataset.put(AuthenticatedDeveloperTrainingModuleCreateService.DIFFICULTYTYPE, choices.getSelected().getKey());
+		dataset.put("difficultyTypeTypes", choices);
 
 		super.getResponse().addData(dataset);
 	}
