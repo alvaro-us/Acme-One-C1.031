@@ -36,7 +36,7 @@
 		</jstl:when>
 	</jstl:choose>
 	<jstl:if test="${ _command == 'show' }" >
-		<acme:button code="developer.training-module.form.button.training-sessions" action="/developer/training-module/list?trainingModuleId=${id}"/>
+		<acme:button code="developer.training-module.form.button.training-sessions" action="/developer/training-session/list?trainingModuleId=${id}"/>
 	</jstl:if>
 		
 </acme:form>

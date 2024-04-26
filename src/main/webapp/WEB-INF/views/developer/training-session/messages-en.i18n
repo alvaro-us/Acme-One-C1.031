@@ -1,0 +1,65 @@
+# messages-en.i18n
+#
+# Copyright (C) 2012-2024 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+developer.training-session.form.title = Training Sessions 
+developer.training-session.list.title = Training Sessions
+
+developer.training-session.form.label.code = Code
+developer.training-session.form.label.startPeriod = Start of period
+developer.training-session.form.label.endPeriod = End of period
+developer.training-session.form.label.location = Location
+developer.training-session.form.label.instructor= Instructor
+developer.training-session.form.label.email = Email
+developer.training-session.form.label.link = Link
+developer.training-session.form.label.project = Project
+
+
+developer.training-session.list.label.code = Code
+developer.training-session.list.label.startPeriod = Start of period
+developer.training-session.list.label.endPeriod = End of period
+developer.training-session.list.label.location = Location
+developer.training-session.list.label.instructor= Instructor
+developer.training-session.list.label.form.label.email = Email
+developer.training-session.list.label.link = Link
+developer.training-session.list.label.published = Published
+
+
+developer.training-session.list.button.create = Create
+developer.training-session.form.button.create = Create
+developer.training-session.form.button.update = Update
+developer.training-session.form.button.delete = Delete
+developer.training-session.form.button.publish = Publish
+developer.training-session.form.button.training-sessions = Training sessions
+
+validation.training-session.code = Incorrect Code Scheme
+
+developer.training-session.form.error.correctAmount = The sum of the invoice prices does not match the price of this field
+developer.training-session.form.error.publishedInvoices = The invoices of the sponsorship with this code are not published
+developer.training-session.form.error.noInvoices = This sponsorship has not invoices
+developer.training-session.form.error.codeDuplicated = Code is already in use
+developer.training-session.form.error.momentBeforeDurationStart = The sponsorship start must be after the moment
+developer.training-session.form.error.durationStart1MothBeforeDurationEnd = The duration must be at least 1 month
+developer.training-session.form.error.amountPositive = The amount must be positive
+developer.training-session.form.error.amountLessInvoicesAmount = The cost of the invoices cannot exceed that of this field
+developer.training-session.form.error.correctStart = The start of the sponsorship duration is not correct
+developer.training-session.form.error.correctEnd = The end of the sponsorship duration is not correct
+developer.training-session.form.error.correctMoment = The moment of the sponsorship is not correct
+developer.training-session.form.error.isAcceptedCurrency = The currency is not accepted
+
+
+
+developer.training-session.code = Code
+developer.training-session.creationMoment = Create moment
+developer.training-session.UpdateMoment = Update moment
+developer.training-session.difficultytype = Difficulty level
+developer.training-session.link = Optional link
+
+developer.training-module.form.button.training-sessions = Training sessions
+
