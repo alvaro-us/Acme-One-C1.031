@@ -17,8 +17,6 @@
 
 <acme:form>
 	<acme:input-textbox code="developer.training-module.form.label.code" path="code" placeholder="[A-Z]{1,3}-[0-9]{3}"/>
-	<acme:input-moment code="developer.training-module.form.label.creationmoment" path="creationMoment"/>
-	<acme:input-moment code="developer.training-module.form.label.updateMoment" path="updateMoment"/>
 	<acme:input-textbox code="developer.training-module.form.label.details" path="details"/>
 	<acme:input-textbox code="developer.training-module.form.label.difficultyType" path="difficultyType" placeholder="ADVANCED,INTERMEDIATE,BASIC" />
 	<acme:input-url code="developer.training-module.form.label.link" path="link"/>

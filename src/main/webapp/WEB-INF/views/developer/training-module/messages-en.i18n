@@ -18,16 +18,18 @@ developer.training-module.form.label.details = details
 developer.training-module.form.label.difficultyType= Difficulty level
 developer.training-module.form.label.email = Email
 developer.training-module.form.label.link = Link
-developer.training-module.form.label.estimatedTotalTime = Estimated total time
+developer.training-module.form.label.estimatedTotalTime = Estimated time
 developer.training-module.form.label.project = Project
 
 
 developer.training-module.list.label.code = Code
-developer.training-module.list.label.creation = Creation
+developer.training-module.list.label.creationMoment = Creation moment
 developer.training-module.list.label.details = Details
 developer.training-module.list.label.updateMoment = Update moment
 developer.training-module.list.label.difficultyType = Difficulty level
 developer.training-module.list.label.training-sessions = Training sessions
+developer.training-module.list.label.link = Link
+developer.training-module.list.label.estimatedTotalTime = Estimated time
 developer.training-module.list.label.published = Published
 
 
