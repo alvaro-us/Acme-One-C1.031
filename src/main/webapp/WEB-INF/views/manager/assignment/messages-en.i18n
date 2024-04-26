@@ -26,4 +26,7 @@ manager.assignment.form.button.create = Create
 
 manager.assignment.project.exists = This assignment already exists
 manager.assignment.project.notDraftMode = This project is not published
+manager.assignment.project.null = Please select a project
+manager.assignment.user-story.null = Please select an user story
+
 

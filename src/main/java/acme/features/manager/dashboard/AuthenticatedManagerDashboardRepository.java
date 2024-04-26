@@ -19,16 +19,16 @@ public interface AuthenticatedManagerDashboardRepository extends AbstractReposit
 	@Query("SELECT COALESCE(count(a), 0) FROM Project a WHERE a.manager.id = :id")
 	int getTotalNumberOfProject(int id);
 
-	@Query("SELECT COALESCE(count(a), 0) FROM UserStory a WHERE a.manager.id = :id AND a.priorityType = 'MUST'")
+	@Query("SELECT COALESCE(count(a), 0) FROM UserStory a WHERE a.manager.id = :id AND a.priorityType = 0")
 	int getTotalNumberOfMustUserStory(int id);
 
-	@Query("SELECT COALESCE(count(a), 0) FROM UserStory a WHERE a.manager.id = :id AND a.priorityType = 'SHOULD'")
+	@Query("SELECT COALESCE(count(a), 0) FROM UserStory a WHERE a.manager.id = :id AND a.priorityType = 1")
 	int getTotalNumberOfShouldUserStory(int id);
 
-	@Query("SELECT COALESCE(count(a), 0) FROM UserStory a WHERE a.manager.id = :id AND a.priorityType = 'COULD'")
+	@Query("SELECT COALESCE(count(a), 0) FROM UserStory a WHERE a.manager.id = :id AND a.priorityType = 2")
 	int getTotalNumberOfCouldUserStory(int id);
 
-	@Query("SELECT COALESCE(count(a), 0) FROM UserStory a WHERE a.manager.id = :id AND a.priorityType = 'WONT'")
+	@Query("SELECT COALESCE(count(a), 0) FROM UserStory a WHERE a.manager.id = :id AND a.priorityType = 3")
 	int getTotalNumberOfWontUserStory(int id);
 
 	@Query("SELECT COALESCE(avg(a.estimatedCost), 0) FROM UserStory a WHERE a.manager.id = :id")

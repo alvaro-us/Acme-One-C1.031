@@ -28,15 +28,13 @@ public class AuthenticatedManagerProjectUpdateService extends AbstractService<Ma
 		final boolean status;
 		int projectId;
 		Project project;
-		Manager manager;
 		int id1;
 
 		projectId = super.getRequest().getData("id", int.class);
 		project = this.repository.findProjectById(projectId);
 		id1 = super.getRequest().getPrincipal().getAccountId();
 
-		manager = project.getManager();
-		status = project != null && project.isDraftMode() && super.getRequest().getPrincipal().hasRole(Manager.class) && project.getManager().getUserAccount().getId() == id1;
+		status = project.isDraftMode() && super.getRequest().getPrincipal().hasRole(Manager.class) && project.getManager().getUserAccount().getId() == id1;
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -63,8 +61,6 @@ public class AuthenticatedManagerProjectUpdateService extends AbstractService<Ma
 	@Override
 	public void validate(final Project object) {
 		assert object != null;
-
-		System.out.println(object.getCost().getAmount());
 
 		if (!super.getBuffer().getErrors().hasErrors("code")) {
 			Project existing;

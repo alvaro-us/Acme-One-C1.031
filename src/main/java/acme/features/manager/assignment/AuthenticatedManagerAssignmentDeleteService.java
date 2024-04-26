@@ -17,10 +17,13 @@ import acme.roles.Manager;
 @Service
 public class AuthenticatedManagerAssignmentDeleteService extends AbstractService<Manager, Assignment> {
 
+	private static final String							PROJECT		= "project";
+	private static final String							USERSTORY	= "userStory";
+
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	protected AuthenticatedManagerAssignmentRepository repository;
+	protected AuthenticatedManagerAssignmentRepository	repository;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -48,11 +51,11 @@ public class AuthenticatedManagerAssignmentDeleteService extends AbstractService
 	public void bind(final Assignment object) {
 		assert object != null;
 
-		int projectId = super.getRequest().getData("project", int.class);
+		int projectId = super.getRequest().getData(AuthenticatedManagerAssignmentDeleteService.PROJECT, int.class);
 		Project project = this.repository.findProjectById(projectId);
 		object.setProject(project);
 
-		int storyId = super.getRequest().getData("userStory", int.class);
+		int storyId = super.getRequest().getData(AuthenticatedManagerAssignmentDeleteService.USERSTORY, int.class);
 		UserStory story = this.repository.findUserStoryById(storyId);
 		object.setUserStory(story);
 	}
@@ -90,10 +93,10 @@ public class AuthenticatedManagerAssignmentDeleteService extends AbstractService
 		choices = SelectChoices.from(stories, "title", object.getUserStory());
 		choices1 = SelectChoices.from(projects, "title", object.getProject());
 
-		dataset = super.unbind(object, "project", "userStory");
-		dataset.put("userStory", choices.getSelected().getKey());
+		dataset = super.unbind(object, AuthenticatedManagerAssignmentDeleteService.PROJECT, AuthenticatedManagerAssignmentDeleteService.USERSTORY);
+		dataset.put(AuthenticatedManagerAssignmentDeleteService.USERSTORY, choices.getSelected().getKey());
 		dataset.put("userStories", choices);
-		dataset.put("project", choices1.getSelected().getKey());
+		dataset.put(AuthenticatedManagerAssignmentDeleteService.PROJECT, choices1.getSelected().getKey());
 		dataset.put("projects", choices1);
 
 		super.getResponse().addData(dataset);

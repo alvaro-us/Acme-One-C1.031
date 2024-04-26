@@ -13,23 +13,23 @@ public class ManagerDashboard extends AbstractForm {
 
 	// Serialisation Identifier
 
-	private static final long	serialVersionUID	= 1L;
+	private static final long		serialVersionUID	= 1L;
 
 	// Attributes -------------------------------------------------------------
 
-	int							totalNumberOfMustUserStory;
-	int							totalNumberOfShouldUserStory;
-	int							totalNumberOfCouldUserStory;
-	int							totalNumberOfWontUserStory;
+	int								totalNumberOfMustUserStory;
+	int								totalNumberOfShouldUserStory;
+	int								totalNumberOfCouldUserStory;
+	int								totalNumberOfWontUserStory;
 
-	double						averageEstimatedCostUserStory;
-	double						deviationEstimatedCostUserStory;
-	int							minEstimatedCostUserStory;
-	int							maxEstimatedCostUserStory;
+	double							averageEstimatedCostUserStory;
+	double							deviationEstimatedCostUserStory;
+	int								minEstimatedCostUserStory;
+	int								maxEstimatedCostUserStory;
 
-	Map<String, Double>			averageCostProject;
-	Map<String, Double>			deviationCostProject;
-	Map<String, Integer>		minCostProject;
-	Map<String, Integer>		maxCostProject;
+	private Map<String, Double>		averageCostProject;
+	private Map<String, Double>		deviationCostProject;
+	private Map<String, Integer>	minCostProject;
+	private Map<String, Integer>	maxCostProject;
 
 }

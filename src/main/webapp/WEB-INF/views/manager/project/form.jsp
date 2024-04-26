@@ -21,6 +21,7 @@
 	<acme:input-textbox code="manager.project.form.label.abstrat" path="abstrat" placeholder="manager.project.abstrat"/>
 	<acme:input-checkbox code="manager.project.form.label.indicator" path="indicator"/>
 	<acme:input-textbox code="manager.project.form.label.cost" path="cost" placeholder="manager.project.cost"/>
+	<acme:message code="${amountBase }" />
 	<acme:input-textbox code="manager.project.form.label.link" path="link"/>	
 	<acme:hidden-data path="draftMode"/>
 	

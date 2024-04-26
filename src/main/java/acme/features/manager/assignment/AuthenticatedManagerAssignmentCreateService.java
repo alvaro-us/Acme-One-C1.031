@@ -17,10 +17,13 @@ import acme.roles.Manager;
 @Service
 public class AuthenticatedManagerAssignmentCreateService extends AbstractService<Manager, Assignment> {
 
+	private static final String							PROJECT		= "project";
+	private static final String							USERSTORY	= "userStory";
+
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	protected AuthenticatedManagerAssignmentRepository repository;
+	protected AuthenticatedManagerAssignmentRepository	repository;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -49,11 +52,11 @@ public class AuthenticatedManagerAssignmentCreateService extends AbstractService
 	public void bind(final Assignment object) {
 		assert object != null;
 
-		int projectId = super.getRequest().getData("project", int.class);
+		int projectId = super.getRequest().getData(AuthenticatedManagerAssignmentCreateService.PROJECT, int.class);
 		Project project = this.repository.findProjectById(projectId);
 		object.setProject(project);
 
-		int storyId = super.getRequest().getData("userStory", int.class);
+		int storyId = super.getRequest().getData(AuthenticatedManagerAssignmentCreateService.USERSTORY, int.class);
 		UserStory story = this.repository.findUserStoryById(storyId);
 		object.setUserStory(story);
 	}
@@ -62,13 +65,19 @@ public class AuthenticatedManagerAssignmentCreateService extends AbstractService
 	public void validate(final Assignment object) {
 		assert object != null;
 
-		if (!super.getBuffer().getErrors().hasErrors("project"))
-			super.state(!object.getUserStory().isDraftMode(), "project", "manager.assignment.project.notDraftMode");
+		if (!super.getBuffer().getErrors().hasErrors(AuthenticatedManagerAssignmentCreateService.PROJECT) && object.getProject() != null)
+			super.state(object.getProject().isDraftMode(), AuthenticatedManagerAssignmentCreateService.PROJECT, "manager.assignment.project.notDraftMode");
 
-		if (!super.getBuffer().getErrors().hasErrors("project")) {
+		if (!super.getBuffer().getErrors().hasErrors(AuthenticatedManagerAssignmentCreateService.PROJECT)) {
 			int exists = this.repository.existsAssignmentWithProjectAndUserStory(object.getProject(), object.getUserStory());
 			super.state(exists == 0, "*", "manager.assignment.project.exists");
 		}
+
+		if (!super.getBuffer().getErrors().hasErrors(AuthenticatedManagerAssignmentCreateService.PROJECT))
+			super.state(object.getProject() != null, AuthenticatedManagerAssignmentCreateService.PROJECT, "manager.assignment.project.null");
+
+		if (!super.getBuffer().getErrors().hasErrors(AuthenticatedManagerAssignmentCreateService.USERSTORY))
+			super.state(object.getUserStory() != null, AuthenticatedManagerAssignmentCreateService.USERSTORY, "manager.assignment.user-story.null");
 
 	}
 
@@ -96,10 +105,10 @@ public class AuthenticatedManagerAssignmentCreateService extends AbstractService
 		choices = SelectChoices.from(stories, "title", object.getUserStory());
 		choices1 = SelectChoices.from(projects, "title", object.getProject());
 
-		dataset = super.unbind(object, "project", "userStory");
-		dataset.put("userStory", choices.getSelected().getKey());
+		dataset = super.unbind(object, AuthenticatedManagerAssignmentCreateService.PROJECT, AuthenticatedManagerAssignmentCreateService.USERSTORY);
+		dataset.put(AuthenticatedManagerAssignmentCreateService.USERSTORY, choices.getSelected().getKey());
 		dataset.put("userStories", choices);
-		dataset.put("project", choices1.getSelected().getKey());
+		dataset.put(AuthenticatedManagerAssignmentCreateService.PROJECT, choices1.getSelected().getKey());
 		dataset.put("projects", choices1);
 
 		super.getResponse().addData(dataset);

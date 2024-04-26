@@ -4,8 +4,10 @@ package acme.features.manager.projects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.client.data.datatypes.Money;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
+import acme.entities.configuration.CurrencyService;
 import acme.entities.projects.Project;
 import acme.roles.Manager;
 
@@ -15,7 +17,10 @@ public class AuthenticatedManagerProjectShowService extends AbstractService<Mana
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	protected AuthenticatedManagerProjectRepository repository;
+	protected AuthenticatedManagerProjectRepository	repository;
+
+	@Autowired
+	protected CurrencyService						service;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -56,6 +61,8 @@ public class AuthenticatedManagerProjectShowService extends AbstractService<Mana
 		Dataset dataset;
 
 		dataset = super.unbind(object, "code", "title", "abstrat", "indicator", "cost", "link", "draftMode");
+		Money amountBase = this.service.changeCurrencyToBase(object.getCost());
+		dataset.put("amountBase", amountBase);
 
 		super.getResponse().addData(dataset);
 	}
