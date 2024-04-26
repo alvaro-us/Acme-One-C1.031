@@ -18,7 +18,6 @@ master.menu.sponsorships = Sponsorships
 master.menu.claims = Claims
 master.menu.training-module = Training Modules
 
-
 # master.menu.anonymous #######################################################
 
 master.menu.anonymous = Anonymous
@@ -38,6 +37,7 @@ master.menu.administrator.populate-initial = Populate DB (initial)
 master.menu.administrator.populate-sample = Populate DB (samples)
 master.menu.administrator.shut-down = Shut down
 master.menu.administrator.configuration = System Configuration
+master.menu.administrator.risk = Risks
 
 # master.menu.client ########################################################
 
@@ -94,3 +94,4 @@ master.menu.user-account.sponsor = Sponsor Data
 master.menu.user-account.developer = Developer Data
 master.menu.user-account.projects = Projects
 master.menu.user-account.notices = Notices
+master.menu.user-account.risk = Risks

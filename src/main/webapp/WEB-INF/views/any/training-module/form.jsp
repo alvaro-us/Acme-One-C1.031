@@ -22,9 +22,6 @@
 	<acme:input-url code="any.training-module.form.label.link" path="link"/>
 	<acme:input-integer code="any.training-module.form.label.estimatedTotalTime" path="estimatedTotalTime" />
 	<acme:input-textbox code="any.training-module.form.label.project" path="project"/>
-	<acme:hidden-data path="draftMode"/>
-	
-				
-		
+	<acme:hidden-data path="draftMode"/>					
 </acme:form>
 

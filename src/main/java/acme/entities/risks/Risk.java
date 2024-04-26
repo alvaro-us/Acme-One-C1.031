@@ -42,7 +42,6 @@ public class Risk extends AbstractEntity {
 	@Pattern(regexp = "^R-\\d{3}$", message = "{validation.risk.reference}")
 	private String				reference;
 
-	@NotNull
 	@Past
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				identificationDate;

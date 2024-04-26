@@ -37,6 +37,8 @@
 			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.shut-down" action="/administrator/system/shut-down"/>
 			<acme:menu-suboption code="master.menu.administrator.configuration" action="/administrator/configuration/show"/>
+			<acme:menu-suboption code="master.menu.administrator.risk" action="/administrator/risk/list"/>
+			
 		</acme:menu-option>
 		
 		<acme:menu-option code="master.menu.client" access="hasRole('Client')">
@@ -67,16 +69,17 @@
 			<acme:menu-suboption code="master.menu.sponsor.ListSponsorship" action="/sponsor/sponsorship/list"/>
 			<acme:menu-suboption code="master.menu.sponsor.Dashboard" action="/sponsor/sponsor-dashboard/show"/>
 			
-
+	
+			
 		</acme:menu-option>
 		<acme:menu-option code="master.menu.sponsorships" action="/any/sponsorship/list"/>
 		<acme:menu-option code="master.menu.claims" action="/any/claim/list"/>
 		
+	
 		<acme:menu-option code="master.menu.developer" access="hasRole('Developer')">
 
 			<acme:menu-suboption code="master.menu.developer.ListTrainingModules" action="/developer/training-module/list"/>
 			<acme:menu-suboption code="master.menu.developer.Dashboard" action="/developer/developer-dashboard/show"/>
-			
 
 		</acme:menu-option>
 		<acme:menu-option code="master.menu.training-module" action="/any/training-module/list"/>
@@ -100,8 +103,9 @@
 			<acme:menu-suboption code="master.menu.user-account.become-developer" action="/authenticated/developer/create" access="!hasRole('Developer')"/>
 			<acme:menu-suboption code="master.menu.user-account.developer" action="/authenticated/developer/update" access="hasRole('Developer')"/>
 			<acme:menu-suboption code="master.menu.user-account.projects" action="/any/project/list"/>
-
 			<acme:menu-suboption code="master.menu.user-account.notices" action="/authenticated/notice/list"/>
+			<acme:menu-suboption code="master.menu.user-account.risk" action="/authenticated/risk/list"/>
+		
 
 			
 		</acme:menu-option>
