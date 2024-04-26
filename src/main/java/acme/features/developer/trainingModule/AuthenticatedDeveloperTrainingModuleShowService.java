@@ -54,6 +54,7 @@ public class AuthenticatedDeveloperTrainingModuleShowService extends AbstractSer
 		Dataset dataset;
 
 		dataset = super.unbind(object, "code", "creationMoment", "updateMoment", "details", "difficultyType", "link", "estimatedTotalTime", "draftMode");
+		dataset.put("project", object.getProject().getCode());
 
 		super.getResponse().addData(dataset);
 	}
