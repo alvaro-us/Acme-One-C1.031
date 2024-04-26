@@ -19,7 +19,7 @@
 
 
 	<acme:input-textbox code="sponsor.sponsorship.form.label.code" path="code" placeholder="[A-Z]{1,3}-[0-9]{3}"/>
-	<acme:input-moment code="sponsor.sponsorship.form.label.moment" path="moment"/>
+	<acme:input-moment code="sponsor.sponsorship.form.label.moment" path="moment" readonly="true"/>
 	<acme:input-moment code="sponsor.sponsorship.form.label.durationStart" path="durationStart"/>
 	<acme:input-moment code="sponsor.sponsorship.form.label.durationEnd" path="durationEnd"/>
 	<acme:input-money code="sponsor.sponsorship.form.label.amount" path="amount" />

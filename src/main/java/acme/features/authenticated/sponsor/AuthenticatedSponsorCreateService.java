@@ -54,7 +54,14 @@ public class AuthenticatedSponsorCreateService extends AbstractService<Authentic
 
 	@Override
 	public void validate(final Sponsor object) {
+
 		assert object != null;
+
+		int userAccountId = super.getRequest().getPrincipal().getAccountId();
+		boolean youAreNotSponsor = this.repository.findOneSponsorByUserAccountId(userAccountId) == null;
+
+		super.state(youAreNotSponsor, "*", "sponsor.sponsorship.form.error.youAreSponsorAlready");
+
 	}
 
 	@Override

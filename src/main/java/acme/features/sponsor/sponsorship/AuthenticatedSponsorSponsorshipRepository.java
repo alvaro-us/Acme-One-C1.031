@@ -36,4 +36,7 @@ public interface AuthenticatedSponsorSponsorshipRepository extends AbstractRepos
 	@Query("SELECT p FROM Project p")
 	Collection<Project> findAllProjects();
 
+	@Query("SELECT p FROM Project p WHERE p.draftMode = false")
+	Collection<Project> findAllProjectsPublished();
+
 }

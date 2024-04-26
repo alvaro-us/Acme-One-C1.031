@@ -37,8 +37,9 @@ sponsor.sponsorship.form.button.invoice = Facturas
 
 validation.sponsorship.code = Esquema de código incorrecto
 
+sponsor.sponsorship.form.error.cantDelete = No se puede eliminar esta subvención porque tiene facturas publicadas
 sponsor.sponsorship.form.error.correctAmount = La suma de los precios de las facturas no coincide con el precio de este campo
-sponsor.sponsorship.form.error.publishedInvoices = Las facturas del patrocinio con este codigo no estan publicadas
+sponsor.sponsorship.form.error.publishedInvoices = Las facturas del patrocinio no estan publicadas
 sponsor.sponsorship.form.error.noInvoices = Este sponsorship no tiene facturas
 sponsor.sponsorship.form.error.codeDuplicated = El código ya esta siendo usado
 sponsor.sponsorship.form.error.momentBeforeDurationStart = El comienzo del patrocinio tiene que ser después del momento
