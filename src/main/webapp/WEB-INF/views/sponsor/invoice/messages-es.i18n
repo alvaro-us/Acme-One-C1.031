@@ -27,6 +27,7 @@ sponsor.invoice.form.button.delete = Eliminar
 sponsor.invoice.form.button.publish = Publicar
 
 
+sponsor.invoice.form.error.correctCurrency = La moneda de la factura debe ser la misma que la del patrocinio
 sponsor.invoice.form.error.codeDuplicated = El código ya esta siendo usado
 sponsor.invoice.form.error.totalAmountLessOrEqualThanSponsorshipAmount = La suma de el precio de todas las facturas no puede ser superior al coste del patrocinio
 sponsor.invoice.form.error.registrationTime1MothBeforeDueDate = La fecha de vencimiento debe ser al menos un mes posterior a la de registro

@@ -13,6 +13,9 @@ authenticated.sponsor.form.title = Datos del patrocinador
 authenticated.sponsor.form.label.expectedBenefits = Beneficios esperados
 authenticated.sponsor.form.label.webPage = Página web
 
+sponsor.sponsorship.form.error.youAreSponsorAlready = Ya eres patrocinador
+
+authenticated.sponsor.form.title = Conviértete en patrocinador
 
 authenticated.sponsor.form.button.create = Registrar
 authenticated.sponsor.form.button.update = Actualizar

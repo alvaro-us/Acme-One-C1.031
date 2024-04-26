@@ -34,7 +34,12 @@ public class CurrencyService {
 	}
 
 	public boolean isAcceptedCurrency(final String currency) {
-		return this.getAcceptedCurrency().contains(currency);
+		String[] currencies = this.getAcceptedCurrency().split(",");
+		boolean res = false;
+		for (String currency1 : currencies)
+			if (currency.equals(currency1))
+				res = true;
+		return res;
 	}
 
 	public String translateMoney(final Money money, final String lang) {

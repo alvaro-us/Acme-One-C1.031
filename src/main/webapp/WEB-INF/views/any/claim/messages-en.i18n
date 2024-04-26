@@ -8,6 +8,7 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
+any.claim.form.title = Claim
 any.claim.list.title = Claim
 any.claim.list.label.code = Code
 any.claim.list.label.instantiationMoment = Instation moment
@@ -21,3 +22,4 @@ any.claim.form.label.email = Email
 any.claim.form.label.link = Link
 any.claim.form.button.create = Create
 any.claim.form.button.publish = Publish
+any.claim.form.label.confirmation = You have to confirm it to publish it
