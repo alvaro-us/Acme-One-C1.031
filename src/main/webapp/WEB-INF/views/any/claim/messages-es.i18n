@@ -8,25 +8,20 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-any.sponsorship.list.title = Patrocinios
-any.sponsorship.form.title = Patrocinio
+
+any.claim.list.title = Reclamación
+any.claim.list.label.code = Código
+any.claim.list.label.instantiationMoment = Momento de Instanciación
+any.claim.list.button.create = Crear
+any.claim.form.label.code = Código
+any.claim.form.label.instantiationMoment = Momento de Instanciación
+any.claim.form.label.heading = Título
+any.claim.form.label.description = Descripción
+any.claim.form.label.department = Departamento
+any.claim.form.label.email = Correo electrónico
+any.claim.form.label.link = Enlace
+any.claim.form.button.create = Crear
+any.claim.form.button.publish = Publicar
 
 
-any.sponsorship.list.label.code = Código
-any.sponsorship.list.label.durationStart = Comienzo
-any.sponsorship.list.label.durationEnd = Final
-any.sponsorship.list.label.type = Tipo
-any.sponsorship.list.label.sponsorName = Nombre del patrocinador
 
-any.sponsorship.form.label.code = Código
-any.sponsorship.form.label.moment = Momento
-any.sponsorship.form.label.durationStart = Comienzo del patrocinio
-any.sponsorship.form.label.durationEnd = Final del patricinio
-any.sponsorship.form.label.amount = Coste
-any.sponsorship.form.label.type = Tipo
-any.sponsorship.form.label.email = Correo
-any.sponsorship.form.label.link Enlace
-any.sponsorship.form.label.project = Código del proyecto al que patrocina
-any.sponsorship.form.label.sponsorName = Nombre del patrocinador
-
-	

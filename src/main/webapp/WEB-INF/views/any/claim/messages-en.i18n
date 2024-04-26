@@ -8,23 +8,16 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-
-any.sponsorship.list.title = Sponsorships
-any.sponsorship.form.title = Sponsorship
-
-any.sponsorship.list.label.code = Code
-any.sponsorship.list.label.durationStart = Start
-any.sponsorship.list.label.durationEnd = End
-any.sponsorship.list.label.type = Type
-any.sponsorship.list.label.sponsorName = Sponsor Name
-
-any.sponsorship.form.label.code = Code
-any.sponsorship.form.label.moment = Moment
-any.sponsorship.form.label.durationStart = Sponsorship Start
-any.sponsorship.form.label.durationEnd = Sponsorship End
-any.sponsorship.form.label.amount = Amount
-any.sponsorship.form.label.type = Type
-any.sponsorship.form.label.email = Email
-any.sponsorship.form.label.link = Link
-any.sponsorship.form.label.project = Project Code Being Sponsored
-any.sponsorship.form.label.sponsorName = Sponsor Name
+any.claim.list.title = Claim
+any.claim.list.label.code = Code
+any.claim.list.label.instantiationMoment = Instation moment
+any.claim.list.button.create = Create
+any.claim.form.label.code = Code
+any.claim.form.label.instantiationMoment = Instantiation Moment
+any.claim.form.label.heading = Heading
+any.claim.form.label.description = Description
+any.claim.form.label.department = Department
+any.claim.form.label.email = Email
+any.claim.form.label.link = Link
+any.claim.form.button.create = Create
+any.claim.form.button.publish = Publish

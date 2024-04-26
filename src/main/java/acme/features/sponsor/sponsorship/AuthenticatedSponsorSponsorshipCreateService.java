@@ -11,6 +11,7 @@ import acme.client.data.models.Dataset;
 import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
+import acme.entities.configuration.CurrencyService;
 import acme.entities.projects.Project;
 import acme.entities.sponsorship.Sponsorship;
 import acme.entities.sponsorship.SponsorshipType;
@@ -22,7 +23,10 @@ public class AuthenticatedSponsorSponsorshipCreateService extends AbstractServic
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	protected AuthenticatedSponsorSponsorshipRepository repository;
+	protected AuthenticatedSponsorSponsorshipRepository	repository;
+
+	@Autowired
+	protected CurrencyService							service;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -61,12 +65,32 @@ public class AuthenticatedSponsorSponsorshipCreateService extends AbstractServic
 
 		assert object != null;
 
+		boolean correctMoment = object.getMoment() != null;
+		boolean correctStart = object.getDurationStart() != null;
+		boolean correctEnd = object.getDurationEnd() != null;
+		Boolean momentBeforeDurationStart;
+		Boolean durationStart1MothBeforeDurationEnd;
 		Boolean codeDuplicated = this.repository.findSponsorshipByCode(object.getCode()) == null;
-		Boolean momentBeforeDurationStart = MomentHelper.isAfter(object.getDurationStart(), MomentHelper.deltaFromMoment(object.getMoment(), 0l, ChronoUnit.DAYS));
-		Boolean durationStart1MothBeforeDurationEnd = MomentHelper.isAfter(object.getDurationEnd(), MomentHelper.deltaFromMoment(object.getDurationStart(), 1l, ChronoUnit.MONTHS));
+		boolean isAcceptedCurrency = this.service.isAcceptedCurrency(object.getAmount().getCurrency());
+		Boolean amountPositive = object.getAmount().getAmount() >= 0;
+
 		super.state(codeDuplicated, "code", "sponsor.sponsorship.form.error.codeDuplicated");
-		super.state(momentBeforeDurationStart, "durationStart", "sponsor.sponsorship.form.error.momentBeforeDurationStart");
-		super.state(durationStart1MothBeforeDurationEnd, "durationEnd", "sponsor.sponsorship.form.error.durationStart1MothBeforeDurationEnd");
+		if (correctStart && correctMoment) {
+			momentBeforeDurationStart = MomentHelper.isAfter(object.getDurationStart(), MomentHelper.deltaFromMoment(object.getMoment(), 0l, ChronoUnit.DAYS));
+			super.state(momentBeforeDurationStart, "durationStart", "sponsor.sponsorship.form.error.momentBeforeDurationStart");
+		}
+		if (correctEnd && correctStart) {
+			durationStart1MothBeforeDurationEnd = MomentHelper.isAfter(object.getDurationEnd(), MomentHelper.deltaFromMoment(object.getDurationStart(), 1l, ChronoUnit.MONTHS));
+
+			super.state(durationStart1MothBeforeDurationEnd, "durationEnd", "sponsor.sponsorship.form.error.durationStart1MothBeforeDurationEnd");
+		}
+
+		super.state(correctEnd, "durationEnd", "sponsor.sponsorship.form.error.correctEnd");
+		super.state(correctStart, "durationStart", "sponsor.sponsorship.form.error.correctStart");
+		super.state(correctMoment, "moment", "sponsor.sponsorship.form.error.correctMoment");
+		if (isAcceptedCurrency)
+			super.state(amountPositive, "amount", "sponsor.sponsorship.form.error.amountPositive");
+		super.state(isAcceptedCurrency, "amount", "sponsor.sponsorship.form.error.isAcceptedCurrency");
 
 	}
 

@@ -47,6 +47,11 @@ sponsor.sponsorship.form.error.momentBeforeDurationStart = The sponsorship start
 sponsor.sponsorship.form.error.durationStart1MothBeforeDurationEnd = The duration must be at least 1 month
 sponsor.sponsorship.form.error.amountPositive = The amount must be positive
 sponsor.sponsorship.form.error.amountLessInvoicesAmount = The cost of the invoices cannot exceed that of this field
+sponsor.sponsorship.form.error.correctStart = The start of the sponsorship duration is not correct
+sponsor.sponsorship.form.error.correctEnd = The end of the sponsorship duration is not correct
+sponsor.sponsorship.form.error.correctMoment = The moment of the sponsorship is not correct
+sponsor.sponsorship.form.error.isAcceptedCurrency = The currency is not accepted
+
 
 
 sponsor.sponsorship.code = Sponsorship code

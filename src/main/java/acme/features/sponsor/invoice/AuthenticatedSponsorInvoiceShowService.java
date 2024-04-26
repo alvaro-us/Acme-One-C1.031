@@ -4,8 +4,10 @@ package acme.features.sponsor.invoice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.client.data.datatypes.Money;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
+import acme.entities.configuration.CurrencyService;
 import acme.entities.invoice.Invoice;
 import acme.roles.Sponsor;
 
@@ -15,7 +17,10 @@ public class AuthenticatedSponsorInvoiceShowService extends AbstractService<Spon
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AuthenticatedSponsorInvoiceRepository repository;
+	private AuthenticatedSponsorInvoiceRepository	repository;
+
+	@Autowired
+	private CurrencyService							service;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -55,6 +60,11 @@ public class AuthenticatedSponsorInvoiceShowService extends AbstractService<Spon
 		Dataset dataset;
 
 		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link", "sponsorship", "draftMode");
+
+		Money quantityBase = this.service.changeCurrencyToBase(object.getQuantity());
+		Money quantityBaseTax = this.service.changeCurrencyToBase(object.getTotalAmount());
+		dataset.put("quantityBase", quantityBase);
+		dataset.put("quantityBaseTax", quantityBaseTax);
 
 		super.getResponse().addData(dataset);
 
