@@ -9,6 +9,7 @@
 # they accept any liabilities with respect to them.
 
 
+any.claim.form.title = Reclamación
 any.claim.list.title = Reclamación
 any.claim.list.label.code = Código
 any.claim.list.label.instantiationMoment = Momento de Instanciación
@@ -20,8 +21,9 @@ any.claim.form.label.description = Descripción
 any.claim.form.label.department = Departamento
 any.claim.form.label.email = Correo electrónico
 any.claim.form.label.link = Enlace
-any.claim.form.button.create = Crear
-any.claim.form.button.publish = Publicar
+
+
+any.claim.form.label.confirmation = Tienes que confirmar para publicarlo
 
 
 
