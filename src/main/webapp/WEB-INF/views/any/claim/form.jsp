@@ -16,28 +16,17 @@
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
-<acme:form>
-
-
-	<acme:input-textbox code="any.claim.form.label.code" path="code" placeholder="C-\\d{4}"/>
-	<acme:input-moment code="any.claim.form.label.instantiationMoment" path="instantiationMoment"/>
-	<acme:input-textbox code="any.claim.form.label.heading" path="heading" placeholder="any.claim.form.label.heading"/>
-	<acme:input-textbox code="any.claim.form.label.description" path="description" placeholder="any.claim.form.label.description"/>
-	<acme:input-textbox code="any.claim.form.label.department" path="department" placeholder="any.claim.form.label.department"/>
-	<acme:input-email code="any.claim.form.label.email" path="email"/>		
-	<acme:input-url code="any.claim.form.label.link" path="link"/>	
+<acme:form> 
+	<acme:input-textbox code="any.claim.form.label.code" path="code" placeholder="C-\d{4}" readonly = "${readonly}"/>
+	<acme:input-moment code="any.claim.form.label.instantiationMoment" path="instantiationMoment" readonly = "true"/>
+	<acme:input-textbox code="any.claim.form.label.heading" path="heading" placeholder="any.claim.form.label.heading" readonly = "${readonly}"/>
+	<acme:input-textarea code="any.claim.form.label.description" path="description" placeholder="any.claim.form.label.description"  readonly = "${readonly}"/>
+	<acme:input-textarea code="any.claim.form.label.department" path="department" placeholder="any.claim.form.label.department" readonly = "${readonly}"/>
+	<acme:input-email code="any.claim.form.label.email" path="email" readonly = "${readonly}"/>
+	<acme:input-url code="any.claim.form.label.link" path="link" readonly = "${readonly}"/>
 	
-	
-	
-
-	<jstl:choose>	 
-		<jstl:when test="${_command == 'create'}">
-			<acme:submit code="any.claim.form.button.create" action="/any/claim/create"/>
-		</jstl:when>
-	</jstl:choose>
-	<jstl:if test="${ _command == 'show' }" >
-		<acme:button code="any.claim.form.button.publish" action="/any/claim/publish"/>
+	<jstl:if test="${_command == 'create' && !readonly}">
+		<acme:input-checkbox code="any.claim.form.label.confirmation" path="confirmation"/>
+		<acme:submit code="any.claim.form.button.create" action="/any/claim/create"/>
 	</jstl:if>
-		
 </acme:form>
-

@@ -28,3 +28,5 @@ manager.assignment.project.exists = Esta asignación ya existe
 manager.assignment.project.notDraftMode = Has introducido un proyecto que no se encuentra publicado
 manager.assignment.project.null = Por favor seleccione un proyecto
 manager.assignment.user-story.null = Por favor seleccione una historia de usuario
+manager.assignment.project.notMine = Por favor seleccione un proyecto que le pertenezca
+manager.assignment.user-story.notMine = Por favor seleccione una historia de usuario que le pertenezca

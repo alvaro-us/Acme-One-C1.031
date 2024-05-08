@@ -72,6 +72,7 @@ public class AuthenticatedManagerAssignmentShowService extends AbstractService<M
 		dataset.put("userStories", choices);
 		dataset.put("project", choices1.getSelected().getKey());
 		dataset.put("projects", choices1);
+		dataset.put("draftMode", object.getProject().isDraftMode());
 
 		super.getResponse().addData(dataset);
 	}

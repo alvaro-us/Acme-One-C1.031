@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
+import acme.client.views.SelectChoices;
 import acme.entities.invoice.Invoice;
+import acme.entities.projects.Project;
 import acme.entities.sponsorship.Sponsorship;
+import acme.entities.sponsorship.SponsorshipType;
 import acme.roles.Sponsor;
 
 @Service
@@ -61,6 +64,16 @@ public class AuthenticatedSponsorSponsorshipDeleteService extends AbstractServic
 
 	@Override
 	public void validate(final Sponsorship object) {
+
+		Collection<Invoice> invoices;
+		invoices = this.repository.findInvoiceBySponsorshipId(object.getId());
+		boolean canDelete = true;
+		for (Invoice invoice : invoices)
+			if (!invoice.isDraftMode())
+				canDelete = false;
+
+		super.state(canDelete, "*", "sponsor.sponsorship.form.error.cantDelete");
+
 		assert object != null;
 	}
 
@@ -86,6 +99,16 @@ public class AuthenticatedSponsorSponsorshipDeleteService extends AbstractServic
 		id = super.getRequest().getPrincipal().getActiveRoleId();
 
 		dataset = super.unbind(object, "code", "moment", "durationStart", "durationEnd", "amount", "type", "email", "link", "draftMode");
+
+		SelectChoices choicesProjects;
+		Collection<Project> projects = this.repository.findAllProjectsPublished();
+
+		choicesProjects = SelectChoices.from(projects, "code", object.getProject());
+		dataset.put("projects", choicesProjects);
+		SelectChoices choices;
+
+		choices = SelectChoices.from(SponsorshipType.class, object.getType());
+		dataset.put("types", choices);
 
 		super.getResponse().addData(dataset);
 	}

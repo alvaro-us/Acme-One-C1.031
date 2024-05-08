@@ -46,6 +46,7 @@ public class AuthenticatedSponsorSponsorshipCreateService extends AbstractServic
 
 		sponsor = this.repository.findSponsorById(super.getRequest().getPrincipal().getActiveRoleId());
 		object = new Sponsorship();
+		object.setMoment(MomentHelper.getCurrentMoment());
 		object.setSponsor(sponsor);
 		object.setDraftMode(true);
 
@@ -65,32 +66,33 @@ public class AuthenticatedSponsorSponsorshipCreateService extends AbstractServic
 
 		assert object != null;
 
-		boolean correctMoment = object.getMoment() != null;
-		boolean correctStart = object.getDurationStart() != null;
-		boolean correctEnd = object.getDurationEnd() != null;
-		Boolean momentBeforeDurationStart;
-		Boolean durationStart1MothBeforeDurationEnd;
-		Boolean codeDuplicated = this.repository.findSponsorshipByCode(object.getCode()) == null;
-		boolean isAcceptedCurrency = this.service.isAcceptedCurrency(object.getAmount().getCurrency());
-		Boolean amountPositive = object.getAmount().getAmount() >= 0;
+		// Code
 
-		super.state(codeDuplicated, "code", "sponsor.sponsorship.form.error.codeDuplicated");
-		if (correctStart && correctMoment) {
+		if (!super.getBuffer().getErrors().hasErrors("code")) {
+			Boolean codeDuplicated = this.repository.findSponsorshipByCode(object.getCode()) == null;
+			super.state(codeDuplicated, "code", "sponsor.sponsorship.form.error.codeDuplicated");
+		}
+
+		// Date
+		if (!super.getBuffer().getErrors().hasErrors("durationStart") && !super.getBuffer().getErrors().hasErrors("moment")) {
+			Boolean momentBeforeDurationStart;
 			momentBeforeDurationStart = MomentHelper.isAfter(object.getDurationStart(), MomentHelper.deltaFromMoment(object.getMoment(), 0l, ChronoUnit.DAYS));
 			super.state(momentBeforeDurationStart, "durationStart", "sponsor.sponsorship.form.error.momentBeforeDurationStart");
 		}
-		if (correctEnd && correctStart) {
-			durationStart1MothBeforeDurationEnd = MomentHelper.isAfter(object.getDurationEnd(), MomentHelper.deltaFromMoment(object.getDurationStart(), 1l, ChronoUnit.MONTHS));
 
+		if (!super.getBuffer().getErrors().hasErrors("durationStart") && !super.getBuffer().getErrors().hasErrors("durationEnd")) {
+			boolean durationStart1MothBeforeDurationEnd;
+			durationStart1MothBeforeDurationEnd = MomentHelper.isAfter(object.getDurationEnd(), MomentHelper.deltaFromMoment(object.getDurationStart(), 1l, ChronoUnit.MONTHS));
 			super.state(durationStart1MothBeforeDurationEnd, "durationEnd", "sponsor.sponsorship.form.error.durationStart1MothBeforeDurationEnd");
 		}
 
-		super.state(correctEnd, "durationEnd", "sponsor.sponsorship.form.error.correctEnd");
-		super.state(correctStart, "durationStart", "sponsor.sponsorship.form.error.correctStart");
-		super.state(correctMoment, "moment", "sponsor.sponsorship.form.error.correctMoment");
-		if (isAcceptedCurrency)
+		// Amount
+		if (!super.getBuffer().getErrors().hasErrors("amount")) {
+			boolean isAcceptedCurrency = this.service.isAcceptedCurrency(object.getAmount().getCurrency());
+			boolean amountPositive = object.getAmount().getAmount() >= 0;
 			super.state(amountPositive, "amount", "sponsor.sponsorship.form.error.amountPositive");
-		super.state(isAcceptedCurrency, "amount", "sponsor.sponsorship.form.error.isAcceptedCurrency");
+			super.state(isAcceptedCurrency, "amount", "sponsor.sponsorship.form.error.isAcceptedCurrency");
+		}
 
 	}
 
@@ -108,7 +110,7 @@ public class AuthenticatedSponsorSponsorshipCreateService extends AbstractServic
 		Dataset dataset;
 		SelectChoices choices;
 		SelectChoices choicesProjects;
-		Collection<Project> projects = this.repository.findAllProjects();
+		Collection<Project> projects = this.repository.findAllProjectsPublished();
 
 		choices = SelectChoices.from(SponsorshipType.class, object.getType());
 		choicesProjects = SelectChoices.from(projects, "code", object.getProject());

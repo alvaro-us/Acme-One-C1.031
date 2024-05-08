@@ -44,8 +44,27 @@ public class AdministratorConfigurationUpdateService extends AbstractService<Adm
 	public void validate(final Configuration object) {
 		assert object != null;
 
-		if (!super.getBuffer().getErrors().hasErrors("systemCurrency"))
-			super.state(object.getAcceptedCurrency().contains(object.getCurrency()), "systemCurrency", "administrator.system-configuration.form.error.system-currency");
+		if (!super.getBuffer().getErrors().hasErrors("currency") && !super.getBuffer().getErrors().hasErrors("acceptedCurrency")) {
+
+			String[] acceptedCurrency = object.getAcceptedCurrency().split(",");
+
+			boolean correctCurrency = false;
+			boolean acceptedCurrencyUpperCase = true;
+			for (String ac : acceptedCurrency) {
+				if (object.getCurrency().equals(ac))
+					correctCurrency = true;
+
+				if (!ac.toUpperCase().equals(ac))
+					acceptedCurrencyUpperCase = false;
+			}
+			boolean currencyUpperCase = object.getCurrency().toUpperCase().equals(object.getCurrency());
+
+			super.state(correctCurrency, "currency", "administrator.configuration.form.error.correctCurrency");
+			super.state(currencyUpperCase, "currency", "administrator.configuration.form.error.currencyUpperCase");
+			super.state(acceptedCurrencyUpperCase, "acceptedCurrency", "administrator.configuration.form.error.acceptedCurrencyUpperCase");
+
+		}
+
 	}
 
 	@Override

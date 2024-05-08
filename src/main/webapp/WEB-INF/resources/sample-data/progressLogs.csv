@@ -1,11 +1,11 @@
 key,record-id,registration-moment,comment,completeness,responsable,published,key:contract
-progressLogs-01,PG-AB-3783,2021/07/30 14:10,Esto es un comentario de Progression Log para probar que se pueden poner como maximo cien caracteres,79,Adolfo,true,contract-01
-progressLogs-02,PG-CD-8925,2022/07/29 23:59,Avance significativo en la fase de construcción,60,Carla,true,contract-02
-progressLogs-03,PG-EF-2367,2021/09/05 17:30,Revisión y ajuste de la estructura del sitio web,0,ManuelJuananLuisaMacarenaFranciscaIgnacioLeonardoBraulioMaximoSetentaYCinco,true,contract-03
-progressLogs-04,PG-GH-4598,2021/10/20 11:25,んい建濯よ芝弾テソ Λορεμ ιπσθμ,75,Grace,true,contract-04
-progressLogs-05,PG-IJ-6732,2021/11/08 14:50,Lanzamiento exitoso de la campaña de marketing digital,80,Ivan,true,contract-05
-progressLogs-06,PG-KL-1245,2021/12/02 10:15,Diseño del nuevo logotipo aprobado por el cliente,95,Karen,false,contract-06
-progressLogs-07,PG-MN-7854,2022/01/15 13:20,Optimización completada con éxito,85,Miguel,true,contract-07
-progressLogs-08,PG-OP-2368,2022/02/28 08:40,Desarrollo de la aplicación móvil en curso,50,Olga,false,contract-08
-progressLogs-09,PG-QR-5678,2022/03/12 16:05,Infraestructura de red mejorada según las especificaciones,70,Quincy,false,contract-09
-progressLogs-10,PG-ST-9012,2000/01/01 00:00,Contenido multimedia creado y listo para su publicación,65,Sara,false,contract-10
+progressLogs-01,PG-AB-3783,2021/07/30 14:10,Esto es un comentario de Progression Log para probar que se pueden poner como maximo cien caracteres,79.,Adolfo,true,contract-01
+progressLogs-02,PG-CD-8925,2022/07/29 23:59,Avance significativo en la fase de construcción,60.,Carla,true,contract-02
+progressLogs-03,PG-EF-2367,2021/09/05 17:30,Revisión y ajuste de la estructura del sitio web,0.,ManuelJuananLuisaMacarenaFranciscaIgnacioLeonardoBraulioMaximoSetentaYCinco,true,contract-03
+progressLogs-04,PG-GH-4598,2021/10/20 11:25,んい建濯よ芝弾テソ Λορεμ ιπσθμ,75.,Grace,true,contract-04
+progressLogs-05,PG-IJ-6732,2021/11/08 14:50,Lanzamiento exitoso de la campaña de marketing digital,80.,Ivan,true,contract-05
+progressLogs-06,PG-KL-1245,2021/12/02 10:15,Diseño del nuevo logotipo aprobado por el cliente,95.,Karen,false,contract-06
+progressLogs-07,PG-MN-7854,2022/01/15 13:20,Optimización completada con éxito,85.,Miguel,true,contract-07
+progressLogs-08,PG-OP-2368,2022/02/28 08:40,Desarrollo de la aplicación móvil en curso,50.,Olga,false,contract-08
+progressLogs-09,PG-QR-5678,2022/03/12 16:05,Infraestructura de red mejorada según las especificaciones,70.,Quincy,false,contract-09
+progressLogs-10,PG-ST-9012,2000/01/01 00:00,Contenido multimedia creado y listo para su publicación,65.,Sara,false,contract-10

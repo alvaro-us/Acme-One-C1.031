@@ -1,6 +1,0 @@
-key,instation-moment,title,description,priority,status,durationStart,durationEnd,link
-objetive-01,2014/02/21 21:34,Un titulo debe ser vistoso,Describimos la situacion de nuestro video vlog,LOW,true,2015/02/21 21:34,2015/02/22 20:34,https://example.com/videovlog
-objetive-02,2000/01/01 00:00,Se venden correas para mascotas,Son correas de todos los tamaños,MEDIUM,true,2200/12/31 23:58,2200/12/31 23:59,https://example.com/mesasdecoracion
-objetive-03,2011/11/11 11:11,Saludos a la comunidad streamer,Felicitamos a nuestro compañero Pablo por su medalla olimpica,HIGH,true,2200/12/31 23:58,2200/12/31 23:59,https://example.com/videojuegos
-objetive-04,2010/10/17 00:00,Una espejo siempre es de segunda mano,Esta descripcion tiene un gran significado,HIGH,true,2045/10/27 09:37,2190/12/31 22:12,
-objetive-05,2001/03/01 22:13,Esto es un heading para probar el maximo de caracteres probar el maximo jns,Esto es un description para probar el maximo de caracteres probar el maximo de caracteres que es 100,HIGH,true,2033/10/21 09:37,2191/05/12 22:12,

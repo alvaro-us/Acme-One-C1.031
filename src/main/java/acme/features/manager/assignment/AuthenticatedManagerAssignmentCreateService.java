@@ -65,6 +65,8 @@ public class AuthenticatedManagerAssignmentCreateService extends AbstractService
 	public void validate(final Assignment object) {
 		assert object != null;
 
+		Manager manager = this.repository.findManagerById(super.getRequest().getPrincipal().getActiveRoleId());
+
 		if (!super.getBuffer().getErrors().hasErrors(AuthenticatedManagerAssignmentCreateService.PROJECT) && object.getProject() != null)
 			super.state(object.getProject().isDraftMode(), AuthenticatedManagerAssignmentCreateService.PROJECT, "manager.assignment.project.notDraftMode");
 
@@ -78,6 +80,12 @@ public class AuthenticatedManagerAssignmentCreateService extends AbstractService
 
 		if (!super.getBuffer().getErrors().hasErrors(AuthenticatedManagerAssignmentCreateService.USERSTORY))
 			super.state(object.getUserStory() != null, AuthenticatedManagerAssignmentCreateService.USERSTORY, "manager.assignment.user-story.null");
+
+		if (!super.getBuffer().getErrors().hasErrors(AuthenticatedManagerAssignmentCreateService.PROJECT))
+			super.state(object.getProject().getManager() == manager, AuthenticatedManagerAssignmentCreateService.PROJECT, "manager.assignment.project.notMine");
+
+		if (!super.getBuffer().getErrors().hasErrors(AuthenticatedManagerAssignmentCreateService.USERSTORY))
+			super.state(object.getUserStory().getManager() == manager, AuthenticatedManagerAssignmentCreateService.USERSTORY, "manager.assignment.user-story.notMine");
 
 	}
 

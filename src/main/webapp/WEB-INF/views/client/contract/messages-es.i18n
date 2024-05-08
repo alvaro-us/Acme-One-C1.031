@@ -3,6 +3,8 @@ client.contract.list.label.code = Code
 client.contract.list.label.providerName = Nombre de proveedor
 client.contract.list.label.customerName = Nombre de cliente
 client.contract.list.label.budget = Presupuesto
+client.contract.list.label.publicado= Publicado
+client.contract.list.button.create = Crear
 
 client.contract.form.title = Detalles del proyecto
 client.contract.form.label.code = Código
@@ -28,3 +30,7 @@ client.contract.form.button.delete = Eliminar
 client.contract.form.button.update = Actualizar
 client.contract.form.button.publish = Publicar
 client.contract.form.button.create = Crear
+
+client.contract.form.error.totalAmountBelow=Presupuesto excesivo
+client.contract.form.error.negative-price=El presupuesto debe ser positivo
+client.contract.form.error.codeDuplicate=Codigo ya en uso

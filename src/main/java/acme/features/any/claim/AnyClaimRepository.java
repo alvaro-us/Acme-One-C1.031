@@ -18,4 +18,7 @@ public interface AnyClaimRepository extends AbstractRepository {
 	@Query("SELECT c FROM Claim c WHERE c.id = :id")
 	Claim findClaimById(int id);
 
+	@Query("SELECT c FROM Claim c WHERE c.code = :code")
+	Claim findClaimByCode(String code);
+
 }

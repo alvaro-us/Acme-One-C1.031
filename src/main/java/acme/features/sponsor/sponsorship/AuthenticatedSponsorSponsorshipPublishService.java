@@ -61,25 +61,22 @@ public class AuthenticatedSponsorSponsorshipPublishService extends AbstractServi
 		assert object != null;
 
 		Collection<Invoice> invoices = this.repository.findInvoiceBySponsorshipId(object.getId());
-
-		Double invoicesDouble = 0.;
+		double invoicesDouble = 0.;
 		boolean arePublished = true;
+
 		for (Invoice invoice : invoices) {
 			invoicesDouble += invoice.getTotalAmount().getAmount();
 			if (invoice.isDraftMode())
 				arePublished = false;
 		}
 
-		super.state(arePublished, "code", "sponsor.sponsorship.form.error.publishedInvoices");
-
-		super.state(!invoices.isEmpty(), "amount", "sponsor.sponsorship.form.error.noInvoices");
+		super.state(arePublished, "*", "sponsor.sponsorship.form.error.publishedInvoices");
+		super.state(!invoices.isEmpty(), "*", "sponsor.sponsorship.form.error.noInvoices");
 
 		if (!invoices.isEmpty()) {
 
 			Money sponsorshipMoney = object.getAmount();
-
 			boolean correct = Objects.equals(invoicesDouble, sponsorshipMoney.getAmount());
-
 			super.state(correct, "amount", "sponsor.sponsorship.form.error.correctAmount");
 		}
 

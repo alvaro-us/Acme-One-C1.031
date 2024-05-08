@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import acme.client.data.accounts.Principal;
 import acme.client.data.models.Dataset;
-import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
 import acme.entities.progressLogs.ProgressLogs;
 import acme.roles.client.Client;
@@ -19,7 +18,6 @@ public class ClientProgressLogsPublishService extends AbstractService<Client, Pr
 	@Autowired
 	protected ClientProgressLogsRepository repository;
 
-	
 	// AbstractService<Employer, Job> -------------------------------------
 
 
@@ -66,8 +64,6 @@ public class ClientProgressLogsPublishService extends AbstractService<Client, Pr
 			final ProgressLogs progressLog2 = object.getRecordId().equals("") || object.getRecordId() == null ? null : this.repository.findProgressLogsByRecordId(object.getRecordId());
 			super.state(existing == null || progressLog2.equals(existing), "code", "client.contract.form.error.code");
 		}
-		if (!super.getBuffer().getErrors().hasErrors("registrationMoment"))
-			super.state(MomentHelper.isBefore(object.getRegistrationMoment(), MomentHelper.getCurrentMoment()), "instantiationMoment", "client.progressLogs.form.error.moment");
 
 	}
 
