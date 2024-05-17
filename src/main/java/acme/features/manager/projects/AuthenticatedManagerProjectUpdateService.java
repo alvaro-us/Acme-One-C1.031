@@ -74,7 +74,7 @@ public class AuthenticatedManagerProjectUpdateService extends AbstractService<Ma
 			Configuration config;
 			config = this.repository.findConfiguration();
 
-			super.state(object.getCost().getAmount() >= 0.0, "retailPrice", "manager.project.error.cost.negative-price");
+			super.state(object.getCost().getAmount() >= 0.0, "cost", "manager.project.error.cost.negative-price");
 			super.state(Arrays.asList(config.getAcceptedCurrency().trim().split(",")).contains(object.getCost().getCurrency()), "cost", "manager.project.error.cost.currency");
 		}
 

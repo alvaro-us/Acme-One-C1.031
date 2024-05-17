@@ -1,8 +1,7 @@
 
 package acme.entities.configuration;
 
-import java.time.LocalDate;
-import java.time.Period;
+import java.util.Date;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class CurrencyRatioService {
 
 	public CurrencyRatio createCurrencyRatio(final String from, final String to) {
 		CurrencyRatio res = new CurrencyRatio();
-		res.setDate(LocalDate.now());
+		res.setDate(new Date()); // Aquí usamos new Date() para obtener la fecha y hora actuales
 		res.setFromCurrency(from);
 		res.setToCurrency(to);
 
@@ -61,8 +60,10 @@ public class CurrencyRatioService {
 		CurrencyRatio cr = this.repository.findCurrencyRatioFromTo(from, to);
 		CurrencyRatio currencyRatio;
 		if (cr != null) {
-			Period period = Period.between(cr.getDate(), LocalDate.now());
-			boolean masDeUnDiaDeDiferencia = period.getDays() > 1 || period.getMonths() > 0 || period.getYears() > 0;
+			Date currentDate = new Date();
+			long differenceInMilliseconds = currentDate.getTime() - cr.getDate().getTime();
+			long differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
+			boolean masDeUnDiaDeDiferencia = differenceInDays > 90;
 			if (masDeUnDiaDeDiferencia) {
 				this.repository.deleteById(cr.getId());
 				currencyRatio = this.createCurrencyRatio(from, to);
