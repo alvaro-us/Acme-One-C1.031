@@ -1,0 +1,60 @@
+# messages-es.i18n
+#
+# Copyright (C) 2012-2024 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+sponsor.sponsorship.form.title = Patrocinio
+sponsor.sponsorship.list.title = Listado de tus patrocinios
+
+sponsor.sponsorship.form.label.code = Código
+sponsor.sponsorship.form.label.moment = Momento
+sponsor.sponsorship.form.label.durationStart = Inicio
+sponsor.sponsorship.form.label.durationEnd = Fin
+sponsor.sponsorship.form.label.amount = Coste
+sponsor.sponsorship.form.label.type = Tipo
+sponsor.sponsorship.form.label.email = Correo electrónico
+sponsor.sponsorship.form.label.link = Enlace
+sponsor.sponsorship.form.label.project = Proyecto
+
+sponsor.sponsorship.list.label.code = Código
+sponsor.sponsorship.list.label.durationStart = Inicio
+sponsor.sponsorship.list.label.durationEnd = Fin
+sponsor.sponsorship.list.label.type = Tipo
+sponsor.sponsorship.list.label.invoices = Número de Facturas
+sponsor.sponsorship.list.label.published = Publicado
+
+sponsor.sponsorship.list.button.create = Crear
+sponsor.sponsorship.form.button.create = Crear
+sponsor.sponsorship.form.button.update = Actualizar
+sponsor.sponsorship.form.button.delete = Eliminar
+sponsor.sponsorship.form.button.publish = Publicar
+sponsor.sponsorship.form.button.invoice = Facturas
+
+validation.sponsorship.code = Esquema de código incorrecto
+
+sponsor.sponsorship.form.error.correctAmount = La suma de los precios de las facturas no coincide con el precio de este campo
+sponsor.sponsorship.form.error.publishedInvoices = Las facturas del patrocinio con este codigo no estan publicadas
+sponsor.sponsorship.form.error.noInvoices = Este sponsorship no tiene facturas
+sponsor.sponsorship.form.error.codeDuplicated = El código ya esta siendo usado
+sponsor.sponsorship.form.error.momentBeforeDurationStart = El comienzo del patrocinio tiene que ser después del momento
+sponsor.sponsorship.form.error.durationStart1MothBeforeDurationEnd = La duracion debe ser de al menos 1 mes
+sponsor.sponsorship.form.error.amountPositive = El coste tiene que ser positivo
+sponsor.sponsorship.form.error.amountLessInvoicesAmount = El coste de las facturas no puede ser superior al de este campo
+sponsor.sponsorship.form.error.correctStart = El inicio de la duración del patrocinio no es correcto
+sponsor.sponsorship.form.error.correctEnd = El final de la duración del patrocinio no es correcto
+sponsor.sponsorship.form.error.correctMoment = El momento del patrocinio no es correcto
+sponsor.sponsorship.form.error.isAcceptedCurrency = La moneda no es aceptada
+
+
+sponsor.sponsorship.code = Código de patrocinio
+sponsor.sponsorship.durationStart = Inicio del patrocinio
+sponsor.sponsorship.durationEnd = Fin del patrocinio
+sponsor.sponsorship.type = Tipo de patrocinio
+sponsor.sponsorship.link = Enlace del patrocinio
+
+sponsor.sponsorship.form.button.invoices = Facturas

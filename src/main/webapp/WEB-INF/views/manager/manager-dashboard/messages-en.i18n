@@ -1,0 +1,46 @@
+# messages-en.i18n
+#
+# Copyright (C) 2012-2024 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+manager.manager-dashboard.form.title = Dashboard 
+manager.manager-dashboard.form.label.statsUserStory = User story stats
+manager.manager-dashboard.form.label.statsProjects = Project stats
+
+manager.manager-dashboard.totalNumberOfMustUserStory = Total number of must user stories
+manager.manager-dashboard.totalNumberOfShouldUserStory = Total number of should user stories
+manager.manager-dashboard.totalNumberOfCouldUserStory = Total number of could user stories
+manager.manager-dashboard.totalNumberOfWontUserStory = Total number of won´t user stories
+
+manager.manager-dashboard.averageEstimatedCostUserStory = Average estimated cost user story
+manager.manager-dashboard.deviationEstimatedCostUserStory = Deviation estimated cost user story
+manager.manager-dashboard.minEstimatedCostUserStory = Min estimated cost user story
+manager.manager-dashboard.maxEstimatedCostUserStory = Max estimated cost user story
+
+manager.manager-dashboard.averageCostProject.EUR = Average cost EUR project
+manager.manager-dashboard.deviationCostProject.EUR = Deviation cost EUR project
+manager.manager-dashboard.minCostProject.EUR = Min cost EUR project
+manager.manager-dashboard.maxCostProject.EUR = Max cost EUR project
+
+manager.manager-dashboard.averageCostProject.GBP = Average cost GBP project
+manager.manager-dashboard.deviationCostProject.GBP = Deviation cost GBP project
+manager.manager-dashboard.minCostProject.GBP = Min cost GBP project
+manager.manager-dashboard.maxCostProject.GBP = Max cost GBP project
+
+manager.manager-dashboard.averageCostProject.USD = Average cost USD project
+manager.manager-dashboard.deviationCostProject.USD = Deviation cost USD project
+manager.manager-dashboard.minCostProject.USD = Min cost USD project
+manager.manager-dashboard.maxCostProject.USD = Max cost USD project
+
+
+
+
+
+
+
+

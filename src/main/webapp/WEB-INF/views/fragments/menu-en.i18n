@@ -14,6 +14,11 @@ master.menu.home = Home
 master.menu.sign-up = Sign up
 master.menu.sign-in = Sign in
 master.menu.sign-out = Sign out
+master.menu.sponsorships = Sponsorships
+master.menu.authenticated = Authenticated
+master.menu.claims = Claims
+master.menu.training-module = Training Modules
+
 
 # master.menu.anonymous #######################################################
 
@@ -33,6 +38,25 @@ master.menu.administrator.user-accounts = User accounts
 master.menu.administrator.populate-initial = Populate DB (initial)
 master.menu.administrator.populate-sample = Populate DB (samples)
 master.menu.administrator.shut-down = Shut down
+master.menu.administrator.configuration = System Configuration
+
+master.menu.list.banner = List banners
+master.menu.administrator.objective = Post objectives
+
+# master.menu.authenticated ########################################################
+
+master.menu.authenticated.objectives-list = List Objectives
+
+master.menu.administrator.risk = Risks
+
+
+# master.menu.client ########################################################
+
+master.menu.client = Client
+master.menu.client.dashboard = Dashboard
+master.menu.client.contract = List of contracts
+master.menu.client.progress-logs = List of progress logs
+
 
 # master.menu.provider ########################################################
 
@@ -50,6 +74,28 @@ master.menu.auditor = CodeAudits
 master.menu.auditor.my-code-audits = My CodeAudits
 master.menu.auditor.auditrecord.list-my-audit-records = My Audits Record
 
+# master.menu.manager ##########################################################
+
+master.menu.manager = Manager
+master.menu.manager.ListProjects = My projects
+master.menu.manager.Dashboard = My dashboard
+master.menu.manager.Assignments = Assignments
+master.menu.manager.liststories = My user stories
+
+# master.menu.sponsor ##########################################################
+
+master.menu.sponsor = Sponsor
+master.menu.sponsor.ListSponsorship = My sponsorships
+master.menu.sponsor.Dashboard = My dashboard 
+
+# master.menu.developer ##########################################################
+
+master.menu.developer = Developer
+master.menu.developer.ListTrainingModules = My Training Modules
+master.menu.developer.Dashboard = My dashboard 
+
+
+
 # master.menu.user-account ####################################################
 
 master.menu.user-account = Account
@@ -58,3 +104,17 @@ master.menu.user-account.provider = Provider data
 master.menu.user-account.become-provider = Become a provider
 master.menu.user-account.consumer = Consumer data
 master.menu.user-account.become-consumer = Become a consumer
+master.menu.user-account.become-manager = Become a manager
+master.menu.user-account.become-sponsor = Become a sponsor
+
+master.menu.user-account.become-client = Become a client
+master.menu.user-account.client = Client Data
+
+master.menu.user-account.become-developer = Become a developer
+
+master.menu.user-account.manager = Manager Data
+master.menu.user-account.sponsor = Sponsor Data
+master.menu.user-account.developer = Developer Data
+master.menu.user-account.projects = Projects
+master.menu.user-account.notices = Notices
+master.menu.user-account.risk = Risks

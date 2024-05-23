@@ -1,0 +1,32 @@
+# messages-es.i18n
+#
+# Copyright (C) 2012-2024 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+manager.assignment.form.title = Asignaciones 
+manager.assignment.list.title = Listado de asignaciones
+
+manager.assignment.list.label.project = Proyecto
+manager.assignment.list.label.userStory = Historia de usuario
+
+manager.assignment.form.label.project = Proyecto
+manager.assignment.form.label.story = Historia de usuario
+
+manager.assignment.list.button.create = Crear
+manager.assignment.list.button.create.project = Crear un proyecto
+manager.assignment.list.button.create.user-story = Crear una historia de usuario
+
+manager.assignment.form.button.delete = Eliminar
+manager.assignment.form.button.create = Crear
+
+manager.assignment.project.exists = Esta asignación ya existe
+manager.assignment.project.notDraftMode = Has introducido un proyecto que no se encuentra publicado
+manager.assignment.project.null = Por favor seleccione un proyecto
+manager.assignment.user-story.null = Por favor seleccione una historia de usuario
+manager.assignment.project.notMine = Por favor seleccione un proyecto que le pertenezca
+manager.assignment.user-story.notMine = Por favor seleccione una historia de usuario que le pertenezca

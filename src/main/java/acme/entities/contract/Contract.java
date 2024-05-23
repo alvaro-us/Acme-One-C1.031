@@ -37,7 +37,7 @@ public class Contract extends AbstractEntity {
 	@NotBlank
 	@Pattern(regexp = "[A-Z]{1,3}-[0-9]{3}")
 	@Column(unique = true)
-	private String				Code;
+	private String				code;
 
 	@NotNull
 	@Past
@@ -59,6 +59,8 @@ public class Contract extends AbstractEntity {
 	@NotNull
 	@Valid
 	private Money				budget;
+
+	private boolean				published;
 
 	@Valid
 	@NotNull

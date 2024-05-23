@@ -9,13 +9,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.PositiveOrZero;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
 import acme.client.data.AbstractEntity;
 import acme.entities.contract.Contract;
@@ -47,12 +48,16 @@ public class ProgressLogs extends AbstractEntity {
 	@Length(max = 100)
 	private String				comment;
 
-	@PositiveOrZero
-	private Integer				completeness;
+	@NotNull
+	@Digits(fraction = 2, integer = 3)
+	@Range(min = 0, max = 100)
+	private double				completeness;
 
 	@NotBlank
-	@Length(max = 75)
+	@Length(max = 75, min = 0)
 	private String				responsable;
+
+	private boolean				published;
 
 	// Relationships ----------------------------------------------
 

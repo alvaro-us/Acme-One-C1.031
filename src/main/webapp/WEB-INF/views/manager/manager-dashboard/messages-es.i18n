@@ -1,0 +1,38 @@
+# messages-es.i18n
+#
+# Copyright (C) 2012-2024 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+manager.manager-dashboard.form.title = Panel 
+manager.manager-dashboard.form.label.statsUserStory = Estadísticas de Historias de Usuario
+manager.manager-dashboard.form.label.statsProjects = Estadísticas de proyectos
+
+manager.manager-dashboard.totalNumberOfMustUserStory = Historias de usuario obligatorias totales
+manager.manager-dashboard.totalNumberOfShouldUserStory = Historias de usuario debería totales
+manager.manager-dashboard.totalNumberOfCouldUserStory = Historias de usuario podría totales
+manager.manager-dashboard.totalNumberOfWontUserStory = Historias de usuario que no se harán totales
+
+manager.manager-dashboard.averageEstimatedCostUserStory = Media del coste estimado de historias de usuario
+manager.manager-dashboard.deviationEstimatedCostUserStory = Desviacion del coste estimado de historias de usuario
+manager.manager-dashboard.minEstimatedCostUserStory = Mínimo del coste estimado de historias de usuario
+manager.manager-dashboard.maxEstimatedCostUserStory = Máximo del coste estimado de historias de usuario
+
+manager.manager-dashboard.averageCostProject.EUR = Media del coste de los proyectos con euros
+manager.manager-dashboard.deviationCostProject.EUR = Desviación del coste de los proyectos con euros
+manager.manager-dashboard.minCostProject.EUR = Mínimo coste de los proyectos con euros
+manager.manager-dashboard.maxCostProject.EUR = Máximo coste de los proyectos con euros
+
+manager.manager-dashboard.averageCostProject.GBP = Media del coste de los proyectos con libras
+manager.manager-dashboard.deviationCostProject.GBP = Desviación del coste de los proyectos con libras
+manager.manager-dashboard.minCostProject.GBP = Mínimo coste de los proyectos con libras
+manager.manager-dashboard.maxCostProject.GBP = Máximo coste de los proyectos con libras
+
+manager.manager-dashboard.averageCostProject.USD = Media del coste de los proyectos con dólares
+manager.manager-dashboard.deviationCostProject.USD = Desviación del coste de los proyectos con dólares
+manager.manager-dashboard.minCostProject.USD = Mínimo coste de los proyectos con dólares
+manager.manager-dashboard.maxCostProject.USD = Máximo coste de los proyectos con dólares
