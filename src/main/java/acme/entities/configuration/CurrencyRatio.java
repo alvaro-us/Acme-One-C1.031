@@ -1,7 +1,7 @@
 
 package acme.entities.configuration;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Entity;
 
@@ -22,7 +22,7 @@ public class CurrencyRatio extends AbstractEntity {
 
 	protected Double			ratio;
 
-	protected LocalDate			date;
+	protected Date				date;
 
 	protected String			fromCurrency;
 
