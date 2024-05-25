@@ -3,6 +3,7 @@ client.contract.list.label.code = Code
 client.contract.list.label.providerName = ProviderName
 client.contract.list.label.customerName = CustomerName
 client.contract.list.label.budget = Budget
+client.contract.list.label.publicado= Publicado
 
 client.contract.form.title = Contract details
 client.contract.form.label.code = Code
@@ -28,3 +29,7 @@ client.contract.form.button.delete = Delete
 client.contract.form.button.update = Update
 client.contract.form.button.publish = Publish
 client.contract.form.button.create = Create
+
+client.contract.form.error.totalAmountBelow=The total amount of all contracts must be below the project cost
+client.contract.form.error.negative-price=The budget must be positive
+client.contract.form.error.code=Already in use

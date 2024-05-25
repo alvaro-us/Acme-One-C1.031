@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
+import acme.entities.configuration.CurrencyService;
 // import acme.entities.components.AuxiliarService;
 import acme.entities.contract.Contract;
 import acme.entities.projects.Project;
@@ -18,10 +20,10 @@ import acme.roles.client.Client;
 public class ClientContractCreateService extends AbstractService<Client, Contract> {
 
 	@Autowired
-	protected ClientContractRepository repository;
+	protected ClientContractRepository	repository;
 
-	//@Autowired
-	//protected AuxiliarService			auxiliarService;
+	@Autowired
+	protected CurrencyService			currencyService;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -36,6 +38,7 @@ public class ClientContractCreateService extends AbstractService<Client, Contrac
 		Contract object;
 		object = new Contract();
 		final Client client = this.repository.findOneClientById(super.getRequest().getPrincipal().getActiveRoleId());
+		object.setInstationMoment(MomentHelper.getCurrentMoment());
 		object.setClient(client);
 		object.setPublished(false);
 		super.getBuffer().addData(object);
@@ -53,45 +56,25 @@ public class ClientContractCreateService extends AbstractService<Client, Contrac
 		if (object == null)
 			throw new IllegalArgumentException("No object found");
 
+		boolean totalAmountBelowProjectCost;
+
+		String currency = object.getProject().getCost().getCurrency();
+		Collection<Contract> contracts = this.repository.findContractsFromProject(object.getId());
+		double sum = 0.;
+		for (Contract contract : contracts)
+			sum += this.currencyService.changeCurrencyTo(contract.getBudget(), currency).getAmount();
+
+		totalAmountBelowProjectCost = sum + this.currencyService.changeCurrencyTo(object.getBudget(), currency).getAmount() <= object.getProject().getCost().getAmount();
+		super.state(totalAmountBelowProjectCost, "budget", "client.contract.form.error.totalAmountBelow");
+
+		if (!super.getBuffer().getErrors().hasErrors("budget"))
+			super.state(object.getBudget().getAmount() >= 0., "budget", "client.contract.form.error.negative-price");
+
 		if (!super.getBuffer().getErrors().hasErrors("code")) {
 			Contract existing;
 			existing = this.repository.findContractByCode(object.getCode());
 			super.state(existing == null, "code", "client.contract.form.error.code");
 		}
-
-		final Collection<Contract> contracts = this.repository.findContractsFromProject(object.getProject().getId());
-		/*
-		 * Money ratioEuros;
-		 * ratioEuros = new Money();
-		 * ratioEuros.setAmount(100.00);
-		 * ratioEuros.setCurrency("EUR");
-		 * 
-		 * if (!contracts.isEmpty()) {
-		 * 
-		 * boolean overBudget;
-		 * double totalBudget = 0.0;
-		 * for (Contract c : contracts)
-		 * totalBudget = totalBudget + c.getBudget().getAmount();
-		 * if (totalBudget < object.getProject().getCost() * ratioEuros.getAmount())
-		 * overBudget = false;
-		 * else
-		 * overBudget = true;
-		 * super.state(overBudget, "*", "manager.project.form.error.overBudget");
-		 * }
-		 * 
-		 * if (!super.getBuffer().getErrors().hasErrors("budget")) {
-		 * 
-		 * Money maxEuros;
-		 * 
-		 * maxEuros = new Money();
-		 * maxEuros.setAmount(1000000.00);
-		 * maxEuros.setCurrency("EUR");
-		 * double maximo = object.getProject().getCost() * this.auxiliarService.changeCurrency(ratioEuros).getAmount();
-		 * super.state(this.auxiliarService.validatePrice(object.getBudget(), 0.00, maximo), "cost", "client.contract.form.error.budget");
-		 * super.state(this.auxiliarService.validateCurrency(object.getBudget()), "budget", "client.contract.form.error.cost2");
-		 * 
-		 * }
-		 */
 
 	}
 
@@ -107,16 +90,14 @@ public class ClientContractCreateService extends AbstractService<Client, Contrac
 		if (object == null)
 			throw new IllegalArgumentException("No object found");
 		Dataset dataset;
-		SelectChoices choicesP;
-		dataset = super.unbind(object, "code", "instationMoment", "providerName", "customerName", "goals", "budget", "project", "client", "published");
 
-		final SelectChoices choices = new SelectChoices();
+		final SelectChoices choicesP = new SelectChoices();
 		Collection<Project> projects;
 		projects = this.repository.findPublishedProjects();
 		for (final Project p : projects)
-			choices.add(Integer.toString(p.getId()), p.getCode() + " - " + p.getTitle(), false);
-
-		dataset.put("projects", choices);
+			choicesP.add(Integer.toString(p.getId()), p.getCode() + " - " + p.getTitle(), false);
+		dataset = super.unbind(object, "code", "instationMoment", "providerName", "customerName", "goals", "budget", "project", "client", "published");
+		dataset.put("projects", choicesP);
 		super.getResponse().addData(dataset);
 	}
 }

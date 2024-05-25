@@ -3,13 +3,13 @@ client.progress-logs.form.title = Detalles del acta
 
 client.progress-logs.list.label.recordId = Id de registro
 client.progress-logs.list.label.completeness = Completitud
-client.progress-logs.list.label.responsiblePerson = Responsable
+client.progress-logs.list.label.responsable = Responsable
 
 client.progress-logs.form.label.recordId = Id de registro
 client.progress-logs.form.label.completeness = Completitud
 client.progress-logs.form.label.comment = Comentarios
 client.progress-logs.form.label.registrationMoment = Registro
-client.progress-logs.form.label.responsiblePerson = Responsable
+client.progress-logs.form.label.responsable = Responsable
 client.progress-logs.form.label.contract = Contrato
 
 client.progressLogs.form.error.recordId = El registro se debe de componer en el siguiente patron: 2 letras - 2 letras - 4 numeros
@@ -20,4 +20,6 @@ client.progress-logs.create = Crear
 client.progress-logs.form.button.delete = Eliminar
 client.progress-logs.form.button.update = Actualizar
 client.progress-logs.form.button.publish = Publicar
-client.progress-logs.form.button.create = Crear
+client.progress-logs.list.button.create = Crear
+
+client.progressLogs.form.error.codeDuplicated= Ya en uso
