@@ -28,5 +28,7 @@ manager.assignment.project.exists = This assignment already exists
 manager.assignment.project.notDraftMode = This project is not published
 manager.assignment.project.null = Please select a project
 manager.assignment.user-story.null = Please select an user story
+manager.assignment.project.notMine = Please select a project you own
+manager.assignment.user-story.notMine = Please select an user story you own
 
 

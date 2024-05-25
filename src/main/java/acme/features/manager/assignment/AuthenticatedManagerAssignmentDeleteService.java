@@ -31,8 +31,14 @@ public class AuthenticatedManagerAssignmentDeleteService extends AbstractService
 	@Override
 	public void authorise() {
 		boolean status;
+		Assignment object;
+		Manager manager;
+		int id;
+		id = super.getRequest().getData("id", int.class);
+		object = this.repository.findAssignmentById(id);
 
-		status = super.getRequest().getPrincipal().hasRole(Manager.class);
+		manager = this.repository.findManagerById(super.getRequest().getPrincipal().getActiveRoleId());
+		status = super.getRequest().getPrincipal().hasRole(Manager.class) && object.getProject().getManager().equals(manager) && object.getProject().isDraftMode();
 		super.getResponse().setAuthorised(status);
 	}
 

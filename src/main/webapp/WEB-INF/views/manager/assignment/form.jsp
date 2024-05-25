@@ -22,9 +22,11 @@
 	<acme:input-select code="manager.assignment.form.label.story"
 		path="userStory" choices="${userStories}"
 		readonly="${_command != 'create'}" />
+		
+	<acme:hidden-data path="draftMode"/>
 
 	<jstl:choose>
-		<jstl:when test="${acme:anyOf(_command, 'show|delete')}">
+		<jstl:when test="${acme:anyOf(_command, 'show|delete') && draftMode == true}">
 			<acme:submit code="manager.assignment.form.button.delete"
 				action="/manager/assignment/delete" />
 		</jstl:when>
