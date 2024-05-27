@@ -11,6 +11,7 @@ user-account-developer-01,true,"UserIdentity{name: 'Felipe', surname: 'Peña', e
 user-account-developer-02,true,"UserIdentity{name: 'Felipe', surname: 'Peña', email: 'felipe@acme.com'}",developer2,developer2
 user-account-sponsor-01,true,"UserIdentity{name: 'Javier', surname: 'Muñoz', email: 'sponsor1@acme.com'}",sponsor1,sponsor1
 user-account-sponsor-02,true,"UserIdentity{name: 'Nicolas', surname: 'Perez', email: 'sponsor2@acme.com'}",sponsor2,sponsor2
+user-account-sponsor-03,true,"UserIdentity{name: 'Juan', surname: 'EseeEssse', email: 'sponsor3@acme.com'}",sponsor3,sponsor3
 user-account-client-01,true,"UserIdentity{name: 'Juan', surname: 'Nuñez', email: 'juan@acme.com'}",client1,client1
 user-account-client-02,true,"UserIdentity{name: 'Jose', surname: 'Sanchez', email: 'jose@acme.com'}",client2,client2
 user-account-administrator-02,true,"UserIdentity{name: 'Administrator2', surname: 'Acme2', email: 'administrator2@acme.com'}",administrator1,administrator1

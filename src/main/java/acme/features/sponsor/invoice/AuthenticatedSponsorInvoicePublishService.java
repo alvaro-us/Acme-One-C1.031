@@ -52,6 +52,13 @@ public class AuthenticatedSponsorInvoicePublishService extends AbstractService<S
 	public void validate(final Invoice object) {
 		assert object != null;
 
+		Invoice invoice;
+		invoice = this.repository.findInvoiceById(object.getId());
+		boolean noUpdate = invoice.getCode().equals(object.getCode()) && invoice.getRegistrationTime().compareTo(object.getRegistrationTime()) == 0 && invoice.getDueDate().compareTo(object.getDueDate()) == 0
+			&& invoice.getQuantity().getAmount().equals(object.getQuantity().getAmount()) && invoice.getQuantity().getCurrency().equals(object.getQuantity().getCurrency()) && invoice.getTax().equals(object.getTax())
+			&& invoice.getLink().equals(object.getLink());
+		super.state(noUpdate, "*", "sponsor.invoice.form.error.hasToUpdate");
+
 	}
 
 	@Override

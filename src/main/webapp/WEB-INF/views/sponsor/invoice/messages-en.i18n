@@ -21,8 +21,11 @@ sponsor.invoice.list.label.published = Published
 
 
 sponsor.invoice.form.error.codeDuplicated = Code is already in use
+sponsor.invoice.form.error.correctCurrency = The currency is not the same as the sponsorship.
 sponsor.invoice.form.error.totalAmountLessOrEqualThanSponsorshipAmount = The sum of the prices of all invoices cannot exceed the sponsorship cost
 sponsor.invoice.form.error.registrationTime1MothBeforeDueDate = The due date must be at least one month after the registration date
+sponsor.invoice.form.error.hasToUpdate = You have to update before you can publish
+
 
 sponsor.invoice.list.button.create = Create
 sponsor.invoice.form.button.create = Create

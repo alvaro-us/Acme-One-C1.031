@@ -74,16 +74,15 @@ public class AuthenticatedSponsorSponsorshipCreateService extends AbstractServic
 		}
 
 		// Date
-		if (!super.getBuffer().getErrors().hasErrors("durationStart") && !super.getBuffer().getErrors().hasErrors("moment")) {
+		if (!super.getBuffer().getErrors().hasErrors("durationStart")) {
 			Boolean momentBeforeDurationStart;
 			momentBeforeDurationStart = MomentHelper.isAfter(object.getDurationStart(), MomentHelper.deltaFromMoment(object.getMoment(), 0l, ChronoUnit.DAYS));
 			super.state(momentBeforeDurationStart, "durationStart", "sponsor.sponsorship.form.error.momentBeforeDurationStart");
-		}
-
-		if (!super.getBuffer().getErrors().hasErrors("durationStart") && !super.getBuffer().getErrors().hasErrors("durationEnd")) {
-			boolean durationStart1MothBeforeDurationEnd;
-			durationStart1MothBeforeDurationEnd = MomentHelper.isAfter(object.getDurationEnd(), MomentHelper.deltaFromMoment(object.getDurationStart(), 1l, ChronoUnit.MONTHS));
-			super.state(durationStart1MothBeforeDurationEnd, "durationEnd", "sponsor.sponsorship.form.error.durationStart1MothBeforeDurationEnd");
+			if (!super.getBuffer().getErrors().hasErrors("durationEnd")) {
+				boolean durationStart1MothBeforeDurationEnd;
+				durationStart1MothBeforeDurationEnd = MomentHelper.isAfter(object.getDurationEnd(), MomentHelper.deltaFromMoment(object.getDurationStart(), 1l, ChronoUnit.MONTHS));
+				super.state(durationStart1MothBeforeDurationEnd, "durationEnd", "sponsor.sponsorship.form.error.durationStart1MothBeforeDurationEnd");
+			}
 		}
 
 		// Amount

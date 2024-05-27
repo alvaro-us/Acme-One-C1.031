@@ -39,4 +39,9 @@ public interface AuthenticatedSponsorSponsorshipRepository extends AbstractRepos
 	@Query("SELECT p FROM Project p WHERE p.draftMode = false")
 	Collection<Project> findAllProjectsPublished();
 
+	@Query("SELECT COUNT(i) FROM Invoice i WHERE i.sponsorship.id = :id AND i.draftMode = false")
+	long countNonDraftInvoicesBySponsorshipId(int id);
+
+	@Query("SELECT COUNT(i) FROM Invoice i WHERE i.sponsorship.id = :id AND i.draftMode = true")
+	long countDraftInvoicesBySponsorshipId(int id);
 }
