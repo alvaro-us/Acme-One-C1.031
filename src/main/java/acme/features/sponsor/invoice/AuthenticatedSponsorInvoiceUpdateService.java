@@ -38,7 +38,7 @@ public class AuthenticatedSponsorInvoiceUpdateService extends AbstractService<Sp
 		id1 = super.getRequest().getPrincipal().getAccountId();
 
 		sponsor = invoice.getSponsorship().getSponsor();
-		status = invoice != null && super.getRequest().getPrincipal().hasRole(Sponsor.class) && invoice.getSponsorship().getSponsor().getUserAccount().getId() == id1;
+		status = invoice != null && super.getRequest().getPrincipal().hasRole(Sponsor.class) && sponsor.getUserAccount().getId() == id1;
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -68,31 +68,36 @@ public class AuthenticatedSponsorInvoiceUpdateService extends AbstractService<Sp
 		Invoice invoice1 = this.repository.findInvoiceById(object.getId());
 		int sponsorshipId = object.getSponsorship().getId();
 		Collection<Invoice> invoices = this.repository.findAllInvoiceOfSponsorship(sponsorshipId);
+
 		double totalAmount = 0.;
 		for (Invoice invoice : invoices)
 			if (invoice != null && invoice.getId() != object.getId())
 				totalAmount += invoice.getTotalAmount().getAmount();
 
-		String currency = object.getSponsorship().getAmount().getCurrency();
-
-		boolean correctCurrency = Objects.equals(object.getQuantity().getCurrency(), currency);
-
 		if (!Objects.equals(object.getCode(), invoice1.getCode())) {
 			Boolean codeDuplicated = this.repository.findInvoiceByCode(object.getCode()) == null;
 			super.state(codeDuplicated, "code", "sponsor.invoice.form.error.codeDuplicated");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("quantity")) {
+
+			String currency = object.getSponsorship().getAmount().getCurrency();
+
+			boolean correctCurrency = Objects.equals(object.getQuantity().getCurrency(), currency);
+			super.state(correctCurrency, "quantity", "sponsor.invoice.form.error.correctCurrency");
+
+			boolean totalAmountLessOrEqualThanSponsorshipAmount = totalAmount + object.getTotalAmount().getAmount() <= object.getSponsorship().getAmount().getAmount();
+			if (correctCurrency) {
+				super.state(totalAmountLessOrEqualThanSponsorshipAmount, "quantity", "sponsor.invoice.form.error.totalAmountLessOrEqualThanSponsorshipAmount");
+				super.state(totalAmountLessOrEqualThanSponsorshipAmount, "tax", "sponsor.invoice.form.error.totalAmountLessOrEqualThanSponsorshipAmount");
+			}
 
 		}
 
-		super.state(correctCurrency, "quantity", "sponsor.invoice.form.error.correctCurrency");
-
-		boolean totalAmountLessOrEqualThanSponsorshipAmount = totalAmount + object.getTotalAmount().getAmount() <= object.getSponsorship().getAmount().getAmount();
-		boolean registrationTime1MothBeforeDueDate = MomentHelper.isAfter(object.getDueDate(), MomentHelper.deltaFromMoment(object.getRegistrationTime(), 1l, ChronoUnit.MONTHS));
-		if (correctCurrency) {
-			super.state(totalAmountLessOrEqualThanSponsorshipAmount, "quantity", "sponsor.invoice.form.error.totalAmountLessOrEqualThanSponsorshipAmount");
-			super.state(totalAmountLessOrEqualThanSponsorshipAmount, "tax", "sponsor.invoice.form.error.totalAmountLessOrEqualThanSponsorshipAmount");
+		if (!super.getBuffer().getErrors().hasErrors("dueDate") && !super.getBuffer().getErrors().hasErrors("registrationTime")) {
+			boolean registrationTime1MothBeforeDueDate = MomentHelper.isAfter(object.getDueDate(), MomentHelper.deltaFromMoment(object.getRegistrationTime(), 1l, ChronoUnit.MONTHS));
+			super.state(registrationTime1MothBeforeDueDate, "dueDate", "sponsor.invoice.form.error.registrationTime1MothBeforeDueDate");
 		}
-
-		super.state(registrationTime1MothBeforeDueDate, "dueDate", "sponsor.invoice.form.error.registrationTime1MothBeforeDueDate");
 
 	}
 
@@ -107,10 +112,7 @@ public class AuthenticatedSponsorInvoiceUpdateService extends AbstractService<Sp
 	public void unbind(final Invoice object) {
 		assert object != null;
 
-		int sponsorId;
 		Dataset dataset;
-
-		sponsorId = super.getRequest().getPrincipal().getActiveRoleId();
 
 		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link");
 		super.getResponse().addData(dataset);

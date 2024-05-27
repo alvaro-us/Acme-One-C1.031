@@ -50,6 +50,8 @@ sponsor.sponsorship.form.error.correctStart = El inicio de la duración del patr
 sponsor.sponsorship.form.error.correctEnd = El final de la duración del patrocinio no es correcto
 sponsor.sponsorship.form.error.correctMoment = El momento del patrocinio no es correcto
 sponsor.sponsorship.form.error.isAcceptedCurrency = La moneda no es aceptada
+sponsor.sponsorship.form.error.hasToUpdate = Tienes que actualizar antes de poder publicar
+sponsor.sponsorship.form.error.incorrectCurrency = Estas cambiando la moneda y ya no es la misma que tus facturas
 
 
 sponsor.sponsorship.code = Código de patrocinio

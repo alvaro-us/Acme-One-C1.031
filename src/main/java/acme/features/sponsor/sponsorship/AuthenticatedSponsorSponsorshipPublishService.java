@@ -60,23 +60,31 @@ public class AuthenticatedSponsorSponsorshipPublishService extends AbstractServi
 	public void validate(final Sponsorship object) {
 		assert object != null;
 
-		Collection<Invoice> invoices = this.repository.findInvoiceBySponsorshipId(object.getId());
-		double invoicesDouble = 0.;
-		boolean arePublished = true;
+		Sponsorship sponsorship;
+		sponsorship = this.repository.findSponsorshipById(object.getId());
 
-		for (Invoice invoice : invoices) {
-			invoicesDouble += invoice.getTotalAmount().getAmount();
-			if (invoice.isDraftMode())
-				arePublished = false;
-		}
+		Collection<Invoice> invoices = this.repository.findInvoiceBySponsorshipId(object.getId());
+		boolean arePublished;
+		Double totalAmount = 0.;
+		for (Invoice invoice : invoices)
+			totalAmount += invoice.getTotalAmount().getAmount();
+
+		long draftInvoiceCount = this.repository.countDraftInvoicesBySponsorshipId(object.getId());
+
+		arePublished = draftInvoiceCount == 0;
+
+		boolean noUpdate = sponsorship.getCode().equals(object.getCode()) && sponsorship.getDurationStart().compareTo(object.getDurationStart()) == 0 && sponsorship.getDurationEnd().compareTo(object.getDurationEnd()) == 0
+			&& sponsorship.getAmount().getAmount().equals(object.getAmount().getAmount()) && sponsorship.getAmount().getCurrency().equals(object.getAmount().getCurrency()) && sponsorship.getType().equals(object.getType())
+			&& sponsorship.getEmail().equals(object.getEmail()) && sponsorship.getLink().equals(object.getLink()) && sponsorship.getProject().getCode().equals(object.getProject().getCode());
 
 		super.state(arePublished, "*", "sponsor.sponsorship.form.error.publishedInvoices");
 		super.state(!invoices.isEmpty(), "*", "sponsor.sponsorship.form.error.noInvoices");
+		super.state(noUpdate, "*", "sponsor.sponsorship.form.error.hasToUpdate");
 
 		if (!invoices.isEmpty()) {
 
 			Money sponsorshipMoney = object.getAmount();
-			boolean correct = Objects.equals(invoicesDouble, sponsorshipMoney.getAmount());
+			boolean correct = Objects.equals(totalAmount, sponsorshipMoney.getAmount());
 			super.state(correct, "amount", "sponsor.sponsorship.form.error.correctAmount");
 		}
 

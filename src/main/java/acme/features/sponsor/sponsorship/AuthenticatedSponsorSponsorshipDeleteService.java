@@ -39,7 +39,7 @@ public class AuthenticatedSponsorSponsorshipDeleteService extends AbstractServic
 		id1 = super.getRequest().getPrincipal().getAccountId();
 
 		sponsor = sponsorship.getSponsor();
-		status = sponsorship != null && sponsorship.isDraftMode() && super.getRequest().getPrincipal().hasRole(Sponsor.class) && sponsorship.getSponsor().getUserAccount().getId() == id1;
+		status = sponsorship != null && sponsorship.isDraftMode() && super.getRequest().getPrincipal().hasRole(Sponsor.class) && sponsor.getUserAccount().getId() == id1;
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -64,17 +64,12 @@ public class AuthenticatedSponsorSponsorshipDeleteService extends AbstractServic
 
 	@Override
 	public void validate(final Sponsorship object) {
+	    assert object != null;
 
-		Collection<Invoice> invoices;
-		invoices = this.repository.findInvoiceBySponsorshipId(object.getId());
-		boolean canDelete = true;
-		for (Invoice invoice : invoices)
-			if (!invoice.isDraftMode())
-				canDelete = false;
+	    long nonDraftInvoiceCount = this.repository.countNonDraftInvoicesBySponsorshipId(object.getId());
+	    boolean canDelete = nonDraftInvoiceCount == 0;
 
-		super.state(canDelete, "*", "sponsor.sponsorship.form.error.cantDelete");
-
-		assert object != null;
+	    super.state(canDelete, "*", "sponsor.sponsorship.form.error.cantDelete");
 	}
 
 	@Override
@@ -93,10 +88,7 @@ public class AuthenticatedSponsorSponsorshipDeleteService extends AbstractServic
 	public void unbind(final Sponsorship object) {
 		assert object != null;
 
-		int id;
 		Dataset dataset;
-
-		id = super.getRequest().getPrincipal().getActiveRoleId();
 
 		dataset = super.unbind(object, "code", "moment", "durationStart", "durationEnd", "amount", "type", "email", "link", "draftMode");
 

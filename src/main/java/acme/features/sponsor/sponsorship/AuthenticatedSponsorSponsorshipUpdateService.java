@@ -76,10 +76,6 @@ public class AuthenticatedSponsorSponsorshipUpdateService extends AbstractServic
 		Sponsorship sponsorship = this.repository.findSponsorshipById(sponsorshipId);
 		Collection<Invoice> invoices = this.repository.findInvoiceBySponsorshipId(sponsorshipId);
 
-		double totalAmount = 0.;
-		for (Invoice invoice : invoices)
-			totalAmount += invoice.getTotalAmount().getAmount();
-
 		// Code
 		if (!super.getBuffer().getErrors().hasErrors("code")) {
 			String code = object.getCode();
@@ -92,21 +88,30 @@ public class AuthenticatedSponsorSponsorshipUpdateService extends AbstractServic
 
 		// Date
 
-		if (!super.getBuffer().getErrors().hasErrors("durationStart") && !super.getBuffer().getErrors().hasErrors("moment")) {
+		if (!super.getBuffer().getErrors().hasErrors("durationStart")) {
 			boolean momentBeforeDurationStart = MomentHelper.isAfter(object.getDurationStart(), MomentHelper.deltaFromMoment(object.getMoment(), 0l, ChronoUnit.DAYS));
 			super.state(momentBeforeDurationStart, "durationStart", "sponsor.sponsorship.form.error.momentBeforeDurationStart");
+			if (!super.getBuffer().getErrors().hasErrors("durationEnd")) {
+				boolean durationStart1MothBeforeDurationEnd = MomentHelper.isAfter(object.getDurationEnd(), MomentHelper.deltaFromMoment(object.getDurationStart(), 1l, ChronoUnit.MONTHS));
+				super.state(durationStart1MothBeforeDurationEnd, "durationEnd", "sponsor.sponsorship.form.error.durationStart1MothBeforeDurationEnd");
 
-		}
-
-		if (!super.getBuffer().getErrors().hasErrors("durationStart") && !super.getBuffer().getErrors().hasErrors("durationEnd")) {
-			boolean durationStart1MothBeforeDurationEnd = MomentHelper.isAfter(object.getDurationEnd(), MomentHelper.deltaFromMoment(object.getDurationStart(), 1l, ChronoUnit.MONTHS));
-			super.state(durationStart1MothBeforeDurationEnd, "durationEnd", "sponsor.sponsorship.form.error.durationStart1MothBeforeDurationEnd");
+			}
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("amount")) {
+
+			String currency = object.getAmount().getCurrency();
+
+			double totalAmount = 0.;
+			for (Invoice invoice : invoices) {
+				currency = invoice.getQuantity().getCurrency();
+				totalAmount += invoice.getTotalAmount().getAmount();
+			}
+
 			boolean isAcceptedCurrency = this.service.isAcceptedCurrency(object.getAmount().getCurrency());
 			boolean amountLessInvoicesAmount = object.getAmount().getAmount() >= totalAmount;
 			boolean amountPositive = object.getAmount().getAmount() >= 0;
+			super.state(currency.equals(object.getAmount().getCurrency()), "amount", "sponsor.sponsorship.form.error.incorrectCurrency");
 
 			if (isAcceptedCurrency) {
 				super.state(amountPositive, "amount", "sponsor.sponsorship.form.error.amountPositive");

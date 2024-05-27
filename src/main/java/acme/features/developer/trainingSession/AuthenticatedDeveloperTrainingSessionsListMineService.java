@@ -32,20 +32,19 @@ public class AuthenticatedDeveloperTrainingSessionsListMineService extends Abstr
 
 		tId = super.getRequest().getData("tsId", int.class);
 		trainingModule = this.repository.findTrainingModuleById(tId);
-		status = trainingModule != null && trainingModule.isDraftMode() && super.getRequest().getPrincipal().hasRole(trainingModule.getDeveloper());
+		status = trainingModule != null && super.getRequest().getPrincipal().hasRole(trainingModule.getDeveloper());
 
 		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
-		TrainingSession object;
-		int id;
+		Collection<TrainingSession> objects;
 
-		id = super.getRequest().getData("id", int.class);
-		object = this.repository.findTrainingSessionById(id);
+		final int tmId = super.getRequest().getData("tmId", int.class);
+		objects = this.repository.findAllTrainingSessionsByTMId(tmId);
 
-		super.getBuffer().addData(object);
+		super.getBuffer().addData(objects);
 	}
 
 	@Override

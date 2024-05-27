@@ -51,6 +51,10 @@ sponsor.sponsorship.form.error.correctStart = The start of the sponsorship durat
 sponsor.sponsorship.form.error.correctEnd = The end of the sponsorship duration is not correct
 sponsor.sponsorship.form.error.correctMoment = The moment of the sponsorship is not correct
 sponsor.sponsorship.form.error.isAcceptedCurrency = The currency is not accepted
+sponsor.sponsorship.form.error.cantDelete = Unable to delete because there are published invoices associated
+sponsor.sponsorship.form.error.hasToUpdate = You have to update before you can publish
+sponsor.sponsorship.form.error.incorrectCurrency = You are changing the currency, and it no longer matches your invoices
+
 
 
 

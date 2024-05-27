@@ -1,6 +1,7 @@
 
 package acme.features.client.contract;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 import acme.client.data.accounts.Principal;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
+import acme.entities.configuration.Configuration;
+import acme.entities.configuration.CurrencyService;
 // import acme.entities.components.AuxiliarService;
 import acme.entities.contract.Contract;
 import acme.roles.client.Client;
@@ -17,7 +20,10 @@ import acme.roles.client.Client;
 public class ClientContractPublishService extends AbstractService<Client, Contract> {
 
 	@Autowired
-	protected ClientContractRepository repository;
+	protected ClientContractRepository	repository;
+
+	@Autowired
+	protected CurrencyService			currencyService;
 
 	//@Autowired
 	//protected AuxiliarService			auxiliarService;
@@ -62,45 +68,36 @@ public class ClientContractPublishService extends AbstractService<Client, Contra
 	public void validate(final Contract object) {
 		if (object == null)
 			throw new IllegalArgumentException("No object found");
-		final Collection<Contract> contracts = this.repository.findContractsFromProject(object.getProject().getId());
-		super.state(!contracts.isEmpty(), "*", "manager.project.form.error.noContracts");
-		/*
-		 * Money ratioEuros;
-		 * ratioEuros = new Money();
-		 * ratioEuros.setAmount(100.00);
-		 * ratioEuros.setCurrency("EUR");
-		 * 
-		 * if (!contracts.isEmpty()) {
-		 * 
-		 * boolean overBudget;
-		 * double totalBudget = 0.0;
-		 * for (Contract c : contracts)
-		 * totalBudget = totalBudget + c.getBudget().getAmount();
-		 * if (totalBudget < object.getProject().getCost() * ratioEuros.getAmount())
-		 * overBudget = false;
-		 * else
-		 * overBudget = true;
-		 * super.state(overBudget, "*", "manager.project.form.error.overBudget");
-		 * }
-		 * 
-		 * if (!super.getBuffer().getErrors().hasErrors("code")) {
-		 * Contract existing;
-		 * existing = this.repository.findContractByCode(object.getCode());
-		 * final Contract contract2 = object.getCode().equals("") || object.getCode() == null ? null : this.repository.findContractById(object.getId());
-		 * super.state(existing == null || contract2.equals(existing), "code", "client.contract.form.error.code");
-		 * }
-		 * 
-		 * if (!super.getBuffer().getErrors().hasErrors("budget")) {
-		 * Money maxEuros;
-		 * 
-		 * maxEuros = new Money();
-		 * maxEuros.setAmount(1000000.00);
-		 * maxEuros.setCurrency("EUR");
-		 * double maximo = object.getProject().getCost() * this.auxiliarService.changeCurrency(ratioEuros).getAmount();
-		 * super.state(this.auxiliarService.validatePrice(object.getBudget(), 0.00, maximo), "cost", "client.contract.form.error.budget");
-		 * super.state(this.auxiliarService.validateCurrency(object.getBudget()), "budget", "client.contract.form.error.cost2");
-		 * }
-		 */
+
+		if (!super.getBuffer().getErrors().hasErrors("code")) {
+			Contract existing;
+			existing = this.repository.findContractByCode(object.getCode());
+			super.state(existing == null, "code", "client.contract.form.error.code");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("budget")) {
+			boolean totalAmountBelowProjectCost;
+			Collection<Contract> contracts = this.repository.findContractsFromProject(object.getId());
+			double sum = 0.;
+			String currency = object.getProject().getCost().getCurrency();
+			for (Contract contract : contracts)
+
+				sum += this.currencyService.changeCurrencyTo(contract.getBudget(), currency).getAmount();
+
+			totalAmountBelowProjectCost = sum + this.currencyService.changeCurrencyTo(object.getBudget(), currency).getAmount() <= object.getProject().getCost().getAmount();
+
+			Configuration config;
+			config = this.repository.findConfiguration();
+			super.state(totalAmountBelowProjectCost, "budget", "client.contract.form.error.totalAmountBelow");
+			super.state(Arrays.asList(config.getAcceptedCurrency().trim().split(",")).contains(object.getBudget().getCurrency()), "budget", "client.contract.error.budget.currency");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("budget"))
+			super.state(object.getBudget().getAmount() >= 0., "budget", "client.contract.form.error.negative-price");
+
+		final Collection<Contract> contracts1 = this.repository.findContractsFromProject(object.getProject().getId());
+		super.state(!contracts1.isEmpty(), "*", "manager.project.form.error.noContracts");
+
 	}
 
 	@Override
