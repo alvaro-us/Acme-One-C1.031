@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.accounts.Principal;
-import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
 import acme.entities.progressLogs.ProgressLogs;
 import acme.roles.client.Client;
@@ -62,13 +61,14 @@ public class ClientProgressLogsDeleteService extends AbstractService<Client, Pro
 			throw new IllegalArgumentException("No object found");
 		this.repository.delete(object);
 	}
-
-	@Override
-	public void unbind(final ProgressLogs object) {
-		if (object == null)
-			throw new IllegalArgumentException("No object found");
-		Dataset dataset;
-		dataset = super.unbind(object, "recordId", "completeness", "comment", "registrationMoment", "responsable", "published", "contract");
-		super.getResponse().addData(dataset);
-	}
+	/*
+	 * @Override
+	 * public void unbind(final ProgressLogs object) {
+	 * if (object == null)
+	 * throw new IllegalArgumentException("No object found");
+	 * Dataset dataset;
+	 * dataset = super.unbind(object, "recordId", "completeness", "comment", "registrationMoment", "responsable", "published", "contract");
+	 * super.getResponse().addData(dataset);
+	 * }
+	 */
 }

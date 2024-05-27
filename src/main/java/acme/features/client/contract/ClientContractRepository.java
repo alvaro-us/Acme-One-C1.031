@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import acme.client.repositories.AbstractRepository;
+import acme.entities.configuration.Configuration;
 import acme.entities.contract.Contract;
 import acme.entities.progressLogs.ProgressLogs;
 import acme.entities.projects.Project;
@@ -45,4 +46,6 @@ public interface ClientContractRepository extends AbstractRepository {
 	@Query("select p from Project p")
 	Collection<Project> findAllProjects();
 
+	@Query("select c from Configuration c")
+	Configuration findConfiguration();
 }
