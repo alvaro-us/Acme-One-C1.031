@@ -31,7 +31,7 @@ public class AuthenticatedDeveloperTrainingModuleShowService extends AbstractSer
 		trainingModuleId = super.getRequest().getData("id", int.class);
 		trainingModule = this.repository.findTrainingModuleById(trainingModuleId);
 		developer = trainingModule == null ? null : trainingModule.getDeveloper();
-		status = trainingModule != null && trainingModule.isDraftMode() && super.getRequest().getPrincipal().hasRole(developer);
+		status = trainingModule != null && super.getRequest().getPrincipal().hasRole(developer);
 
 		super.getResponse().setAuthorised(status);
 	}
