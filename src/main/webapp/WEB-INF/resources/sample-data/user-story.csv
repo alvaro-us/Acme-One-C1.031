@@ -1,9 +1,11 @@
 key,title,description,estimatedCost,acceptanceCriteria,priorityType,link,draftMode,key:manager
-user-story-01,Desarrollar funcionalidad de inicio de sesión,Los usuarios deben poder iniciar sesión en la plataforma.,15,Los usuarios pueden iniciar sesión utilizando su correo electrónico,MUST,,1,manager-01
-user-story-02,Implementar funcionalidad de registro,Los usuarios deben poder registrarse en la plataforma.,12,Los usuarios pueden crear una cuenta proporcionando su correo electrónico,COULD,https://example.com/register,0,manager-01
-user-story-03,Crear página de perfil de usuario,Los usuarios deben tener una página de perfil personalizada.,20,Los usuarios pueden ver y editar su información personal en su perfil,SHOULD,https://example.com/profile,1,manager-01
-user-story-04,Agregar función de búsqueda avanzada,Los usuarios deben poder buscar contenido avanzado en la plataforma.,18,Los usuarios pueden filtrar los resultados de búsqueda utilizando criterios,MUST,https://example.com/search,0,manager-01
-user-story-05,Desarrollar módulo de notificaciones,Los usuarios deben recibir notificaciones sobre actividades importantes.,23,Los usuarios recibirán notificaciones por correo y en la plataforma,SHOULD,,1,manager-02
-user-story-06,Implementar sistema de comentarios,Los usuarios deben poder comentar en publicaciones y contenido.,18,Los usuarios pueden escribir comentarios y responder a otros comentarios,COULD,https://example.com/comments,0,manager-02
-user-story-07,Agregar función de carrito de compras,Los usuarios deben poder agregar productos a un carrito de compras.,26,Los usuarios pueden ver los productos en su carrito antes de pagar,MUST,https://example.com/cart,1,manager-02
-user-story-08,Desarrollar funcionalidad de pago,a,30,ñ,MUST,,0,manager-02
+user-story-01,Lorem ipsum,Lorem ipsum,50,Lorem ipsum,MUST,http://www.lorem-ipsum.org,1,manager-01
+user-story-02,Ñ,Ñ,189,Ñ,COULD,ftp://,0,manager-01
+user-story-03,Lo,Lo,1,Lo,SHOULD,ftp://a,1,manager-01
+user-story-04,"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod te","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",59,"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod te",MUST,ftp://a.b,0,manager-01
+user-story-05,"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tem","Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore*",100000000,"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tem",SHOULD,"http://www.lorem-ipsum.org/dolor/sit/amet,/consectetur/adipiscing/elit,/sed/do/eiusmod/tempor/incididunt/ut/labore/et/dolore/magna/aliqua/Ut/enim/ad/minim/veniam/quis/nostrud/exercitation/ullamco/laboris/nisi/ut/aliquip/ex/ea/commodo/consequat/duis/aute/",1,manager-02
+user-story-06,<h1>!</h1>,<h1>!</h1>,999999999,<h1>!</h1>,COULD,"http://www.lorem-ipsum.org/dolor/sit/amet,/consectetur/adipiscing/elit,/sed/do/eiusmod/tempor/incididunt/ut/labore/et/dolore/magna/aliqua/Ut/enim/ad/minim/veniam/quis/nostrud/exercitation/ullamco/laboris/nisi/ut/aliquip/ex/ea/commodo/consequat/duis/aute/X",1,manager-02
+user-story-07,' or 'A'='A,' or 'A'='A,1239123,' or 'A'='A,MUST,https://example.com/cart,1,manager-02
+user-story-08,국민경제의 발전을العظمى واعتلاء,국민경제의 발전을العظمى واعتلاء,999111,국민경제의 발전을العظمى واعتلاء,MUST,https://www.lorem-ipsum.org,0,manager-02
+user-story-09,Historia de usuario vacía del manager1,Descripción estandar 1,1,que exista,MUST,http://www.lorem-ipsum.org/dolor/sit.html,1,manager-01
+user-story-10,Historia de usuario vacía del manager2,Descripción estándar 2,99,que exista,MUST,,1,manager-02

@@ -2,7 +2,9 @@
 package acme.entities.projects;
 
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -19,6 +21,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@Table(indexes = {
+	@Index(columnList = "manager_id")
+})
+
 public class UserStory extends AbstractEntity {
 
 	// Serialisation Identifier
