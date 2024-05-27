@@ -1,5 +1,5 @@
 
-package acme.entities;
+package acme.entities.banner;
 
 import java.util.Date;
 
@@ -31,26 +31,23 @@ public class Banner extends AbstractEntity {
 	@NotNull
 	@Past
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date				installationDate;
+	private Date				instantiationMoment;
 
 	@NotNull
-	@Past
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				modificationDate;
 
 	@NotNull
-	@Past
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				startDisplayPeriod;
 
 	@NotNull
-	@Past
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				endDisplayPeriod;
 
 	@NotNull
 	@URL
-	private String				pictureLink;
+	private String				picture;
 
 	@NotBlank
 	@Length(max = 75)
