@@ -57,8 +57,19 @@ public class AuthenticatedClientCreateService extends AbstractService<Authentica
 	@Override
 	public void validate(final Client object) {
 		assert object != null;
-	}
+		int userAccountId = super.getRequest().getPrincipal().getAccountId();
 
+		if (!super.getBuffer().getErrors().hasErrors("identification")) {
+			Client existing;
+
+			existing = this.repository.findOneClientByUserAccountId(userAccountId);
+			super.state(existing == null, "identification", "authenticated.client.form.error.duplicatedAccountId");
+		}
+
+		boolean youAreNotClient = this.repository.findOneClientByUserAccountId(userAccountId) == null;
+
+		super.state(youAreNotClient, "*", "client.form.error.youClientAlready");
+	}
 	@Override
 	public void perform(final Client object) {
 		assert object != null;

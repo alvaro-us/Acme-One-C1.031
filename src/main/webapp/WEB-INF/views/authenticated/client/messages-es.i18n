@@ -10,3 +10,6 @@ authenticated.client.form.label.link = Enlace
 
 authenticated.client.form.button.create = Crear
 authenticated.client.form.button.update = Actualizar
+
+client.form.error.youClientAlready= Ya eres cliente
+authenticated.client.form.error.duplicatedAccountId= ID duplicado

@@ -8,3 +8,6 @@ authenticated.client.form.label.link = Link
 
 authenticated.client.form.button.create = Create
 authenticated.client.form.button.update = Update
+
+client.form.error.youClientAlready= You are already a client
+authenticated.client.form.error.duplicatedAccountId= ID duplicated

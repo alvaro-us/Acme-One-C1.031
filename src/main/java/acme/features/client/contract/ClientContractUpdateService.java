@@ -1,6 +1,7 @@
 
 package acme.features.client.contract;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import acme.client.data.accounts.Principal;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
+import acme.entities.configuration.Configuration;
 import acme.entities.configuration.CurrencyService;
 import acme.entities.contract.Contract;
 import acme.entities.projects.Project;
@@ -58,6 +60,7 @@ public class ClientContractUpdateService extends AbstractService<Client, Contrac
 		object2 = this.repository.findContractById(id);
 		object.setProject(object2.getProject());
 		object.setClient(object2.getClient());
+		object.setInstationMoment(object2.getInstationMoment());
 		super.bind(object, "code", "providerName", "instationMoment", "customerName", "goals", "budget");
 	}
 
@@ -67,26 +70,34 @@ public class ClientContractUpdateService extends AbstractService<Client, Contrac
 		if (object == null)
 			throw new IllegalArgumentException("No object found");
 
-		boolean totalAmountBelowProjectCost;
-		String currency = object.getProject().getCost().getCurrency();
-		Collection<Contract> contracts = this.repository.findContractsFromProject(object.getId());
-		double sum = 0.;
-		for (Contract contract : contracts)
-			if (contract.getId() != object.getId())
+		if (!super.getBuffer().getErrors().hasErrors("code")) {
+			Contract existing;
+			existing = this.repository.findContractByCode(object.getCode());
+			super.state(existing == null, "code", "client.contract.form.error.code");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("budget")) {
+			boolean totalAmountBelowProjectCost;
+			Collection<Contract> contracts = this.repository.findContractsFromProject(object.getId());
+			double sum = 0.;
+			String currency = object.getProject().getCost().getCurrency();
+			for (Contract contract : contracts)
+
 				sum += this.currencyService.changeCurrencyTo(contract.getBudget(), currency).getAmount();
 
-		totalAmountBelowProjectCost = sum + this.currencyService.changeCurrencyTo(object.getBudget(), currency).getAmount() <= object.getProject().getCost().getAmount();
-		super.state(totalAmountBelowProjectCost, "budget", "client.contract.form.error.totalAmountBelow");
+			totalAmountBelowProjectCost = sum + this.currencyService.changeCurrencyTo(object.getBudget(), currency).getAmount() <= object.getProject().getCost().getAmount();
+
+			Configuration config;
+			config = this.repository.findConfiguration();
+			super.state(totalAmountBelowProjectCost, "budget", "client.contract.form.error.totalAmountBelow");
+			super.state(Arrays.asList(config.getAcceptedCurrency().trim().split(",")).contains(object.getBudget().getCurrency()), "budget", "client.contract.error.budget.currency");
+		}
 
 		if (!super.getBuffer().getErrors().hasErrors("budget"))
 			super.state(object.getBudget().getAmount() >= 0., "budget", "client.contract.form.error.negative-price");
 
-		if (!super.getBuffer().getErrors().hasErrors("code")) {
-			Contract existing;
-			existing = this.repository.findContractByCode(object.getCode());
-			final Contract contract2 = object.getCode().equals("") || object.getCode() == null ? null : this.repository.findContractById(object.getId());
-			super.state(existing == null || contract2.equals(existing), "code", "client.contract.form.error.code");
-		}
+		final Collection<Contract> contracts1 = this.repository.findContractsFromProject(object.getProject().getId());
+		super.state(!contracts1.isEmpty(), "*", "manager.project.form.error.noContracts");
 	}
 
 	@Override

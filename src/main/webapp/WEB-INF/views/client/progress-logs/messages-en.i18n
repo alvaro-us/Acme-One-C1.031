@@ -27,3 +27,5 @@ client.progress-logs.form.button.create = Create
 
 
 client.progressLogs.form.error.codeDuplicated= Already in use
+client.progressLogs.form.error.moment = The registration date must be before or equal to 2099/12/31 23:59
+client.progressLogs.form.error.moment2 = The registration date must be after or equal to InstationMoment
