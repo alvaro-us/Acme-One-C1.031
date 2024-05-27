@@ -33,7 +33,7 @@ public class AuthenticatedSponsorInvoiceDeleteService extends AbstractService<Sp
 		id1 = super.getRequest().getPrincipal().getAccountId();
 
 		sponsor = invoice.getSponsorship().getSponsor();
-		status = invoice != null && super.getRequest().getPrincipal().hasRole(Sponsor.class) && invoice.getSponsorship().getSponsor().getUserAccount().getId() == id1;
+		status = invoice != null && super.getRequest().getPrincipal().hasRole(Sponsor.class) && sponsor.getUserAccount().getId() == id1;
 
 		super.getResponse().setAuthorised(status);
 	}
