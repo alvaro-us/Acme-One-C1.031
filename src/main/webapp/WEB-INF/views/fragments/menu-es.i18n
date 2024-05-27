@@ -44,7 +44,7 @@ master.menu.administrator.populate-initial = Poblar BD (inicial)
 master.menu.administrator.populate-sample = Poblar BD (ejemplos)
 master.menu.administrator.shut-down = Parar el sistema
 master.menu.administrator.configuration = Configuración de la moneda
-master.menu.list.banner = Listar banners
+master.menu.administrator.list.banner = Listar banners
 master.menu.administrator.objective = Publicar objetivos
 
 
@@ -71,6 +71,12 @@ master.menu.provider.favourite-link = Enlace favorito
 master.menu.consumer = Consumidor
 master.menu.consumer.favourite-link = Enlace favorito
 
+# master.menu.auditor ##########################################################
+
+master.menu.auditor = Auditorías de código
+master.menu.auditor.my-code-audits = Mis auditorías de código
+master.menu.auditor.auditrecord.list-my-audit-records = Mis registros de auditorias
+
 
 # master.menu.manager ##########################################################
 
@@ -91,7 +97,6 @@ master.menu.sponsor.Dashboard = Mi panel de control
 master.menu.developer = Desarrollador
 master.menu.developer.ListTrainingModules = Mis modulos de entrenamiento
 master.menu.developer.Dashboard = My panel de control
-
 
 
 # master.menu.user-account ####################################################
