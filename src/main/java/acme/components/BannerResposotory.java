@@ -18,10 +18,10 @@ import acme.entities.banner.Banner;
 @Repository
 public interface BannerResposotory extends AbstractRepository {
 
-	@Query("select count(ban) from Banner ban where ban.startDisplayPeriod < :currentDate and ban.endDisplayPeriod > :currentDate")
+	@Query("select count(b) from Banner b WHERE b.startDisplayPeriod < :currentDate AND b.endDisplayPeriod > :currentDate")
 	int countCurrentBanner(Date currentDate);
 
-	@Query("select ban from banner ban where ban.startDisplayPeriod < :currentDate AND ban.endDisplayPeriod > :currentDate")
+	@Query("select b from Banner b WHERE b.startDisplayPeriod < :currentDate AND b.endDisplayPeriod > :currentDate")
 	List<Banner> findManyCurrentBanners(PageRequest pRequest, Date currentDate);
 
 	default Banner findRandomBanner() {

@@ -1,4 +1,4 @@
-key,installationDate,modificationDate,startDisplayPeriod,endDisplayPeriod,pictureLink,slogan,url
+key,instantiationMoment,modificationDate,startDisplayPeriod,endDisplayPeriod,picture,slogan,url
 banner-01,2000/01/01 00:00,2001/03/12 12:21,2021/04/28 02:31,2022/01/02 00:00,https://example.com/imagen,La mejor forma de ver,https://example.com/ocultismo
 banner-02,2001/05/01 14:24,2001/03/12 12:21,2021/04/28 02:31,2022/01/02 00:00,https://example.com/imagen,Abre tu mente,https://example.com/mente
 banner-03,2002/04/01 21:02,2001/03/12 12:21,2021/04/28 02:31,2022/01/02 00:00,https://example.com/fotografia,Todo puede cambiar si cambias,https://example.com/mano
