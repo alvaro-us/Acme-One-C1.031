@@ -17,11 +17,10 @@
 
 <acme:list>
 	<acme:list-column code="manager.user-story.list.label.title" path="title"/>	
-	<acme:list-column code="manager.user-story.list.label.description" path="description"/>
 	<acme:list-column code="manager.user-story.list.label.priorityType" path="priorityType"/>
 	<acme:list-column code="manager.user-story.list.label.estimatedCost" path="estimatedCost"/>	
 </acme:list>
 
-<jstl:if test="${acme:anyOf(_command, 'list|listmine')}">
+<jstl:if test="${acme:anyOf(_command, 'listmine')}">
 	<acme:button code="manager.user-story.list.button.create" action="/manager/user-story/create"/>
 </jstl:if>	
