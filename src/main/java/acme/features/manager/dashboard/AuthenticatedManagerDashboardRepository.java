@@ -52,10 +52,10 @@ public interface AuthenticatedManagerDashboardRepository extends AbstractReposit
 	double getDeviationCostProjectEUR(int id);
 
 	@Query("SELECT COALESCE(min(a.cost.amount), 0) FROM Project a WHERE a.manager.id = :id and a.cost.currency = 'EUR'")
-	int getMinCostProjectEUR(int id);
+	double getMinCostProjectEUR(int id);
 
 	@Query("SELECT COALESCE(max(a.cost.amount), 0) FROM Project a WHERE a.manager.id = :id and a.cost.currency = 'EUR'")
-	int getMaxCostProjectEUR(int id);
+	double getMaxCostProjectEUR(int id);
 
 	//------------------ GBP
 
@@ -66,10 +66,10 @@ public interface AuthenticatedManagerDashboardRepository extends AbstractReposit
 	double getDeviationCostProjectGBP(int id);
 
 	@Query("SELECT COALESCE(min(a.cost.amount), 0) FROM Project a WHERE a.manager.id = :id and a.cost.currency = 'GBP'")
-	int getMinCostProjectGBP(int id);
+	double getMinCostProjectGBP(int id);
 
 	@Query("SELECT COALESCE(max(a.cost.amount), 0) FROM Project a WHERE a.manager.id = :id and a.cost.currency = 'GBP'")
-	int getMaxCostProjectGBP(int id);
+	double getMaxCostProjectGBP(int id);
 
 	//------------------ USD
 
@@ -80,9 +80,9 @@ public interface AuthenticatedManagerDashboardRepository extends AbstractReposit
 	double getDeviationCostProjectUSD(int id);
 
 	@Query("SELECT COALESCE(min(a.cost.amount), 0) FROM Project a WHERE a.manager.id = :id and a.cost.currency = 'USD'")
-	int getMinCostProjectUSD(int id);
+	double getMinCostProjectUSD(int id);
 
 	@Query("SELECT COALESCE(max(a.cost.amount), 0) FROM Project a WHERE a.manager.id = :id and a.cost.currency = 'USD'")
-	int getMaxCostProjectUSD(int id);
+	double getMaxCostProjectUSD(int id);
 
 }

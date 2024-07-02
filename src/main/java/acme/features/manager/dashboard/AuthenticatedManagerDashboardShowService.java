@@ -38,8 +38,8 @@ public class AuthenticatedManagerDashboardShowService extends AbstractService<Ma
 		ManagerDashboard dashboard;
 		final Map<String, Double> averageCostProject = new HashMap<>();
 		final Map<String, Double> deviationCostProject = new HashMap<>();
-		final Map<String, Integer> minCostProject = new HashMap<>();
-		final Map<String, Integer> maxCostProject = new HashMap<>();
+		final Map<String, Double> minCostProject = new HashMap<>();
+		final Map<String, Double> maxCostProject = new HashMap<>();
 
 		managerId = super.getRequest().getPrincipal().getActiveRoleId();
 

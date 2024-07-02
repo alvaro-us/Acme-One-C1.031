@@ -16,8 +16,8 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:list>
-	<acme:list-column code="manager.assignment.list.label.project" path="project" width="50%"/>	
-	<acme:list-column code="manager.assignment.list.label.userStory" path="userStory" width="50%"/>
+	<acme:list-column code="manager.assignment.list.label.project" path="project"/>	
+	<acme:list-column code="manager.assignment.list.label.userStory" path="userStory"/>
 </acme:list>
 
 <acme:button code="manager.assignment.list.button.create" action="/manager/assignment/create"/>
