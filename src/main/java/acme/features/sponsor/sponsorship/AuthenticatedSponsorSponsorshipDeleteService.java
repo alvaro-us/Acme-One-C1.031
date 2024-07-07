@@ -64,12 +64,12 @@ public class AuthenticatedSponsorSponsorshipDeleteService extends AbstractServic
 
 	@Override
 	public void validate(final Sponsorship object) {
-	    assert object != null;
+		assert object != null;
 
-	    long nonDraftInvoiceCount = this.repository.countNonDraftInvoicesBySponsorshipId(object.getId());
-	    boolean canDelete = nonDraftInvoiceCount == 0;
+		long nonDraftInvoiceCount = this.repository.countNonDraftInvoicesBySponsorshipId(object.getId());
+		boolean canDelete = nonDraftInvoiceCount == 0;
 
-	    super.state(canDelete, "*", "sponsor.sponsorship.form.error.cantDelete");
+		super.state(canDelete, "*", "sponsor.sponsorship.form.error.cantDelete");
 	}
 
 	@Override
@@ -89,8 +89,8 @@ public class AuthenticatedSponsorSponsorshipDeleteService extends AbstractServic
 		assert object != null;
 
 		Dataset dataset;
-
-		dataset = super.unbind(object, "code", "moment", "durationStart", "durationEnd", "amount", "type", "email", "link", "draftMode");
+		Sponsorship sponsorship = this.repository.findSponsorshipById(object.getId());
+		dataset = super.unbind(sponsorship, "code", "moment", "durationStart", "durationEnd", "amount", "type", "email", "link", "draftMode");
 
 		SelectChoices choicesProjects;
 		Collection<Project> projects = this.repository.findAllProjectsPublished();

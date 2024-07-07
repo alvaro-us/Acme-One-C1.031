@@ -31,9 +31,9 @@ public class AuthenticatedSponsorInvoiceDeleteService extends AbstractService<Sp
 		invoiceId = super.getRequest().getData("id", int.class);
 		invoice = this.repository.findInvoiceById(invoiceId);
 		id1 = super.getRequest().getPrincipal().getAccountId();
-
+		boolean correctInvoice = invoice != null && invoice.isDraftMode();
 		sponsor = invoice.getSponsorship().getSponsor();
-		status = invoice != null && super.getRequest().getPrincipal().hasRole(Sponsor.class) && sponsor.getUserAccount().getId() == id1;
+		status = correctInvoice && super.getRequest().getPrincipal().hasRole(Sponsor.class) && sponsor.getUserAccount().getId() == id1;
 
 		super.getResponse().setAuthorised(status);
 	}
