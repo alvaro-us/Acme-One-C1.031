@@ -43,7 +43,9 @@ public class AuthenticatedSponsorSponsorshipShowService extends AbstractService<
 		idUser = super.getRequest().getPrincipal().getAccountId();
 
 		sponsor = this.repository.findSponsorById(super.getRequest().getPrincipal().getActiveRoleId());
-		status = super.getRequest().getPrincipal().hasRole(Sponsor.class) && object.getSponsor().equals(sponsor) && object.getSponsor().getUserAccount().getId() == idUser;
+		boolean correctRol = super.getRequest().getPrincipal().hasRole(Sponsor.class);
+		boolean correctSponsor = object.getSponsor().equals(sponsor);
+		status = object != null && correctRol && correctSponsor && object.getSponsor().getUserAccount().getId() == idUser;
 
 		super.getResponse().setAuthorised(status);
 	}

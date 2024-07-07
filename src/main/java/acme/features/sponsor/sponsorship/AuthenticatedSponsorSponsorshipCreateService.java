@@ -1,8 +1,11 @@
 
 package acme.features.sponsor.sponsorship;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,24 +78,62 @@ public class AuthenticatedSponsorSponsorshipCreateService extends AbstractServic
 
 		// Date
 		if (!super.getBuffer().getErrors().hasErrors("durationStart")) {
+
 			Boolean momentBeforeDurationStart;
-			momentBeforeDurationStart = MomentHelper.isAfter(object.getDurationStart(), MomentHelper.deltaFromMoment(object.getMoment(), 0l, ChronoUnit.DAYS));
+
+			LocalDateTime momentDate = object.getMoment().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+			LocalDateTime durationStartDate = object.getDurationStart().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+			LocalDateTime localDateTime = LocalDateTime.of(2200, 12, 31, 23, 59);
+			Date maxDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+
+			long monthsDifferenceStart = ChronoUnit.MONTHS.between(momentDate, durationStartDate);
+			momentBeforeDurationStart = monthsDifferenceStart >= 1;
+
 			super.state(momentBeforeDurationStart, "durationStart", "sponsor.sponsorship.form.error.momentBeforeDurationStart");
+
 			if (!super.getBuffer().getErrors().hasErrors("durationEnd")) {
-				boolean durationStart1MothBeforeDurationEnd;
-				durationStart1MothBeforeDurationEnd = MomentHelper.isAfter(object.getDurationEnd(), MomentHelper.deltaFromMoment(object.getDurationStart(), 1l, ChronoUnit.MONTHS));
-				super.state(durationStart1MothBeforeDurationEnd, "durationEnd", "sponsor.sponsorship.form.error.durationStart1MothBeforeDurationEnd");
+				boolean durationStart1MonthBeforeDurationEnd;
+				LocalDateTime durationEndDate = object.getDurationEnd().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+				long monthsDifferenceEnd = ChronoUnit.MONTHS.between(durationStartDate, durationEndDate);
+				durationStart1MonthBeforeDurationEnd = monthsDifferenceEnd >= 1;
+
+				super.state(durationStart1MonthBeforeDurationEnd, "durationEnd", "sponsor.sponsorship.form.error.durationStart1MonthBeforeDurationEnd");
+
+				boolean durationEndMax = object.getDurationEnd().after(maxDate);
+				super.state(!durationEndMax, "durationEnd", "sponsor.sponsorship.form.error.durationEndMax");
+
 			}
+
+			boolean durationStartMax = object.getDurationStart().after(maxDate);
+
+			super.state(!durationStartMax, "durationStart", "sponsor.sponsorship.form.error.durationStartMax");
+
 		}
 
 		// Amount
 		if (!super.getBuffer().getErrors().hasErrors("amount")) {
+			double maxAmount = 1000000.;
+			boolean incorrectMaxAmount = object.getAmount().getAmount() > maxAmount;
+			super.state(!incorrectMaxAmount, "amount", "sponsor.sponsorship.form.error.incorrectMaxAmount");
 			boolean isAcceptedCurrency = this.service.isAcceptedCurrency(object.getAmount().getCurrency());
-			boolean amountPositive = object.getAmount().getAmount() >= 0;
+			boolean amountPositive = object.getAmount().getAmount() > 0;
 			super.state(amountPositive, "amount", "sponsor.sponsorship.form.error.amountPositive");
 			super.state(isAcceptedCurrency, "amount", "sponsor.sponsorship.form.error.isAcceptedCurrency");
 		}
 
+		//URL
+		if (!super.getBuffer().getErrors().hasErrors("link") && !object.getLink().isEmpty()) {
+			boolean linkbetween7and255 = object.getLink().length() >= 7 && object.getLink().length() <= 255;
+			super.state(linkbetween7and255, "link", "sponsor.sponsorship.form.error.linkbetween7and255");
+		}
+
+		//EMAIL
+		if (!super.getBuffer().getErrors().hasErrors("email") && !object.getEmail().isEmpty()) {
+			boolean emailbetween6and254 = object.getEmail().length() >= 6 && object.getEmail().length() <= 254;
+			super.state(emailbetween6and254, "email", "sponsor.sponsorship.form.error.emailbetween6and254");
+		}
 	}
 
 	@Override

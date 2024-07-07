@@ -28,7 +28,7 @@ public class AuthenticatedSponsorInvoiceShowService extends AbstractService<Spon
 	@Override
 	public void authorise() {
 
-		boolean status;
+		boolean status = false;
 		Invoice object;
 		Sponsor sponsor;
 		int id;
@@ -38,7 +38,8 @@ public class AuthenticatedSponsorInvoiceShowService extends AbstractService<Spon
 		id1 = super.getRequest().getPrincipal().getAccountId();
 
 		sponsor = this.repository.findSponsorById(super.getRequest().getPrincipal().getActiveRoleId());
-		status = super.getRequest().getPrincipal().hasRole(Sponsor.class) && object.getSponsorship().getSponsor().equals(sponsor) && object.getSponsorship().getSponsor().getUserAccount().getId() == id1;
+		if (object != null)
+			status = super.getRequest().getPrincipal().hasRole(Sponsor.class) && object.getSponsorship().getSponsor().equals(sponsor) && object.getSponsorship().getSponsor().getUserAccount().getId() == id1;
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -49,7 +50,6 @@ public class AuthenticatedSponsorInvoiceShowService extends AbstractService<Spon
 
 		id = super.getRequest().getData("id", int.class);
 		object = this.repository.findInvoiceById(id);
-
 		super.getBuffer().addData(object);
 	}
 
