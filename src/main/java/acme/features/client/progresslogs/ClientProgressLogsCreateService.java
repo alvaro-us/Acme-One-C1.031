@@ -1,8 +1,6 @@
 
 package acme.features.client.progresslogs;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +22,15 @@ public class ClientProgressLogsCreateService extends AbstractService<Client, Pro
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status;
+		int masterId;
+		Contract contract;
+
+		masterId = super.getRequest().getData("masterId", int.class);
+		contract = this.repository.findContractById(masterId);
+		status = contract != null && super.getRequest().getPrincipal().hasRole(contract.getClient());
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -57,12 +63,6 @@ public class ClientProgressLogsCreateService extends AbstractService<Client, Pro
 			existing = this.repository.findProgressLogsByRecordId(object.getRecordId());
 			super.state(existing == null, "recordId", "client.progressLogs.form.error.codeDuplicate");
 		}
-		if (!super.getBuffer().getErrors().hasErrors("registrationMoment")) {
-			Date maxDate = new Date(4102441199000L); // 2099/12/31 23:59
-			super.state(MomentHelper.isBeforeOrEqual(object.getRegistrationMoment(), maxDate), "registrationMoment", "client.progressLogs.form.error.moment");
-		}
-		if (!super.getBuffer().getErrors().hasErrors("registrationMoment"))
-			super.state(MomentHelper.isAfter(object.getRegistrationMoment(), object.getContract().getInstationMoment()), "registrationMoment", "client.progressLogs.form.error.moment2");
 
 	}
 

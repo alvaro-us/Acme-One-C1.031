@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import acme.client.data.accounts.Principal;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
+import acme.client.views.SelectChoices;
 import acme.entities.configuration.Configuration;
 import acme.entities.configuration.CurrencyService;
 // import acme.entities.components.AuxiliarService;
 import acme.entities.contract.Contract;
+import acme.entities.projects.Project;
 import acme.roles.client.Client;
 
 @Service
@@ -71,8 +73,9 @@ public class ClientContractPublishService extends AbstractService<Client, Contra
 
 		if (!super.getBuffer().getErrors().hasErrors("code")) {
 			Contract existing;
-			existing = this.repository.findContractByCode(object.getCode());
-			super.state(existing == null, "code", "client.contract.form.error.code");
+			existing = this.repository.findOneContractByCode(object.getCode());
+			final Contract contract2 = object.getCode().equals("") || object.getCode() == null ? null : this.repository.findContractById(object.getId());
+			super.state(existing == null || contract2.equals(existing), "code", "client.contract.form.error.code");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("budget")) {
@@ -113,7 +116,14 @@ public class ClientContractPublishService extends AbstractService<Client, Contra
 		if (object == null)
 			throw new IllegalArgumentException("No object found");
 		Dataset dataset;
+		final SelectChoices choicesP = new SelectChoices();
+		Collection<Project> projects;
+		projects = this.repository.findPublishedProjects();
+		for (final Project p : projects)
+			choicesP.add(Integer.toString(p.getId()), p.getCode() + " - " + p.getTitle(), false);
 		dataset = super.unbind(object, "code", "instationMoment", "providerName", "customerName", "goals", "budget", "project", "client", "published");
+		dataset.put("projects", choicesP);
+
 		dataset.put("projectTitle", object.getProject().getCode());
 		super.getResponse().addData(dataset);
 	}

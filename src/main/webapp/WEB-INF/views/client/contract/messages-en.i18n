@@ -33,3 +33,5 @@ client.contract.form.button.create = Create
 client.contract.form.error.totalAmountBelow=The total amount of all contracts must be below the project cost
 client.contract.form.error.negative-price=The budget must be positive
 client.contract.form.error.code=Already in use
+client.contract.error.budget.currency= Currency not correct
+client.contract.form.error.project-null=Project may not be null
