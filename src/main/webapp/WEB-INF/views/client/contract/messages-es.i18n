@@ -34,3 +34,5 @@ client.contract.form.button.create = Crear
 client.contract.form.error.totalAmountBelow=Presupuesto excesivo
 client.contract.form.error.negative-price=El presupuesto debe ser positivo
 client.contract.form.error.codeDuplicate=Codigo ya en uso
+client.contract.error.budget.currency= Moneda no correcta
+client.contract.form.error.project-null=Proyecto no puede ser nulo
