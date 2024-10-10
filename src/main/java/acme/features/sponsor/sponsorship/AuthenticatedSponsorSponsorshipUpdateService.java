@@ -105,8 +105,7 @@ public class AuthenticatedSponsorSponsorshipUpdateService extends AbstractServic
 			LocalDateTime localDateTime = LocalDateTime.of(2200, 12, 31, 23, 59);
 			Date maxDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
 
-			long monthsDifferenceStart = ChronoUnit.MONTHS.between(momentDate, durationStartDate);
-			momentBeforeDurationStart = monthsDifferenceStart >= 1;
+			momentBeforeDurationStart = momentDate.isBefore(durationStartDate);
 
 			super.state(momentBeforeDurationStart, "durationStart", "sponsor.sponsorship.form.error.momentBeforeDurationStart");
 
