@@ -63,6 +63,12 @@ public class ClientProgressLogsCreateService extends AbstractService<Client, Pro
 			existing = this.repository.findProgressLogsByRecordId(object.getRecordId());
 			super.state(existing == null, "recordId", "client.progressLogs.form.error.codeDuplicate");
 		}
+		if (!super.getBuffer().getErrors().hasErrors("completeness")) {
+			Double existing;
+			existing = this.repository.findPublishedProgressLogWithMaxCompletenessPublished(object.getContract().getId());
+			if (existing != null)
+				super.state(object.getCompleteness() > existing, "completeness", "client.progress-log.form.error.completeness-too-low");
+		}
 
 	}
 

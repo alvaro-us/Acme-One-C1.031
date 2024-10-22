@@ -25,3 +25,4 @@ client.progress-logs.list.button.create = Crear
 client.progressLog.form.error.duplicated= Ya en uso
 client.progressLogs.form.error.codeDuplicate= Ya en uso
 client.progressLogs.form.error.codeDuplicated= Ya en uso
+client.progress-log.form.error.completeness-too-low= Porcentaje inferior al acumulado

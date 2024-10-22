@@ -69,6 +69,12 @@ public class ClientProgressLogsPublishService extends AbstractService<Client, Pr
 			final ProgressLogs progressLog2 = object.getRecordId().equals("") || object.getRecordId() == null ? null : this.repository.findOneProgressLogById(object.getId());
 			super.state(existing == null || progressLog2.equals(existing), "recordId", "client.progressLog.form.error.duplicated");
 		}
+		if (!super.getBuffer().getErrors().hasErrors("completeness")) {
+			Double existing;
+			existing = this.repository.findPublishedProgressLogWithMaxCompletenessPublished(object.getContract().getId());
+			if (existing != null)
+				super.state(object.getCompleteness() > existing, "completeness", "client.progress-log.form.error.completeness-too-low");
+		}
 
 	}
 

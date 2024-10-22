@@ -101,8 +101,6 @@ public class ClientContractUpdateService extends AbstractService<Client, Contrac
 		if (!super.getBuffer().getErrors().hasErrors("budget"))
 			super.state(object.getBudget().getAmount() >= 0., "budget", "client.contract.form.error.negative-price");
 
-		final Collection<Contract> contracts1 = this.repository.findContractsFromProject(object.getProject().getId());
-		super.state(!contracts1.isEmpty(), "*", "manager.project.form.error.noContracts");
 	}
 
 	@Override
@@ -114,18 +112,19 @@ public class ClientContractUpdateService extends AbstractService<Client, Contrac
 
 	@Override
 	public void unbind(final Contract object) {
-		if (object == null)
-			throw new IllegalArgumentException("No object found");
-		Dataset dataset;
-		final SelectChoices choicesP = new SelectChoices();
-		Collection<Project> projects;
-		projects = this.repository.findPublishedProjects();
-		for (final Project p : projects)
-			choicesP.add(Integer.toString(p.getId()), p.getCode() + " - " + p.getTitle(), false);
-		dataset = super.unbind(object, "code", "instationMoment", "providerName", "customerName", "goals", "budget", "project", "client", "published");
-		dataset.put("projects", choicesP);
+		assert object != null;
 
-		dataset.put("projectTitle", object.getProject().getCode());
+		Collection<Project> projects;
+		SelectChoices choices;
+		Dataset dataset;
+
+		projects = this.repository.findAllProjects();
+		choices = SelectChoices.from(projects, "title", object.getProject());
+
+		dataset = super.unbind(object, "code", "instationMoment", "providerName", "customerName", "goals", "budget", "published");
+		dataset.put("project", choices.getSelected().getKey());
+		dataset.put("projects", choices);
+
 		super.getResponse().addData(dataset);
 	}
 }

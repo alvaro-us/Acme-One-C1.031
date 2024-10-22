@@ -28,4 +28,5 @@ client.progress-logs.form.button.create = Create
 client.progressLog.form.error.duplicated= Already in use
 client.progressLogs.form.error.codeDuplicate= Already in use
 client.progressLogs.form.error.codeDuplicated= Already in use
+client.progress-log.form.error.completeness-too-low= Percentage lower than the cumulative total
 
