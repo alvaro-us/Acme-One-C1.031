@@ -127,7 +127,6 @@ public class AuthenticatedSponsorSponsorshipPublishService extends AbstractServi
 					cantChangeCurrency = Objects.equals(invoice.getQuantity().getCurrency(), object.getAmount().getCurrency());
 
 			}
-			System.out.println(totalAmount);
 			boolean isAcceptedCurrency = this.service.isAcceptedCurrency(object.getAmount().getCurrency());
 			boolean amountPositive = object.getAmount().getAmount() > 0;
 			boolean correct = Objects.equals(totalAmount, object.getAmount().getAmount());
@@ -188,7 +187,7 @@ public class AuthenticatedSponsorSponsorshipPublishService extends AbstractServi
 		Dataset dataset;
 		SelectChoices choices;
 		SelectChoices choicesProjects;
-		Collection<Project> projects = this.repository.findAllProjects();
+		Collection<Project> projects = this.repository.findAllProjectsPublished();
 
 		choices = SelectChoices.from(SponsorshipType.class, object.getType());
 		choicesProjects = SelectChoices.from(projects, "code", object.getProject());

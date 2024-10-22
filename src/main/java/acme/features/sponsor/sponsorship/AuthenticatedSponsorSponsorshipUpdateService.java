@@ -179,7 +179,7 @@ public class AuthenticatedSponsorSponsorshipUpdateService extends AbstractServic
 		Dataset dataset;
 		SelectChoices choices;
 		SelectChoices choicesProjects;
-		Collection<Project> projects = this.repository.findAllProjects();
+		Collection<Project> projects = this.repository.findAllProjectsPublished();
 
 		choices = SelectChoices.from(SponsorshipType.class, object.getType());
 		choicesProjects = SelectChoices.from(projects, "code", object.getProject());

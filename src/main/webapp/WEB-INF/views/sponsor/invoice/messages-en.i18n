@@ -29,7 +29,7 @@ sponsor.invoice.form.error.hasToUpdate = You have to update before you can publi
 sponsor.invoice.form.error.dueDateMax = The date is later than the maximum date: 2200/12/31 23:59
 sponsor.invoice.form.error.incorrectMaxAmount = The amount must be lower or equal than 1000000
 sponsor.invoice.form.error.linkbetween7and255 = The link must have between 7 and 255 characters
-
+sponsor.invoice.form.error.incorrectMaxAmountPublished = The total amount of all published invoices cannot exceed 1000000
 
 
 
