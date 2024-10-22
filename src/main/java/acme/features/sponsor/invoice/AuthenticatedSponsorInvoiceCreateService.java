@@ -40,7 +40,7 @@ public class AuthenticatedSponsorInvoiceCreateService extends AbstractService<Sp
 		int sponsorshipId = super.getRequest().getData("sponsorshipId", int.class);
 		Sponsorship sponsorship = this.repository.findSponsorshipById(sponsorshipId);
 
-		boolean canCreate = this.repository.findAllSponsorshipOfSponsor(sponsor.getId()).contains(sponsorship);
+		boolean canCreate = this.repository.findAllSponsorshipOfSponsorPublished(sponsor.getId()).contains(sponsorship);
 
 		status = super.getRequest().getPrincipal().hasRole(Sponsor.class) && canCreate;
 		super.getResponse().setAuthorised(status);

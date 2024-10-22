@@ -4,6 +4,7 @@ package acme.features.sponsor.invoice;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Objects;
 
@@ -65,7 +66,7 @@ public class AuthenticatedSponsorInvoicePublishService extends AbstractService<S
 			super.state(codeDuplicated, "code", "sponsor.invoice.form.error.codeDuplicated");
 		}
 
-		if (!super.getBuffer().getErrors().hasErrors("quantity")) {
+		if (!super.getBuffer().getErrors().hasErrors("quantity") && !super.getBuffer().getErrors().hasErrors("tax")) {
 
 			String currency = object.getSponsorship().getAmount().getCurrency();
 
@@ -74,9 +75,14 @@ public class AuthenticatedSponsorInvoicePublishService extends AbstractService<S
 			Boolean correctQuantity = object.getQuantity().getAmount() > 0;
 			super.state(correctQuantity, "quantity", "sponsor.invoice.form.error.correctQuantity");
 			double maxAmount = 1000000.;
-			boolean incorrectMaxAmount = object.getQuantity().getAmount() > maxAmount;
-			super.state(!incorrectMaxAmount, "quantity", "sponsor.invoice.form.error.incorrectMaxAmount");
 
+			Collection<Invoice> invoices = this.repository.findAllInvoicePublishedOfSponsorship(invoice1.getSponsorship().getId());
+			for (Invoice invoice : invoices)
+				if (invoice.getId() != invoice1.getId())
+					maxAmount = maxAmount - invoice.getTotalAmount().getAmount();
+
+			boolean incorrectMaxAmount = maxAmount - object.getTotalAmount().getAmount() < 0;
+			super.state(!incorrectMaxAmount, "quantity", "sponsor.invoice.form.error.incorrectMaxAmountPublished");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("dueDate")) {

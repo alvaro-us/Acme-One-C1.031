@@ -70,7 +70,6 @@ public class AuthenticatedSponsorSponsorshipPublishService extends AbstractServi
 		int sponsorshipId = super.getRequest().getData("id", int.class);
 		Sponsorship sponsorship = this.repository.findSponsorshipById(sponsorshipId);
 		Collection<Invoice> invoices = this.repository.findInvoiceBySponsorshipId(sponsorshipId);
-
 		// Code
 		if (!super.getBuffer().getErrors().hasErrors("code")) {
 			String code = object.getCode();
@@ -92,8 +91,7 @@ public class AuthenticatedSponsorSponsorshipPublishService extends AbstractServi
 			LocalDateTime localDateTime = LocalDateTime.of(2200, 12, 31, 23, 59);
 			Date maxDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
 
-			long monthsDifferenceStart = ChronoUnit.MONTHS.between(momentDate, durationStartDate);
-			momentBeforeDurationStart = monthsDifferenceStart >= 1;
+			momentBeforeDurationStart = momentDate.isBefore(durationStartDate);
 
 			super.state(momentBeforeDurationStart, "durationStart", "sponsor.sponsorship.form.error.momentBeforeDurationStart");
 
@@ -129,7 +127,6 @@ public class AuthenticatedSponsorSponsorshipPublishService extends AbstractServi
 					cantChangeCurrency = Objects.equals(invoice.getQuantity().getCurrency(), object.getAmount().getCurrency());
 
 			}
-
 			boolean isAcceptedCurrency = this.service.isAcceptedCurrency(object.getAmount().getCurrency());
 			boolean amountPositive = object.getAmount().getAmount() > 0;
 			boolean correct = Objects.equals(totalAmount, object.getAmount().getAmount());
@@ -190,7 +187,7 @@ public class AuthenticatedSponsorSponsorshipPublishService extends AbstractServi
 		Dataset dataset;
 		SelectChoices choices;
 		SelectChoices choicesProjects;
-		Collection<Project> projects = this.repository.findAllProjects();
+		Collection<Project> projects = this.repository.findAllProjectsPublished();
 
 		choices = SelectChoices.from(SponsorshipType.class, object.getType());
 		choicesProjects = SelectChoices.from(projects, "code", object.getProject());
