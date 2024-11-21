@@ -20,24 +20,24 @@
 	<acme:input-moment code="sponsor.invoice.form.label.registrationTime" path="registrationTime" readonly="true"/>
 	<acme:input-moment code="sponsor.invoice.form.label.dueDate" path="dueDate"/>
 	<acme:input-money code="sponsor.invoice.form.label.quantity" path="quantity"/>
-	<acme:message code="${quantityBase }" />
+	<acme:message code="${quantityBase}" />
 	<acme:input-double code="sponsor.invoice.form.label.tax" path="tax"/>
-	<acme:message code="${quantityBaseTax }" />
+	<acme:message code="${quantityBaseTax}" />
 	<acme:input-url code="sponsor.invoice.form.label.link" path="link"/>
 	
     			
-	<jstl:choose>	 
+	<jstl:choose>	
+	 
 		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && draftMode == true}">
 			<acme:submit code="sponsor.invoice.form.button.update" action="/sponsor/invoice/update"/>
 			<acme:submit code="sponsor.invoice.form.button.delete" action="/sponsor/invoice/delete"/>
 			<acme:submit code="sponsor.invoice.form.button.publish" action="/sponsor/invoice/publish"/>
-			
 		</jstl:when>
+		
 		<jstl:when test="${_command == 'create'}">
-			
-    		
 			<acme:submit code="sponsor.invoice.form.button.create" action="/sponsor/invoice/create?sponsorshipId=${sponsorshipId}"/>
 		</jstl:when>
+		
 	</jstl:choose>
 </acme:form>
 

@@ -29,8 +29,14 @@ public interface AuthenticatedSponsorInvoiceRepository extends AbstractRepositor
 	@Query("SELECT i FROM Invoice i WHERE i.sponsorship.id = :id")
 	Collection<Invoice> findAllInvoiceOfSponsorship(int id);
 
+	@Query("SELECT i FROM Invoice i WHERE i.sponsorship.id = :id AND i.draftMode = false")
+	Collection<Invoice> findAllInvoicePublishedOfSponsorship(int id);
+
 	@Query("SELECT s FROM Sponsorship s WHERE s.sponsor.id = :id")
 	Collection<Sponsorship> findAllSponsorshipOfSponsor(int id);
+
+	@Query("SELECT s FROM Sponsorship s WHERE s.sponsor.id = :id AND s.draftMode = true")
+	Collection<Sponsorship> findAllSponsorshipOfSponsorPublished(int id);
 
 	@Query("SELECT s FROM Sponsor s WHERE s.id = :id")
 	Sponsor findSponsorById(int id);

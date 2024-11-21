@@ -39,8 +39,8 @@ sponsor.sponsorship.form.button.invoice = Invoices
 
 validation.sponsorship.code = Incorrect Code Scheme
 
-sponsor.sponsorship.form.error.correctAmount = The sum of the invoice prices does not match the price of this field
-sponsor.sponsorship.form.error.publishedInvoices = The invoices of the sponsorship with this code are not published
+sponsor.sponsorship.form.error.correctAmount = The sum of the invoice prices does not match the price of this sponsorship
+sponsor.sponsorship.form.error.publishedInvoices = The invoices of this sponsorship are not published
 sponsor.sponsorship.form.error.noInvoices = This sponsorship has not invoices
 sponsor.sponsorship.form.error.codeDuplicated = Code is already in use
 sponsor.sponsorship.form.error.momentBeforeDurationStart = The sponsorship start must be after the moment
@@ -54,6 +54,18 @@ sponsor.sponsorship.form.error.isAcceptedCurrency = The currency is not accepted
 sponsor.sponsorship.form.error.cantDelete = Unable to delete because there are published invoices associated
 sponsor.sponsorship.form.error.hasToUpdate = You have to update before you can publish
 sponsor.sponsorship.form.error.incorrectCurrency = You are changing the currency, and it no longer matches your invoices
+sponsor.sponsorship.form.error.durationStart1MonthBeforeDurationEnd = The end of the sponsorship must be at least one month after the start
+sponsor.sponsorship.form.error.durationStartMax = The date is later than the maximum date: 2200/12/31 23:59
+sponsor.sponsorship.form.error.durationEndMax = The date is later than the maximum date: 2200/12/31 23:59
+sponsor.sponsorship.form.error.incorrectMaxAmount = The amount must be lower or equal than 1000000
+sponsor.sponsorship.form.error.linkbetween7and255 = The link must have between 7 and 255 characters
+sponsor.sponsorship.form.error.emailbetween6and254 = The email must have between 6 and 254 characters
+sponsor.sponsorship.form.error.cantChangeCurrency = You cannot change the currency as it must match the one on the published invoices
+
+
+
+
+
 
 
 

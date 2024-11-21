@@ -28,11 +28,15 @@ sponsor.invoice.form.button.publish = Publicar
 
 
 sponsor.invoice.form.error.correctCurrency = La moneda de la factura debe ser la misma que la del patrocinio
+sponsor.invoice.form.error.correctQuantity = Tiene que ser un valor mayor que 0
 sponsor.invoice.form.error.codeDuplicated = El código ya esta siendo usado
 sponsor.invoice.form.error.totalAmountLessOrEqualThanSponsorshipAmount = La suma de el precio de todas las facturas no puede ser superior al coste del patrocinio
-sponsor.invoice.form.error.registrationTime1MothBeforeDueDate = La fecha de vencimiento debe ser al menos un mes posterior a la de registro
+sponsor.invoice.form.error.registrationTime1MonthBeforeDueDate = La fecha de vencimiento debe ser al menos un mes posterior a la de registro
 sponsor.invoice.form.error.hasToUpdate = Tienes que actualizar antes de publicar
-
+sponsor.invoice.form.error.dueDateMax = La fecha es mayor que la fecha maxima: 31/12/2200 23:59
+sponsor.invoice.form.error.incorrectMaxAmount = La cantidad tiene que ser menor o igual a 1000000
+sponsor.invoice.form.error.linkbetween7and255 = El enlace tiene que tener entre 7 y 255 caracteres
+sponsor.invoice.form.error.incorrectMaxAmountPublished = La cantidad de todas las invoices publicadas no puede ser superior a 1000000
 
 sponsor.invoice.form.title = Factura
 sponsor.invoice.form.label.code = Código
@@ -41,5 +45,6 @@ sponsor.invoice.form.label.dueDate = Fecha de vencimiento
 sponsor.invoice.form.label.quantity = Cantidad
 sponsor.invoice.form.label.tax = Impuesto
 sponsor.invoice.form.label.link = Enlace
+
 
 

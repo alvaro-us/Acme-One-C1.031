@@ -1,8 +1,10 @@
 
 package acme.features.sponsor.invoice;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.Collection;
+import java.util.Date;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +40,7 @@ public class AuthenticatedSponsorInvoiceCreateService extends AbstractService<Sp
 		int sponsorshipId = super.getRequest().getData("sponsorshipId", int.class);
 		Sponsorship sponsorship = this.repository.findSponsorshipById(sponsorshipId);
 
-		boolean canCreate = this.repository.findAllSponsorshipOfSponsor(sponsor.getId()).contains(sponsorship);
+		boolean canCreate = this.repository.findAllSponsorshipOfSponsorPublished(sponsor.getId()).contains(sponsorship);
 
 		status = super.getRequest().getPrincipal().hasRole(Sponsor.class) && canCreate;
 		super.getResponse().setAuthorised(status);
@@ -71,16 +73,6 @@ public class AuthenticatedSponsorInvoiceCreateService extends AbstractService<Sp
 	public void validate(final Invoice object) {
 		assert object != null;
 
-		int sponsorshipId = super.getRequest().getData("sponsorshipId", int.class);
-		Collection<Invoice> invoices = this.repository.findAllInvoiceOfSponsorship(sponsorshipId);
-		double totalAmount = 0.;
-
-		for (Invoice invoice : invoices)
-			if (invoice != null)
-				totalAmount += invoice.getTotalAmount().getAmount();
-
-		String currency = object.getSponsorship().getAmount().getCurrency();
-
 		// Code
 
 		if (!super.getBuffer().getErrors().hasErrors("code")) {
@@ -91,24 +83,43 @@ public class AuthenticatedSponsorInvoiceCreateService extends AbstractService<Sp
 		// Quantity
 
 		if (!super.getBuffer().getErrors().hasErrors("quantity")) {
-
+			String currency = object.getSponsorship().getAmount().getCurrency();
 			boolean correctCurrency = Objects.equals(object.getQuantity().getCurrency(), currency);
 			super.state(correctCurrency, "quantity", "sponsor.invoice.form.error.correctCurrency");
-			if (!super.getBuffer().getErrors().hasErrors("tax")) {
-				boolean totalAmountLessOrEqualThanSponsorshipAmount = totalAmount + object.getTotalAmount().getAmount() <= object.getSponsorship().getAmount().getAmount();
-				if (correctCurrency) {
-					super.state(totalAmountLessOrEqualThanSponsorshipAmount, "quantity", "sponsor.invoice.form.error.totalAmountLessOrEqualThanSponsorshipAmount");
-					super.state(totalAmountLessOrEqualThanSponsorshipAmount, "tax", "sponsor.invoice.form.error.totalAmountLessOrEqualThanSponsorshipAmount");
-				}
-			}
+			double maxAmount = 1000000.;
+			boolean incorrectMaxAmount = object.getQuantity().getAmount() > maxAmount;
+			super.state(!incorrectMaxAmount, "quantity", "sponsor.invoice.form.error.incorrectMaxAmount");
+			Boolean correctQuantity = object.getQuantity().getAmount() > 0;
+			super.state(correctQuantity, "quantity", "sponsor.invoice.form.error.correctQuantity");
+
 		}
 
 		// Date
 
 		if (!super.getBuffer().getErrors().hasErrors("dueDate")) {
-			boolean registrationTime1MothBeforeDueDate = MomentHelper.isAfter(object.getDueDate(), MomentHelper.deltaFromMoment(object.getRegistrationTime(), 1l, ChronoUnit.MONTHS));
-			super.state(registrationTime1MothBeforeDueDate, "dueDate", "sponsor.invoice.form.error.registrationTime1MothBeforeDueDate");
+			boolean registrationTime1MonthBeforeDueDate;
+
+			LocalDateTime localDateTime = LocalDateTime.of(2200, 12, 31, 23, 59);
+			Date maxDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+
+			boolean dueDateMax = object.getDueDate().after(maxDate);
+			super.state(!dueDateMax, "dueDate", "sponsor.invoice.form.error.dueDateMax");
+
+			LocalDateTime registrationTimeDate = object.getRegistrationTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+			LocalDateTime dueDate = object.getDueDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+			long monthsDifference = ChronoUnit.MONTHS.between(registrationTimeDate, dueDate);
+			registrationTime1MonthBeforeDueDate = monthsDifference >= 1;
+
+			super.state(registrationTime1MonthBeforeDueDate, "dueDate", "sponsor.invoice.form.error.registrationTime1MonthBeforeDueDate");
 		}
+
+		//URL
+		if (!super.getBuffer().getErrors().hasErrors("link") && !object.getLink().isEmpty()) {
+			boolean linkbetween7and255 = object.getLink().length() >= 7 && object.getLink().length() <= 255;
+			super.state(linkbetween7and255, "link", "sponsor.invoice.form.error.linkbetween7and255");
+		}
+
 	}
 
 	@Override

@@ -1,15 +1,16 @@
 
 package acme.features.sponsor.invoice;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.Collection;
+import java.util.Date;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
-import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
 import acme.entities.invoice.Invoice;
 import acme.roles.Sponsor;
@@ -66,13 +67,6 @@ public class AuthenticatedSponsorInvoiceUpdateService extends AbstractService<Sp
 		assert object != null;
 
 		Invoice invoice1 = this.repository.findInvoiceById(object.getId());
-		int sponsorshipId = object.getSponsorship().getId();
-		Collection<Invoice> invoices = this.repository.findAllInvoiceOfSponsorship(sponsorshipId);
-
-		double totalAmount = 0.;
-		for (Invoice invoice : invoices)
-			if (invoice != null && invoice.getId() != object.getId())
-				totalAmount += invoice.getTotalAmount().getAmount();
 
 		if (!Objects.equals(object.getCode(), invoice1.getCode())) {
 			Boolean codeDuplicated = this.repository.findInvoiceByCode(object.getCode()) == null;
@@ -85,18 +79,36 @@ public class AuthenticatedSponsorInvoiceUpdateService extends AbstractService<Sp
 
 			boolean correctCurrency = Objects.equals(object.getQuantity().getCurrency(), currency);
 			super.state(correctCurrency, "quantity", "sponsor.invoice.form.error.correctCurrency");
-
-			boolean totalAmountLessOrEqualThanSponsorshipAmount = totalAmount + object.getTotalAmount().getAmount() <= object.getSponsorship().getAmount().getAmount();
-			if (correctCurrency) {
-				super.state(totalAmountLessOrEqualThanSponsorshipAmount, "quantity", "sponsor.invoice.form.error.totalAmountLessOrEqualThanSponsorshipAmount");
-				super.state(totalAmountLessOrEqualThanSponsorshipAmount, "tax", "sponsor.invoice.form.error.totalAmountLessOrEqualThanSponsorshipAmount");
-			}
+			Boolean correctQuantity = object.getQuantity().getAmount() > 0;
+			super.state(correctQuantity, "quantity", "sponsor.invoice.form.error.correctQuantity");
+			double maxAmount = 1000000.;
+			boolean incorrectMaxAmount = object.getQuantity().getAmount() > maxAmount;
+			super.state(!incorrectMaxAmount, "quantity", "sponsor.invoice.form.error.incorrectMaxAmount");
 
 		}
 
-		if (!super.getBuffer().getErrors().hasErrors("dueDate") && !super.getBuffer().getErrors().hasErrors("registrationTime")) {
-			boolean registrationTime1MothBeforeDueDate = MomentHelper.isAfter(object.getDueDate(), MomentHelper.deltaFromMoment(object.getRegistrationTime(), 1l, ChronoUnit.MONTHS));
-			super.state(registrationTime1MothBeforeDueDate, "dueDate", "sponsor.invoice.form.error.registrationTime1MothBeforeDueDate");
+		if (!super.getBuffer().getErrors().hasErrors("dueDate")) {
+			LocalDateTime localDateTime = LocalDateTime.of(2200, 12, 31, 23, 59);
+			Date maxDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+
+			boolean dueDateMax = object.getDueDate().after(maxDate);
+			super.state(!dueDateMax, "dueDate", "sponsor.invoice.form.error.dueDateMax");
+
+			boolean registrationTime1MonthBeforeDueDate;
+
+			LocalDateTime registrationTimeDate = object.getRegistrationTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+			LocalDateTime dueDate = object.getDueDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+			long monthsDifference = ChronoUnit.MONTHS.between(registrationTimeDate, dueDate);
+			registrationTime1MonthBeforeDueDate = monthsDifference >= 1;
+
+			super.state(registrationTime1MonthBeforeDueDate, "dueDate", "sponsor.invoice.form.error.registrationTime1MonthBeforeDueDate");
+		}
+
+		//URL
+		if (!super.getBuffer().getErrors().hasErrors("link") && !object.getLink().isEmpty()) {
+			boolean linkbetween7and255 = object.getLink().length() >= 7 && object.getLink().length() <= 255;
+			super.state(linkbetween7and255, "link", "sponsor.invoice.form.error.linkbetween7and255");
 		}
 
 	}
@@ -114,7 +126,7 @@ public class AuthenticatedSponsorInvoiceUpdateService extends AbstractService<Sp
 
 		Dataset dataset;
 
-		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link");
+		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link", "draftMode");
 		super.getResponse().addData(dataset);
 	}
 

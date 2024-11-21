@@ -1,15 +1,19 @@
 
 package acme.features.sponsor.sponsorship;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
-import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
 import acme.entities.configuration.CurrencyService;
@@ -44,7 +48,10 @@ public class AuthenticatedSponsorSponsorshipUpdateService extends AbstractServic
 		sponsorship = this.repository.findSponsorshipById(sponsorshipId);
 		id = super.getRequest().getPrincipal().getAccountId();
 
-		status = sponsorship != null && sponsorship.isDraftMode() && super.getRequest().getPrincipal().hasRole(Sponsor.class) && sponsorship.getSponsor().getUserAccount().getId() == id;
+		boolean correctSponsorship = sponsorship != null && sponsorship.isDraftMode();
+		boolean correctRol = super.getRequest().getPrincipal().hasRole(Sponsor.class);
+		boolean correctUserId = sponsorship.getSponsor().getUserAccount().getId() == id;
+		status = correctSponsorship && correctRol && correctUserId;
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -64,7 +71,7 @@ public class AuthenticatedSponsorSponsorshipUpdateService extends AbstractServic
 	public void bind(final Sponsorship object) {
 		assert object != null;
 
-		super.bind(object, "code", "moment", "durationStart", "durationEnd", "amount", "type", "email", "link");
+		super.bind(object, "code", "moment", "durationStart", "durationEnd", "amount", "type", "email", "link", "draftMode", "project");
 
 	}
 
@@ -75,6 +82,7 @@ public class AuthenticatedSponsorSponsorshipUpdateService extends AbstractServic
 		int sponsorshipId = super.getRequest().getData("id", int.class);
 		Sponsorship sponsorship = this.repository.findSponsorshipById(sponsorshipId);
 		Collection<Invoice> invoices = this.repository.findInvoiceBySponsorshipId(sponsorshipId);
+		List<Invoice> invoiceList = new ArrayList<>(invoices);
 
 		// Code
 		if (!super.getBuffer().getErrors().hasErrors("code")) {
@@ -89,36 +97,71 @@ public class AuthenticatedSponsorSponsorshipUpdateService extends AbstractServic
 		// Date
 
 		if (!super.getBuffer().getErrors().hasErrors("durationStart")) {
-			boolean momentBeforeDurationStart = MomentHelper.isAfter(object.getDurationStart(), MomentHelper.deltaFromMoment(object.getMoment(), 0l, ChronoUnit.DAYS));
+			Boolean momentBeforeDurationStart;
+
+			LocalDateTime momentDate = object.getMoment().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+			LocalDateTime durationStartDate = object.getDurationStart().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+			LocalDateTime localDateTime = LocalDateTime.of(2200, 12, 31, 23, 59);
+			Date maxDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+
+			momentBeforeDurationStart = momentDate.isBefore(durationStartDate);
+
 			super.state(momentBeforeDurationStart, "durationStart", "sponsor.sponsorship.form.error.momentBeforeDurationStart");
+
 			if (!super.getBuffer().getErrors().hasErrors("durationEnd")) {
-				boolean durationStart1MothBeforeDurationEnd = MomentHelper.isAfter(object.getDurationEnd(), MomentHelper.deltaFromMoment(object.getDurationStart(), 1l, ChronoUnit.MONTHS));
-				super.state(durationStart1MothBeforeDurationEnd, "durationEnd", "sponsor.sponsorship.form.error.durationStart1MothBeforeDurationEnd");
+				boolean durationStart1MonthBeforeDurationEnd;
+				LocalDateTime durationEndDate = object.getDurationEnd().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+				long monthsDifferenceEnd = ChronoUnit.MONTHS.between(durationStartDate, durationEndDate);
+				durationStart1MonthBeforeDurationEnd = monthsDifferenceEnd >= 1;
+
+				super.state(durationStart1MonthBeforeDurationEnd, "durationEnd", "sponsor.sponsorship.form.error.durationStart1MonthBeforeDurationEnd");
+
+				boolean durationEndMax = object.getDurationEnd().after(maxDate);
+				super.state(!durationEndMax, "durationEnd", "sponsor.sponsorship.form.error.durationEndMax");
 
 			}
+
+			boolean durationStartMax = object.getDurationStart().after(maxDate);
+
+			super.state(!durationStartMax, "durationStart", "sponsor.sponsorship.form.error.durationStartMax");
+
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("amount")) {
 
+			boolean cantChangeCurrency = true;
+			double maxAmount = 1000000.;
 			String currency = object.getAmount().getCurrency();
+			for (Invoice invoice : invoiceList)
+				if (!invoice.isDraftMode()) {
+					String invoicesCurrency = invoice.getQuantity().getCurrency();
+					cantChangeCurrency = Objects.equals(invoicesCurrency, currency);
+				}
 
-			double totalAmount = 0.;
-			for (Invoice invoice : invoices) {
-				currency = invoice.getQuantity().getCurrency();
-				totalAmount += invoice.getTotalAmount().getAmount();
-			}
+			boolean isAcceptedCurrency = this.service.isAcceptedCurrency(currency);
+			boolean amountPositive = object.getAmount().getAmount() > 0;
 
-			boolean isAcceptedCurrency = this.service.isAcceptedCurrency(object.getAmount().getCurrency());
-			boolean amountLessInvoicesAmount = object.getAmount().getAmount() >= totalAmount;
-			boolean amountPositive = object.getAmount().getAmount() >= 0;
-			super.state(currency.equals(object.getAmount().getCurrency()), "amount", "sponsor.sponsorship.form.error.incorrectCurrency");
+			boolean incorrectMaxAmount = object.getAmount().getAmount() > maxAmount;
 
-			if (isAcceptedCurrency) {
-				super.state(amountPositive, "amount", "sponsor.sponsorship.form.error.amountPositive");
-				super.state(amountLessInvoicesAmount, "amount", "sponsor.sponsorship.form.error.amountLessInvoicesAmount");
-			}
+			super.state(amountPositive, "amount", "sponsor.sponsorship.form.error.amountPositive");
+			super.state(!incorrectMaxAmount, "amount", "sponsor.sponsorship.form.error.incorrectMaxAmount");
+			super.state(cantChangeCurrency, "amount", "sponsor.sponsorship.form.error.cantChangeCurrency");
+
 			super.state(isAcceptedCurrency, "amount", "sponsor.sponsorship.form.error.isAcceptedCurrency");
 
+		}
+		//URL
+		if (!super.getBuffer().getErrors().hasErrors("link") && !object.getLink().isEmpty()) {
+			boolean linkbetween7and255 = object.getLink().length() >= 7 && object.getLink().length() <= 255;
+			super.state(linkbetween7and255, "link", "sponsor.sponsorship.form.error.linkbetween7and255");
+		}
+
+		//EMAIL
+		if (!super.getBuffer().getErrors().hasErrors("email") && !object.getEmail().isEmpty()) {
+			boolean emailbetween6and254 = object.getEmail().length() >= 6 && object.getEmail().length() <= 254;
+			super.state(emailbetween6and254, "email", "sponsor.sponsorship.form.error.emailbetween6and254");
 		}
 
 	}
@@ -132,6 +175,8 @@ public class AuthenticatedSponsorSponsorshipUpdateService extends AbstractServic
 	@Override
 	public void unbind(final Sponsorship object) {
 		assert object != null;
+
+		Dataset dataset;
 		SelectChoices choices;
 		SelectChoices choicesProjects;
 		Collection<Project> projects = this.repository.findAllProjectsPublished();
@@ -139,9 +184,7 @@ public class AuthenticatedSponsorSponsorshipUpdateService extends AbstractServic
 		choices = SelectChoices.from(SponsorshipType.class, object.getType());
 		choicesProjects = SelectChoices.from(projects, "code", object.getProject());
 
-		Dataset dataset;
-
-		dataset = super.unbind(object, "code", "moment", "durationStart", "durationEnd", "amount", "type", "email", "link", "draftMode");
+		dataset = super.unbind(object, "code", "moment", "durationStart", "durationEnd", "amount", "type", "email", "link", "project", "draftMode");
 
 		dataset.put("types", choices);
 		dataset.put("projects", choicesProjects);

@@ -16,7 +16,7 @@ public interface AuthenticatedSponsorDashboardRepository extends AbstractReposit
 	@Query("SELECT COALESCE(count(i), 0) FROM Invoice i WHERE i.draftMode = false AND i.tax <= 0.21 AND i.sponsorship.sponsor.id = :id")
 	int getTotalNumberOfInvoicesWithTaxLessThanOrEqual21Percent(int id);
 
-	@Query("SELECT COALESCE(count(s), 0) FROM Sponsorship s WHERE s.draftMode = false AND s.link != null AND s.sponsor.id = :id")
+	@Query("SELECT COALESCE(count(s), 0) FROM Sponsorship s WHERE s.draftMode = false AND s.link <> '' AND s.sponsor.id = :id")
 	int getTotalNumberOfSponsorshipsWithLink(int id);
 
 	@Query("SELECT COALESCE(avg(s.amount.amount), 0) FROM Sponsorship s WHERE s.draftMode = false AND s.sponsor.id = :id")

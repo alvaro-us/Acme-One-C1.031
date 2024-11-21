@@ -9,8 +9,6 @@
 # they accept any liabilities with respect to them.
 
 - Rafael Corchuelo (corchu@us.es)
-- Álvaro Paradas Borrego (alvparbor1@alum.us.es)
 - Pablo Cuenca Pérez (pabcueper@alum.us.es)
 - Javier Muñoz Romero (jacmunrom@alum.us.es)
 - Juan Nuñez Sanchez (juanunsan2@alum.us.es)
-- Felipe Peña Nuñez (felpunnun@alum.us.es)

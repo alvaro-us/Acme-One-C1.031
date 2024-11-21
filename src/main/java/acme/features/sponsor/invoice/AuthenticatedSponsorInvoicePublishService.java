@@ -1,6 +1,13 @@
 
 package acme.features.sponsor.invoice;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,12 +59,56 @@ public class AuthenticatedSponsorInvoicePublishService extends AbstractService<S
 	public void validate(final Invoice object) {
 		assert object != null;
 
-		Invoice invoice;
-		invoice = this.repository.findInvoiceById(object.getId());
-		boolean noUpdate = invoice.getCode().equals(object.getCode()) && invoice.getRegistrationTime().compareTo(object.getRegistrationTime()) == 0 && invoice.getDueDate().compareTo(object.getDueDate()) == 0
-			&& invoice.getQuantity().getAmount().equals(object.getQuantity().getAmount()) && invoice.getQuantity().getCurrency().equals(object.getQuantity().getCurrency()) && invoice.getTax().equals(object.getTax())
-			&& invoice.getLink().equals(object.getLink());
-		super.state(noUpdate, "*", "sponsor.invoice.form.error.hasToUpdate");
+		Invoice invoice1 = this.repository.findInvoiceById(object.getId());
+
+		if (!Objects.equals(object.getCode(), invoice1.getCode())) {
+			Boolean codeDuplicated = this.repository.findInvoiceByCode(object.getCode()) == null;
+			super.state(codeDuplicated, "code", "sponsor.invoice.form.error.codeDuplicated");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("quantity") && !super.getBuffer().getErrors().hasErrors("tax")) {
+
+			String currency = object.getSponsorship().getAmount().getCurrency();
+
+			boolean correctCurrency = Objects.equals(object.getQuantity().getCurrency(), currency);
+			super.state(correctCurrency, "quantity", "sponsor.invoice.form.error.correctCurrency");
+			Boolean correctQuantity = object.getQuantity().getAmount() > 0;
+			super.state(correctQuantity, "quantity", "sponsor.invoice.form.error.correctQuantity");
+			double maxAmount = 1000000.;
+
+			Collection<Invoice> invoices = this.repository.findAllInvoicePublishedOfSponsorship(invoice1.getSponsorship().getId());
+			for (Invoice invoice : invoices)
+				if (invoice.getId() != invoice1.getId())
+					maxAmount = maxAmount - invoice.getTotalAmount().getAmount();
+
+			boolean incorrectMaxAmount = maxAmount - object.getTotalAmount().getAmount() < 0;
+			super.state(!incorrectMaxAmount, "quantity", "sponsor.invoice.form.error.incorrectMaxAmountPublished");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("dueDate")) {
+
+			LocalDateTime localDateTime = LocalDateTime.of(2200, 12, 31, 23, 59);
+			Date maxDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+
+			boolean dueDateMax = object.getDueDate().after(maxDate);
+			super.state(!dueDateMax, "dueDate", "sponsor.invoice.form.error.dueDateMax");
+
+			boolean registrationTime1MonthBeforeDueDate;
+
+			LocalDateTime registrationTimeDate = object.getRegistrationTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+			LocalDateTime dueDate = object.getDueDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+			long monthsDifference = ChronoUnit.MONTHS.between(registrationTimeDate, dueDate);
+			registrationTime1MonthBeforeDueDate = monthsDifference >= 1;
+
+			super.state(registrationTime1MonthBeforeDueDate, "dueDate", "sponsor.invoice.form.error.registrationTime1MonthBeforeDueDate");
+		}
+
+		//URL
+		if (!super.getBuffer().getErrors().hasErrors("link") && !object.getLink().isEmpty()) {
+			boolean linkbetween7and255 = object.getLink().length() >= 7 && object.getLink().length() <= 255;
+			super.state(linkbetween7and255, "link", "sponsor.invoice.form.error.linkbetween7and255");
+		}
 
 	}
 
@@ -83,7 +134,7 @@ public class AuthenticatedSponsorInvoicePublishService extends AbstractService<S
 
 		Dataset dataset;
 
-		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link");
+		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link", "draftMode");
 
 		super.getResponse().addData(dataset);
 	}

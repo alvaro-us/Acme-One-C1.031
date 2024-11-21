@@ -32,7 +32,7 @@ import lombok.Setter;
 @Setter
 
 @Table(indexes = {
-	@Index(columnList = "sponsorship_id"), @Index(columnList = "code"), @Index(columnList = "sponsorship_id, draftmode")
+	@Index(columnList = "sponsorship_id"), @Index(columnList = "code"), @Index(columnList = "sponsorship_id, draftmode"), @Index(columnList = "id")
 })
 public class Invoice extends AbstractEntity {
 
@@ -76,7 +76,9 @@ public class Invoice extends AbstractEntity {
 	@Transient
 	public Money getTotalAmount() {
 		Money res = new Money();
-		res.setAmount(this.quantity.getAmount() * (1 + this.tax));
+		double total = this.quantity.getAmount() * (1 + this.tax);
+		double roundedTotal = Math.round(total * 100) / 100.0;
+		res.setAmount(roundedTotal);
 		res.setCurrency(this.quantity.getCurrency());
 		return res;
 	}
