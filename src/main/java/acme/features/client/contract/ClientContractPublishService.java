@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import acme.client.data.accounts.Principal;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
+import acme.client.views.SelectChoices;
 import acme.entities.configuration.Configuration;
 import acme.entities.configuration.CurrencyService;
 // import acme.entities.components.AuxiliarService;
 import acme.entities.contract.Contract;
+import acme.entities.projects.Project;
 import acme.roles.client.Client;
 
 @Service
@@ -71,8 +73,9 @@ public class ClientContractPublishService extends AbstractService<Client, Contra
 
 		if (!super.getBuffer().getErrors().hasErrors("code")) {
 			Contract existing;
-			existing = this.repository.findContractByCode(object.getCode());
-			super.state(existing == null, "code", "client.contract.form.error.code");
+			existing = this.repository.findOneContractByCode(object.getCode());
+			final Contract contract2 = object.getCode().equals("") || object.getCode() == null ? null : this.repository.findContractById(object.getId());
+			super.state(existing == null || contract2.equals(existing), "code", "client.contract.form.error.code");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("budget")) {
@@ -95,9 +98,6 @@ public class ClientContractPublishService extends AbstractService<Client, Contra
 		if (!super.getBuffer().getErrors().hasErrors("budget"))
 			super.state(object.getBudget().getAmount() >= 0., "budget", "client.contract.form.error.negative-price");
 
-		final Collection<Contract> contracts1 = this.repository.findContractsFromProject(object.getProject().getId());
-		super.state(!contracts1.isEmpty(), "*", "manager.project.form.error.noContracts");
-
 	}
 
 	@Override
@@ -110,11 +110,19 @@ public class ClientContractPublishService extends AbstractService<Client, Contra
 
 	@Override
 	public void unbind(final Contract object) {
-		if (object == null)
-			throw new IllegalArgumentException("No object found");
+		assert object != null;
+
+		Collection<Project> projects;
+		SelectChoices choices;
 		Dataset dataset;
-		dataset = super.unbind(object, "code", "instationMoment", "providerName", "customerName", "goals", "budget", "project", "client", "published");
-		dataset.put("projectTitle", object.getProject().getCode());
+
+		projects = this.repository.findAllProjects();
+		choices = SelectChoices.from(projects, "title", object.getProject());
+
+		dataset = super.unbind(object, "code", "instationMoment", "providerName", "customerName", "goals", "budget", "published");
+		dataset.put("project", choices.getSelected().getKey());
+		dataset.put("projects", choices);
+
 		super.getResponse().addData(dataset);
 	}
 }

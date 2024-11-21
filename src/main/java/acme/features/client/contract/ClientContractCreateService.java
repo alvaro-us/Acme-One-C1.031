@@ -64,6 +64,11 @@ public class ClientContractCreateService extends AbstractService<Client, Contrac
 			super.state(existing == null, "code", "client.contract.form.error.code");
 		}
 
+		if (object.getProject() == null) {
+			super.state(false, "project", "client.contract.form.error.project-null");
+			return;
+		}
+
 		if (!super.getBuffer().getErrors().hasErrors("budget")) {
 			boolean totalAmountBelowProjectCost;
 			Collection<Contract> contracts = this.repository.findContractsFromProject(object.getId());
@@ -83,9 +88,6 @@ public class ClientContractCreateService extends AbstractService<Client, Contrac
 
 		if (!super.getBuffer().getErrors().hasErrors("budget"))
 			super.state(object.getBudget().getAmount() >= 0., "budget", "client.contract.form.error.negative-price");
-
-		final Collection<Contract> contracts1 = this.repository.findContractsFromProject(object.getProject().getId());
-		super.state(!contracts1.isEmpty(), "*", "manager.project.form.error.noContracts");
 
 	}
 

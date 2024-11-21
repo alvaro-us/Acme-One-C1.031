@@ -22,6 +22,7 @@ client.progress-logs.form.button.update = Actualizar
 client.progress-logs.form.button.publish = Publicar
 client.progress-logs.list.button.create = Crear
 
+client.progressLog.form.error.duplicated= Ya en uso
+client.progressLogs.form.error.codeDuplicate= Ya en uso
 client.progressLogs.form.error.codeDuplicated= Ya en uso
-client.progressLogs.form.error.moment = La fecha de registro debe ser anterior o igual a 2099/12/31 23:59
-client.progressLogs.form.error.moment2 = La fecha de registro debe ser posterior o igual a la fecha de instanciacion del contrato
+client.progress-log.form.error.completeness-too-low= Porcentaje inferior al acumulado

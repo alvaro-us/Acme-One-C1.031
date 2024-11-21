@@ -15,4 +15,4 @@
 
 <jstl:if test="${_command == 'list'}">
 	<acme:button code="client.contract.create" action="/client/contract/create"/>
-</jstl:if>	
+</jstl:if>

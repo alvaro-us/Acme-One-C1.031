@@ -13,12 +13,6 @@ import acme.entities.progressLogs.ProgressLogs;
 @Repository
 public interface ClientProgressLogsRepository extends AbstractRepository {
 
-	@Query("select pl from ProgressLogs pl where pl.contract.client.userAccount.id = :id")
-	Collection<ProgressLogs> findProgressLogsByClientId(int id);
-
-	@Query("select c from Contract c where c.code = :code")
-	Contract findContractByCode(String code);
-
 	@Query("select pl from ProgressLogs pl where pl.contract.id = :id")
 	Collection<ProgressLogs> findProgressLogsByContract(int id);
 
@@ -31,9 +25,6 @@ public interface ClientProgressLogsRepository extends AbstractRepository {
 	@Query("select c from Contract c where c.id = :id")
 	Contract findContractById(int id);
 
-	@Query("select c from Contract c where c.client.id = :id")
-	Collection<Contract> findContractsByClient(int id);
-
 	@Query("select pl.contract from ProgressLogs pl where pl.id = :id")
 	Contract findOneContractByProgressLogId(int id);
 
@@ -42,5 +33,8 @@ public interface ClientProgressLogsRepository extends AbstractRepository {
 
 	@Query("select pl from ProgressLogs pl where pl.recordId = :recordId")
 	ProgressLogs findOneProgressLogsByRecordId(String recordId);
+
+	@Query("select max(pg.completeness) from ProgressLogs pg where pg.contract.id = :contractId and pg.published = true")
+	Double findPublishedProgressLogWithMaxCompletenessPublished(int contractId);
 
 }

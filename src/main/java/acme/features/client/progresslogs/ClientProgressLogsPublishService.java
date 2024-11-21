@@ -1,13 +1,10 @@
 
 package acme.features.client.progresslogs;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
-import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
 import acme.entities.contract.Contract;
 import acme.entities.progressLogs.ProgressLogs;
@@ -34,8 +31,7 @@ public class ClientProgressLogsPublishService extends AbstractService<Client, Pr
 		progressLogId = super.getRequest().getData("id", int.class);
 		contract = this.repository.findOneContractByProgressLogId(progressLogId);
 		progressLog = this.repository.findOneProgressLogById(progressLogId);
-		status = contract != null && !contract.isPublished() && !progressLog.isPublished() && contract.getClient().getUserAccount().getUsername().equals(super.getRequest().getPrincipal().getUsername())
-			&& super.getRequest().getPrincipal().hasRole(contract.getClient());
+		status = contract != null && !progressLog.isPublished() && contract.getClient().getUserAccount().getUsername().equals(super.getRequest().getPrincipal().getUsername()) && super.getRequest().getPrincipal().hasRole(contract.getClient());
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -73,13 +69,13 @@ public class ClientProgressLogsPublishService extends AbstractService<Client, Pr
 			final ProgressLogs progressLog2 = object.getRecordId().equals("") || object.getRecordId() == null ? null : this.repository.findOneProgressLogById(object.getId());
 			super.state(existing == null || progressLog2.equals(existing), "recordId", "client.progressLog.form.error.duplicated");
 		}
-		if (!super.getBuffer().getErrors().hasErrors("registrationMoment")) {
-
-			Date maxDate = new Date(4102441199000L); // 2099/12/31 23:59
-			super.state(MomentHelper.isBeforeOrEqual(object.getRegistrationMoment(), maxDate), "registrationMoment", "client.progressLogs.form.error.moment");
+		if (!super.getBuffer().getErrors().hasErrors("completeness")) {
+			Double existing;
+			existing = this.repository.findPublishedProgressLogWithMaxCompletenessPublished(object.getContract().getId());
+			if (existing != null)
+				super.state(object.getCompleteness() > existing, "completeness", "client.progress-log.form.error.completeness-too-low");
 		}
-		if (!super.getBuffer().getErrors().hasErrors("registrationMoment"))
-			super.state(MomentHelper.isAfter(object.getRegistrationMoment(), object.getContract().getInstationMoment()), "registrationMoment", "client.progressLogs.form.error.moment2");
+
 	}
 
 	@Override

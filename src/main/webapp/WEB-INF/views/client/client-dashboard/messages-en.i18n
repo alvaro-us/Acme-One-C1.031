@@ -5,11 +5,14 @@ client.client-dashboard.form.title = Client dashboard
 
 client.dashboard.form.title.general-indicators = General indicators
 
-client.dashboard.form.label.total-Number-Of-ProgressLogs-Below-25-Percent = Percentage Of total Number Completeness less than 25
-client.dashboard.form.label.total-Number-Of-ProgressLogs-25-To-50-Percent = Percentage Of total Number Completeness between 25 and 50
-client.dashboard.form.label.total-Number-Of-ProgressLogs-50-To-75-Percent = Percentage Of total Number Completeness between 50 and 75
-client.dashboard.form.label.total-Number-Of-ProgressLogs-Above-75-Percent =  Percentage Of total Number Completeness greater than 75
-client.dashboard.form.label.average-Budget-Of-Contracts =  Average Budget Of Contract
-client.dashboard.form.label.deviation-Budget-Of-Contracts = Deviation Budget Of Contract
-client.dashboard.form.label.min-Budget-Of-Contracts = Minimum Budget Of Contract
-client.dashboard.form.label.max-Budget-Of-Contracts = Maximum Budget Of Contract
+client.dashboard.form.label.percentage-Of-Total-Number-Completeness-25 = Percentage Of total Number Completeness less than 25
+client.dashboard.form.label.percentage-Of-Total-Number-Completeness-25-At-50 = Percentage Of total Number Completeness between 25 and 50
+client.dashboard.form.label.percentage-Of-Total-Number-Completeness-50-at-75 = Percentage Of total Number Completeness between 50 and 75
+client.dashboard.form.label.percentage-Of-Total-Number-Completeness-More-75 =  Percentage Of total Number Completeness greater than 75
+client.dashboard.form.label.average-Budget-Of-Contract =  Average Budget Of Contract
+client.dashboard.form.label.deviation-Budget-Of-Contract = Deviation Budget Of Contract
+client.dashboard.form.label.minimum-Budget-Of-Contract = Minimum Budget Of Contract
+client.dashboard.form.label.maximum-Budget-Of-Contract = Maximum Budget Of Contract
+
+client.dashboard.form.label.progresslog.completeness = Graphic about the completeness of the progress logs
+client.dashboard.form.label.contract.budget = Graphic about the budget of the contract

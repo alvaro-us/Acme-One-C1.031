@@ -22,14 +22,8 @@ public interface ClientContractRepository extends AbstractRepository {
 	@Query("select c from Contract c where c.id = :id")
 	Contract findContractById(int id);
 
-	@Query("select p from Project p where p.id in (select id from Contract c where c.project.id = :id)")
-	Project findProjectByContract(int id);
-
 	@Query("select p from Project p where p.draftMode = false")
 	Collection<Project> findPublishedProjects();
-
-	@Query("select p from Project p where p.code = :code")
-	Project findprojectByCode(String code);
 
 	@Query("select c from Contract c where c.code = :code")
 	Contract findContractByCode(String code);
@@ -48,4 +42,8 @@ public interface ClientContractRepository extends AbstractRepository {
 
 	@Query("select c from Configuration c")
 	Configuration findConfiguration();
+
+	@Query("select c from Contract c where c.code = :code")
+	Contract findOneContractByCode(String code);
+
 }

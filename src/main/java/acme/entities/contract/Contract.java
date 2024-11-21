@@ -29,9 +29,8 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(indexes = {
-	@Index(columnList = "code")
+	@Index(columnList = "client_id"), @Index(columnList = "project_id"), @Index(columnList = "code")
 })
-
 public class Contract extends AbstractEntity {
 
 	// Serialisation Identifier --------------------------------
@@ -68,13 +67,13 @@ public class Contract extends AbstractEntity {
 
 	private boolean				published;
 
-	@Valid
 	@NotNull
+	@Valid
 	@ManyToOne(optional = false)
 	private Client				client;
 
-	@Valid
 	@NotNull
+	@Valid
 	@ManyToOne(optional = false)
 	private Project				project;
 
